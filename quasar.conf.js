@@ -3,7 +3,7 @@ var webpack = require('webpack')
 var path = require('path')
 
 // Get our env variables
-const envparser = require('./config/envparser')
+const envparser = require('./configEnv/envparser')
 
 module.exports = function (ctx) {
   return {
@@ -35,7 +35,7 @@ module.exports = function (ctx) {
         // Make our helper function Global, for example to use it in js files you should call it env('MY_VALUE')
         cfg.plugins.push(
           new webpack.ProvidePlugin({
-            env: [path.resolve(__dirname, 'config/helpers/env.js'),'default']
+            env: [path.resolve(__dirname, 'configEnv/helpers/env.js'),'default']
           })
         )
 
