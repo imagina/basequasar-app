@@ -3,7 +3,7 @@ var webpack = require('webpack')
 var path = require('path')
 
 // Get our env variables
-const envparser = require('./plugins/env/envparser')
+const envparser = require('./env/envparser')
 
 module.exports = function (ctx) {
   return {
