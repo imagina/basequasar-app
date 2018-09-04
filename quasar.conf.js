@@ -35,7 +35,7 @@ module.exports = function (ctx) {
         // Make our helper function Global, for example to use it in js files you should call it env('MY_VALUE')
         cfg.plugins.push(
           new webpack.ProvidePlugin({
-            env: [path.resolve(__dirname, '/env/env'),'default']
+            env: [path.resolve(__dirname, 'env/env'),'default']
           })
         )
 

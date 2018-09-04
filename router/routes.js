@@ -15,8 +15,6 @@ Route.view('/', 'MyLayout')
     }
   )
 
-Route.view('*', 'pages/Error404')//Route error 404
-
-console.log(Route.all())
+Route.view('*', 'pages/404')//Route error 404
 
 export default Route.all()
