@@ -3,12 +3,12 @@
  */
 
 /*
-*       {
-        title: 'Assignment',
-        icon: 'fas fa-users-cog',
-        to: 'user.users.assignment',
-        can:'user.users.index'
-      },*/
+*{
+  title: 'Assignment',
+  icon: 'fas fa-users-cog',
+  to: 'user.users.assignment',
+  can:'user.users.index'
+},*/
 
 export default {
   /*home*/
@@ -21,30 +21,33 @@ export default {
   user: {
     title: 'Users',
     icon: 'fas fa-users',
+    can: 'iprofile.api.user.permission',
     children: [
       {
         title: 'Create',
         icon: 'fas fa-user-plus',
         to: 'user.users.create',
-        can: 'user.users.create'
+        can: 'iprofile.api.user.create'
       },
       {
         title: 'List/Search',
         icon: 'fas fa-list-alt',
         to: 'user.users.index',
-        can: 'user.users.index'
+        can: 'iprofile.api.user.index'
       },
       {
         title: 'My profile',
         icon: 'fas fa-user-tie',
-        to: 'user.profile.me'
+        to: 'user.profile.me',
       },
+      /*
       {
         title: 'Departments',
         icon: 'fas fa-cubes',
         to: 'user.department',
-        can: 'fhia.departments.index'
+        can: 'iprofile.api.user.deparment'
       }
+      */
     ]
   },
   /*logout*/

@@ -9,4 +9,6 @@ export default {
   base_url,
   api_url,
   token_url: base_url + '/api/login',
+  login_url: base_url + '/api/auth/login',
+  logout_url: base_url + '/api/auth/logout',
 }

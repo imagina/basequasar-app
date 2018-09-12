@@ -11,11 +11,11 @@
 
         <!--= TITLE =-->
         <q-toolbar-title class="gt-xs">
-          FHIA
+          IMAGINA
         </q-toolbar-title>
 
         <!--= FULLSCREEN =-->
-        <q-btn flat dense
+        <q-btn flat dense class="gt-xs"
                :icon="$q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen'"
                @click="toggleFullscreen()"></q-btn>
 
@@ -37,7 +37,7 @@
         <!-- === LOGO === -->
         <q-list-header class="text-center">
           <a href="/">
-            <img src="src/assets/imagina-logo.svg" width="30%">
+            <img src="img/imagina-logo.svg" width="70%">
           </a>
         </q-list-header>
 
