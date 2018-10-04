@@ -1,5 +1,5 @@
 <template>
-  <q-list id="list_menu" separator>
+  <q-list id="list_menu" separator class="q-pt-none">
     <!--Level 1 Single-->
     <singleItem v-for="(lv1,key1) in sidebar"
                 :item="lv1" :key="key1"
