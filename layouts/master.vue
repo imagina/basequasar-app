@@ -37,7 +37,7 @@
         <!-- === LOGO === -->
         <q-list-header class="text-center">
           <a href="/">
-            <img src="img/imagina-logo.svg" width="70%">
+            <img src="imgage/" width="70%">
           </a>
         </q-list-header>
 
