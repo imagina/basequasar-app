@@ -15,7 +15,8 @@
         </q-toolbar-title>
 
         <!--= FULLSCREEN =-->
-        <q-btn flat dense class="gt-xs"
+        <q-btn flat dense
+               class="desktop-only"
                :icon="$q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen'"
                @click="toggleFullscreen()"></q-btn>
 
@@ -36,21 +37,12 @@
       <q-list no-border link inset-delimiter>
         <!-- === LOGO === -->
         <q-list-header class="text-center">
-          <a href="/">
-            <img src="imgage/" width="70%">
-          </a>
+          <router-link :to="{ name: 'home'}">
+            <a>
+              <img src="../assets/image/logo.png" width="80%">
+            </a>
+          </router-link>
         </q-list-header>
-
-        <!--= SEARCHERS =-->
-        <!--<q-item class="bg-grey-4">
-          <q-item-main>
-            <textarea></textarea>
-            <q-search v-model="search"
-                      float-label="Global Search"
-                      class="q-mb-sm">
-            </q-search>
-          </q-item-main>
-        </q-item>-->
 
         <!--= MENU =-->
         <widget-menu></widget-menu>
