@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex flex-center">
-    <img alt="Quasar logo" src="~assets/imagina-logo.svg">
+    <img alt="Quasar logo" src="img/logo.png">
   </q-page>
 </template>
 
