@@ -1,0 +1,94 @@
+// app global css
+@import "~variables";
+
+*
+  a
+    text-decoration none
+  .round-borders
+    border-radius 6px !important
+    border 1px solid $grey-4
+  .q-inner-loading
+    .q-box-inner-loading
+      text-align center
+      background-color #ffffffde
+      margin 20px 10px 10px 10px
+      padding 5px 15px
+      border-radius 15px
+  .text-title-border
+    span
+      border-bottom 2px red solid
+  .bg-loading
+    background-color white
+    .text-primary
+      text-shadow none !important
+      font-weight bold
+
+.q-container
+  width 100%
+  margin 0 auto
+  @media screen and (min-width: $breakpoint-xs)
+    max-width 540px
+  @media screen and (min-width: $breakpoint-sm)
+    max-width 720px
+  @media screen and (min-width: $breakpoint-md)
+    max-width 960px
+  @media screen and (min-width: $breakpoint-lg)
+    max-width 1140px
+
+.q-select
+  .q-chip-small
+    min-height 24px
+
+//VUE TREE SELECT
+.vue-treeselect__control
+  border: none !important
+  border-bottom: 1px solid $grey-6 !important
+  border-radius 0px !important
+  padding: 0 !important
+  .vue-treeselect__multi-value-item-container
+    padding-top 2px
+  .vue-treeselect__multi-value-item
+    background: $primary
+    color: white
+    font-size: 14px
+    border-radius: 15px
+    padding: 2px
+    &:hover
+      .vue-treeselect__icon
+        color: $primary
+  .vue-treeselect__icon
+    color: $primary
+    background: white
+    border-radius: 100%
+    padding: 5px
+    svg
+      width: 10px
+      height: 12px
+  .vue-treeselect__placeholder
+    padding: 0
+  .vue-treeselect__input-container
+    padding: 0
+  .vue-treeselect__control-arrow
+    color: $grey-6
+
+.vue-treeselect__list-item
+  .vue-treeselect__option
+    padding 6px 0
+.vue-treeselect__portal-target
+  z-index 9999 !important
+
+.table-responsive
+  min-height: .01%;
+  overflow-x: auto;
+  width: 100%;
+
+  .text_title
+    line-height: 30px;
+
+@media screen and (max-width: 767px)
+  .table-responsive {
+    margin-bottom: 15px;
+    overflow-y: hidden;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+
+  }

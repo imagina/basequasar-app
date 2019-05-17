@@ -1,0 +1,19 @@
+
+# Ignore everything
+/*
+
+# But not these files
+
+#src
+!/env
+!/src
+!/src-pwa
+!.env-example
+
+#other fields
+!/.gitignore
+!/package.json
+!/quasar.conf.js
+!/README.md
+!/.babelrc
+!/.postcssrc.js
