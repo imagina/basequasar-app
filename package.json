@@ -15,7 +15,7 @@
     "@imagina/qhelper": "^0.0.25",
     "@imagina/qmedia": "^0.0.14",
     "@imagina/qsite": "^0.0.11",
-    "@imagina/quser": "^0.0.49",
+    "@imagina/quser": "^0.0.50",
     "@riophae/vue-treeselect": "0.0.38",
     "axios": "^0.18.0",
     "dotenv": "^6.0.0",

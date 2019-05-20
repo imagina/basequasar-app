@@ -67,7 +67,7 @@
       checkVersionApp(toRoute) {
         if (toRoute.name != 'config') {
           let currentVersion = parseInt(config('app.version').split('.').join(''))
-          appServices.crud.index('apiRoutes.profile.appVersion', {remember: false}).then(response => {
+          appServices.crud.index('apiRoutes.site.appVersion', {remember: false}).then(response => {
             let version = parseInt(response.data.split('.').join(''))
             if (currentVersion < version) {
               this.$router.push({name: 'app.config'})

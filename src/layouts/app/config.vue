@@ -78,6 +78,7 @@
   //Plugins
   import axios from 'axios'
   import {notification} from 'src/plugins/notification'
+  import _cloneDeep from 'lodash.clonedeep'
 
   //Services
   import auth from '@imagina/quser/_plugins/auth' //Middleware auth
@@ -146,18 +147,19 @@
         if (this.$route.params.refresh) {
           await this.$store.dispatch('app/RESET_STORE')//Reset Store
           await this.$helper.storage.restore(config('app.storageKeysToSave'))//Restore storage
-          if(this.$store.state.auth.userToken)
-            await this.$store.dispatch('auth/AUTH_UPDATE')//Reset Auth
+          if(await this.$helper.storage.get.item('userToken'))//Reset Auth
+            await this.$store.dispatch('auth/AUTH_UPDATE')
           if (navigator && navigator.serviceWorker) {//Reset Service Worker
             navigator.serviceWorker.controller.postMessage({
               msg: "clearCache"
             });
           }
         }
+
         //Check version of App
         await this.checkVersionApp()
         //If there is User loged, config user data
-        if (this.$store.state.auth.userToken) {
+        if (await this.$helper.storage.get.item('userToken')) {
           this.percentageChangeNumber += 4
           await this.setRoleAndDepartment()//Set Role and Department of User
           await this.configUserData()//Set user data
