@@ -5,7 +5,7 @@ export default function (key, fallback) {
     let domain = window.location.host.split('.')
     if(domain[0] == 'www') domain[0] = 'backend'
     else domain.unshift('backend')
-    value = 'https://www.'+domain.join('.')
+    value = 'https://'+domain.join('.')
   }
   if (!value) return fallback//Check if must return fallback
   return value.replace(/["]/g, '')
