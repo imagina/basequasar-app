@@ -149,7 +149,7 @@
           await this.$helper.storage.restore(config('app.storageKeysToSave'))//Restore storage
           if(await this.$helper.storage.get.item('userToken'))//Reset Auth
             await this.$store.dispatch('auth/AUTH_UPDATE')
-          if (navigator && navigator.serviceWorker) {//Reset Service Worker
+          if (navigator && navigator.serviceWorker && navigator.serviceWorker.controller) {//Reset Service Worker
             navigator.serviceWorker.controller.postMessage({
               msg: "clearCache"
             });
@@ -276,6 +276,7 @@
 
         //Default route to redirect
         let route = {
+          name : 'app.home',
           params: Object.assign({fromConfig: 1}, (this.fromRoute ? this.fromRoute.params : {})),
           query: Object.assign({}, (this.fromRoute ? this.fromRoute.query : {}))
         }

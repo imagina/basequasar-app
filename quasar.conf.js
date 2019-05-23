@@ -52,32 +52,32 @@ module.exports = function (ctx) {
     },
     // framework: 'all' --- includes everything; for dev only!
     framework: 'all',
-      /*components: [
-        'QLayout',
-        'QLayoutHeader',
-        'QLayoutDrawer',
-        'QPageContainer',
-        'QPage',
-        'QToolbar',
-        'QToolbarTitle',
-        'QBtn',
-        'QIcon',
-        'QList',
-        'QListHeader',
-        'QItem',
-        'QItemMain',
-        'QItemSide'
-      ],
-      directives: [
-        'Ripple'
-      ],
-      // Quasar plugins
-      plugins: [
-        'Notify'
-      ]
-      // iconSet: ctx.theme.mat ? 'material-icons' : 'ionicons'
-      // i18n: 'de' // Quasar language
-    },*/
+    /*components: [
+      'QLayout',
+      'QLayoutHeader',
+      'QLayoutDrawer',
+      'QPageContainer',
+      'QPage',
+      'QToolbar',
+      'QToolbarTitle',
+      'QBtn',
+      'QIcon',
+      'QList',
+      'QListHeader',
+      'QItem',
+      'QItemMain',
+      'QItemSide'
+    ],
+    directives: [
+      'Ripple'
+    ],
+    // Quasar plugins
+    plugins: [
+      'Notify'
+    ]
+    // iconSet: ctx.theme.mat ? 'material-icons' : 'ionicons'
+    // i18n: 'de' // Quasar language
+  },*/
     // animations: 'all' --- includes all animations
     animations: [],
     ssr: {
@@ -87,12 +87,12 @@ module.exports = function (ctx) {
       workboxPluginMode: 'InjectManifest',
       workboxOptions: {},
       manifest: {
-        name: 'FHIA APP',
-        short_name: 'FHIA',
+        name: 'APP',
+        short_name: 'APP',
         description: '',
         orientation: 'portrait',
         background_color: '#ffffff',
-        theme_color: '#027be3',
+        theme_color: '#ffffff',
         display: "standalone",
         serviceWorker: {
           src: "service-worker.js",

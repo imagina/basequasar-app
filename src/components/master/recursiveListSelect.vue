@@ -7,7 +7,7 @@
         <span v-if="title">{{title}}</span>
       </div>
       <!-- Search -->
-      <div class="col-12 col-md-6 q-mb-md">
+      <div :class="'col-12 q-mb-md '+ (icon && title ? 'col-md-6 ' : '')">
         <q-search v-model="search" placeholder="Search..." clearable hide-underline/>
       </div>
     </div>
@@ -16,7 +16,7 @@
       <q-tree
         :nodes="items"
         default-expand-all
-        color="secondary"
+        color="primary"
         :ticked.sync="itemsSelected"
         tick-strategy="leaf-filtered"
         :filter="search"

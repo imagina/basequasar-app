@@ -4,91 +4,208 @@
 *
   a
     text-decoration none
+
+  //=================== Round bordes modified
+
   .round-borders
     border-radius 6px !important
     border 1px solid $grey-4
-  .q-inner-loading
-    .q-box-inner-loading
-      text-align center
-      background-color #ffffffde
-      margin 20px 10px 10px 10px
-      padding 5px 15px
-      border-radius 15px
-  .text-title-border
-    span
-      border-bottom 2px red solid
-  .bg-loading
-    background-color white
-    .text-primary
-      text-shadow none !important
-      font-weight bold
 
-.q-container
-  width 100%
-  margin 0 auto
-  @media screen and (min-width: $breakpoint-xs)
-    max-width 540px
-  @media screen and (min-width: $breakpoint-sm)
-    max-width 720px
-  @media screen and (min-width: $breakpoint-md)
-    max-width 960px
-  @media screen and (min-width: $breakpoint-lg)
-    max-width 1140px
+  //================== Container like bootstrap
 
-.q-select
-  .q-chip-small
-    min-height 24px
+  .q-container
+    width 100%
+    margin 0 auto
+    @media screen and (min-width: $breakpoint-xs)
+      max-width 540px
+    @media screen and (min-width: $breakpoint-sm)
+      max-width 720px
+    @media screen and (min-width: $breakpoint-md)
+      max-width 960px
+    @media screen and (min-width: $breakpoint-lg)
+      max-width 1140px
 
-//VUE TREE SELECT
-.vue-treeselect__control
-  border: none !important
-  border-bottom: 1px solid $grey-6 !important
-  border-radius 0px !important
-  padding: 0 !important
-  .vue-treeselect__multi-value-item-container
-    padding-top 2px
-  .vue-treeselect__multi-value-item
-    background: $primary
-    color: white
-    font-size: 14px
-    border-radius: 15px
-    padding: 2px
-    &:hover
+  //===================== VUE TREE SELECT
+
+  .vue-treeselect
+    border 1px solid $grey-4
+
+    .vue-treeselect__control
+      border: 0px !important
+      padding: 0 !important
+
+      .vue-treeselect__single-value
+        font-size 15px
+        height 36px
+        padding 5px 3px
+        line-height 1.8
+
+      .vue-treeselect__multi-value-item-container
+        padding-top 2px
+
+      .vue-treeselect__multi-value-item
+        background: $primary
+        color: white
+        font-size: 14px
+        border-radius: 15px
+        padding: 2px
+
+        &:hover
+          .vue-treeselect__icon
+            color: $primary
+
       .vue-treeselect__icon
         color: $primary
-  .vue-treeselect__icon
-    color: $primary
-    background: white
-    border-radius: 100%
-    padding: 5px
-    svg
-      width: 10px
-      height: 12px
-  .vue-treeselect__placeholder
-    padding: 0
-  .vue-treeselect__input-container
-    padding: 0
-  .vue-treeselect__control-arrow
-    color: $grey-6
+        background: white
+        border-radius: 100%
+        padding: 5px
 
-.vue-treeselect__list-item
-  .vue-treeselect__option
-    padding 6px 0
-.vue-treeselect__portal-target
-  z-index 9999 !important
+        svg
+          width: 10px
+          height: 12px
 
-.table-responsive
-  min-height: .01%;
-  overflow-x: auto;
-  width: 100%;
+      .vue-treeselect__placeholder
+        padding: 0
 
-  .text_title
-    line-height: 30px;
+      .vue-treeselect__input-container
+        padding: 0
 
-@media screen and (max-width: 767px)
-  .table-responsive {
-    margin-bottom: 15px;
-    overflow-y: hidden;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
+      .vue-treeselect__control-arrow
+        color: $grey-6
 
-  }
+    .vue-treeselect__list-item
+      .vue-treeselect__option
+        padding 6px 0
+
+    .vue-treeselect__portal-target
+      z-index 9999 !important
+
+  .table-responsive
+    min-height: .01%;
+    overflow-x: auto;
+    width: 100%;
+
+    .text_title
+      line-height: 30px;
+
+  @media screen and (max-width: 767px)
+    .table-responsive {
+      margin-bottom: 15px;
+      overflow-y: hidden;
+      -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
+
+  //================== Styles only to backend
+
+  .backend-page
+    .q-btn, .q-btn-group //All buttons with border radius
+      border-radius 28px
+      box-shadow none
+
+    .border-top-color //border top color
+      border-top 3px solid $primary
+      padding 15px
+
+      &.q-table-container, &.q-card
+        padding 0px
+
+    .input-title //Label to input fields
+      color $grey-8
+      font-size 12px
+      margin-left 4px
+      padding 6px 0
+
+    .q-input, .q-select, .q-datetime-input //Style to input select and date time
+      padding-bottom 0px
+
+      &:before
+        border 1px solid transparent
+
+      .q-if-inner
+        border 1px solid $grey-4
+        padding 5px 3px
+
+        .q-if-label
+          line-height 3 !important
+          color $grey-8
+
+    .q-field //Field inputs
+
+      .q-field-bottom
+        padding-top 3px
+        margin 0px
+        border none
+
+    .q-select, .q-datetime-input //q select and q date time
+
+      .q-if-inner
+        border-right 0px
+
+      .q-icon
+        border 1px solid $grey-4
+        border-left 0px
+        height 36px
+        padding 5px 3px
+        margin 0px
+
+      .q-input-target
+        padding-left 4px
+
+    .q-search //q search
+      border 1px solid $grey-4
+      padding 0px 9px !important
+      border-radius 5px
+
+      .q-if-inner
+        border 0px
+
+    .q-select //q select
+
+      .q-chip-small
+        min-height 24px
+
+    .q-table-bottom //Q table bottom
+
+      .q-select
+        border 0px
+
+        .q-if-inner, .q-icon
+          border 0px
+
+    .q-modal-layout //Modal
+
+      .q-layout-header, .q-layout-footer
+        box-shadow none !important
+
+      .layout-padding
+        padding 15px
+
+    .cont-vue-tree //Content vue tree with label left
+      border 1px solid $grey-4
+      border-left 2px solid $primary
+      border-radius 4px
+      display inline-flex
+      margin-right 7px
+
+      @media screen and (max-width: $breakpoint-md)
+        width 100%
+        margin-bottom 10px
+
+      .stack-label
+        padding 9px 4px
+        color $primary
+
+      .vue-treeselect, .q-if-inner, .q-if-control
+        float right
+        border 0px
+
+        .vue-treeselect__control
+          border 0px !important
+          width auto
+          padding-right 5px !important
+
+        .vue-treeselect__single-value
+          font-size 15px
+          height 36px
+          padding 5px 3px
+          line-height 1.8
