@@ -167,7 +167,7 @@
         //Call aditional condigs
         await this.additionalConfigs()
         //Redirec from Config
-        await this.redirectToroute()
+        await this.redirectToRoute()
       },
 
       //Check if app is updated
@@ -264,7 +264,7 @@
       },
 
       //Redirect after config data from page
-      redirectToroute() {
+      redirectToRoute() {
         this.setRandompercentage() //update progress percentage
 
         //Redirect route
@@ -313,7 +313,7 @@
       //Refresh site
       refreshSite() {
         window.location.reload(false)
-        this.redirectToroute()
+        this.redirectToRoute()
       },
     }
   }
