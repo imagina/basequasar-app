@@ -14,7 +14,8 @@ module.exports = function (ctx) {
       'axios',
       'moment',
       'helper',
-      'auth'
+      'auth',
+      'clone'
     ],
     css: [
       'app.styl'
