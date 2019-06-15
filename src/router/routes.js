@@ -1,9 +1,9 @@
 import Route from 'vue-routisan'
-//Redirect
-Route.redirect('/', '/home');
-
 //Create all routes from pages
 const pages = config('pages')//Get pages from config
+
+//Redirect
+Route.redirect('/', pages.application.home.path);
 
 for (var nameGroupPage in pages) {
   let groupPages = pages[nameGroupPage]//Get group pages
