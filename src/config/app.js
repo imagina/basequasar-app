@@ -1,5 +1,6 @@
 export default {
   version: '0.0.1',
+  registerUsers : true,//Permit register users
   modules: {
     apiRoutes: {//All api routes
       api: require('src/config/apiRoutes/api').default,
@@ -24,13 +25,20 @@ export default {
       blog: require('@imagina/qblog/_store/index').default,
     }
   },
-  storageKeysToSave: [
-    'userToken',
-    'userId',
-    'userData',
-    'offlineRequests',
-    'notifications',
-    'auth.department.id',
-    'auth.role.id'
-  ]
+  saveStorage : {
+    refresh : [
+      'userToken',
+      'userId',
+      'userData',
+      'offlineRequests',
+      'notifications',
+      'auth.department.id',
+      'auth.role.id',
+      'redirect.to.from.login',
+      'dataAddress'
+    ],
+    logout : [
+      'offlineRequests',
+    ]
+  }
 }
