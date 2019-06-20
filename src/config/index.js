@@ -8,6 +8,8 @@ export default function (value = '', fallback = null) {
     apiRoutes : configApp.modules.apiRoutes,
     sidebar : require('src/config/sidebar').default,
     auth : require('@imagina/quser/_config/auth').default,
+    testApiRoutes : require('src/config/apiRoutes/index').default,
+    testPages : require('src/config/pages/index').default,
     app : configApp,
   }
 

@@ -1,10 +1,15 @@
 export default {
   version: '0.0.1',
   registerUsers : true,//Permit register users
+  isBackend : false, //Define if project is to admin
+  modulesDev : [
+    'qcommerce','qcrud','qhelper',
+    'qmedia','qmenu','qnotification','qoffline',
+    'qsite','qslider','quser'
+  ],
   modules: {
     apiRoutes: {//All api routes
-      api: require('src/config/apiRoutes/api').default,
-      app: require('src/config/apiRoutes/application').default,
+      //api: require('src/config/apiRoutes/api').default,
       site: require('@imagina/qsite/_config/site').default,
       profile: require('@imagina/quser/_config/profile').default,
       blog: require('@imagina/qblog/_config/blog').default,
