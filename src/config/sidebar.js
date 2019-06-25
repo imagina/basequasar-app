@@ -1,3 +1,4 @@
+import indexSidebar from '@imagina/qmenu/_config/sidebar/index'//Side bar of qMenu
 const pages = config('pages') // Get Pages from config
 
 /*Example group item. April 04, 2019
@@ -17,6 +18,11 @@ const pages = config('pages') // Get Pages from config
 }
 */
 
-export default [
-  pages.application.home,//Home
+
+//Add items tu sidebar
+let sidebar = [
+  pages.app.home,//Home
 ]
+
+//Return merge between local sidebar and sidebar of qMenu
+export default sidebar.concat(indexSidebar)

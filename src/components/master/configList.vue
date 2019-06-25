@@ -10,7 +10,7 @@
       </q-list-header>
 
       <!--Settings User-->
-      <div v-if="$store.state.auth.userToken">
+      <div v-if="$store.state.quserAuth.userToken">
         <q-item-separator/>
 
         <!--Title Loges as-->
@@ -23,7 +23,7 @@
         <!--Select Role-->
         <q-item class="q-py-none">
           <div class="full-width text-primary">
-            <q-icon name="fas fa-user-circle" class="q-mr-sm"></q-icon>
+            <q-icon name="fas fa-user-tag" class="q-mr-sm"></q-icon>
             Role
             <q-select :options="options.roles" filter hide-underline v-if="show.roles"
                       v-model="roleId" class="full-width q-mt-xs" @input="updateDepRolUser">
@@ -37,7 +37,7 @@
         <!--Select Department-->
         <q-item class="q-py-none relative-position">
           <div class="full-width q-mt-sm text-primary">
-            <q-icon name="fas fa-globe" class="q-mr-sm"></q-icon>
+            <q-icon name="fas fa-user-shield" class="q-mr-sm"></q-icon>
             Department
             <treeselect
               :clearable="false"
@@ -65,12 +65,28 @@
           Language
         </div>
       </div>
-
+      <!--Data language-->
       <q-item class="q-py-none q-my-sm">
         <div class="full-width text-primary">
-          <q-select :options="options.locales" :before="[{icon:'g_translate'}]"
+          <q-icon name="fas fa-language" class="q-mr-sm"></q-icon>
+          Language
+          <q-select :options="options.locales"
                     filter hide-underline v-if="show.locales" @input="updateLocale"
                     v-model="locale" class="full-width q-if-focused q-if-focusable">
+          </q-select>
+          <h1 v-else class="ellipsis q-subheading q-ma-none text-grey-8 q-ml-md">
+            {{options.locales[0].label}}
+          </h1>
+        </div>
+      </q-item>
+      <!--Currenci language-->
+      <q-item class="q-py-none q-my-sm">
+        <div class="full-width text-primary">
+          <q-icon name="fas fa-money-bill-wave" class="q-mr-sm"></q-icon>
+          Currency
+          <q-select :options="options.locales" filter hide-underline v-if="show.locales"
+                    @input="updateLocale" v-model="locale"
+                    class="full-width q-if-focused q-if-focusable">
           </q-select>
           <h1 v-else class="ellipsis q-subheading q-ma-none text-grey-8 q-ml-md">
             {{options.locales[0].label}}
@@ -114,7 +130,7 @@
       </q-item>
 
       <!--Logout-->
-      <q-item tag="label" link :to="{name:'auth.logout'}" v-if="$store.state.auth.userToken">
+      <q-item tag="label" link :to="{name:'auth.logout'}" v-if="$store.state.quserAuth.userToken">
         <q-item-side>
           <q-icon color="negative" name="fas fa-sign-out-alt" size="20px"></q-icon>
         </q-item-side>
@@ -153,16 +169,16 @@
         valueConsistsOf: 'BRANCH_PRIORITY',
         roleId: false,
         departmentId: false,
-        locale : this.$store.state.site.defaultLocale,
+        locale: this.$store.state.qsiteSettings.defaultLocale,
         options: {
-          roles: this.$store.getters['auth/userRolesSelect'],
-          departments: this.$store.getters['auth/userDepartmentsSelect'],
-          locales: this.$store.getters['site/getSelectedLocalesSelect']
+          roles: this.$store.getters['quserAuth/userRolesSelect'],
+          departments: this.$store.getters['quserAuth/userDepartmentsSelect'],
+          locales: this.$store.getters['qsiteSettings/getSelectedLocalesSelect']
         },
         show: {
           roles: false,
           departments: false,
-          locales : false,
+          locales: false,
         },
         fullScreen: this.$q.fullscreen.isActive,
       }
@@ -194,7 +210,7 @@
         if (this.options.departments.length == 1)
           if (this.options.departments[0].children)
             this.show.departments = true
-        if(this.options.locales.length >= 2)
+        if (this.options.locales.length >= 2)
           this.show.locales = true
       },
 
@@ -212,9 +228,12 @@
       },
 
       //update Locale
-      async updateLocale(){
-        await this.$store.dispatch('site/SET_LOCALE',this.locale)
-        this.$router.push({name : 'app.config'})
+      async updateLocale() {
+        await this.$store.dispatch(
+          'qsiteSettings/SET_LOCALE',
+          {locale: this.locale, vue: this}
+        )
+        this.$router.push({name: 'app.config'})
       }
     }
   }

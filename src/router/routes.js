@@ -3,7 +3,7 @@ import Route from 'vue-routisan'
 const pages = config('pages')//Get pages from config
 
 //Redirect
-Route.redirect('/', pages.application.home.path);
+Route.redirect('/', pages.app.home.path);
 
 for (var nameGroupPage in pages) {
   let groupPages = pages[nameGroupPage]//Get group pages
@@ -15,18 +15,20 @@ for (var nameGroupPage in pages) {
         //Create Route
         Route.view('/', page.containerLayout)
           .children(() => {
-              Route.view(page.path, page.layout).options({
-                name: page.name,
-                meta: {permission: (page.permission ? page.permission : null)},
-                guard : (page.middleware ? page.middleware : []),
-                props: (route) => {
-                  let propsData = page.props ? page.props : {}
-                  propsData.parentId = route.params.parentId || null
-                  return propsData
-                },
-              });
-            }
-          )
+            Route.view(page.path, page.layout).options({
+              name: page.name,
+              meta: {
+                permission: (page.permission ? page.permission : null),
+                title : page.title
+              },
+              guard: (page.middleware ? page.middleware : []),
+              props: (route) => {
+                let propsData = page.props ? page.props : {}
+                propsData.parentId = route.params.parentId || null
+                return propsData
+              },
+            });
+          })
       }
     }
   }

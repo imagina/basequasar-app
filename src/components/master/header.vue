@@ -23,7 +23,7 @@
 
         <!--== Button User ==-->
         <q-btn :to="{name: 'user.profile.me'}" flat
-               v-if="this.$q.platform.is.desktop && $store.state.auth.userToken">
+               v-if="this.$q.platform.is.desktop && $store.state.quserAuth.userToken">
 
           <img :src="getImageUrl"
                style="border-radius: 100%; margin-right: 5px; width: 25px;height: 25px;"
@@ -90,15 +90,15 @@
     },
     data() {
       return {
-        projectName: this.$store.getters['site/getSettingValueByName']('core::site-name'),
-        userData: this.$store.state.auth.userData,
+        projectName: this.$store.getters['qsiteSettings/getSettingValueByName']('core::site-name'),
+        userData: this.$store.state.quserAuth.userData,
         drawer: {
           menu: false,
           config: false,
           notification: false
         },
         menu: config('sidebar'),
-        logo : this.$store.getters['site/getSettingMediaByName']('isite::logo1').path
+        logo : this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo1').path
       }
     },
     computed: {

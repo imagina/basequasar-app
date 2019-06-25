@@ -23,10 +23,11 @@
 
   export default {
     meta() {
-      let siteName = this.$store.getters['site/getSettingValueByName']('core::site-name')
-      let iconHref = this.$store.getters['site/getSettingMediaByName']('isite::favicon').path
+      let routetitle = ((this.$route.meta && this.$route.meta.title) ? this.$route.meta.title : '')
+      let siteName = this.$store.getters['qsiteSettings/getSettingValueByName']('core::site-name')
+      let iconHref = this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::favicon').path
       return {
-        title: siteName,
+        title: `${siteName} | ${routetitle}`,
         link: [{rel: 'icon', href: iconHref, id: 'icon'}],
       }
     },
@@ -67,7 +68,7 @@
       checkVersionApp(toRoute) {
         if (toRoute.name != 'config') {
           let currentVersion = parseInt(config('app.version').split('.').join(''))
-          appServices.crud.index('apiRoutes.site.appVersion', {remember: false}).then(response => {
+          appServices.crud.index('apiRoutes.qsite.appVersion', {remember: false}).then(response => {
             let version = parseInt(response.data.split('.').join(''))
             if (currentVersion < version) {
               this.$router.push({name: 'app.config'})

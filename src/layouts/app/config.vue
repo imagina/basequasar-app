@@ -7,7 +7,7 @@
         Loading ({{progressPercentage}}%)
       </h6>
       <!--Bar Loading-->
-      <q-progress :percentage="progressPercentage" color="primary" class="q-mt-sm"/>
+      <q-progress :percentage="progressPercentage" color="blue-grey" class="q-mt-sm"/>
     </div>
 
     <!--=== Dialog to Update APP ===-->
@@ -150,7 +150,7 @@
           await this.$store.dispatch('app/RESET_STORE')//Reset Store
           await this.$helper.storage.restore(config('app.saveStorage.refresh'))//Restore storage
           if(await this.$helper.storage.get.item('userToken'))//Reset Auth
-            await this.$store.dispatch('auth/AUTH_UPDATE')
+            await this.$store.dispatch('quserAuth/AUTH_UPDATE')
           if (navigator && navigator.serviceWorker && navigator.serviceWorker.controller) {//Reset Service Worker
             navigator.serviceWorker.controller.postMessage({
               msg: "clearCache"
@@ -162,7 +162,7 @@
         await this.checkVersionApp()
         //If there is User loged, config user data
         let userToken = await this.$helper.storage.get.item('userToken')
-        if (userToken && this.$store.state.auth.userToken) {
+        if (userToken && this.$store.state.quserAuth.userToken) {
           this.percentageChangeNumber += 4
           await this.setRoleAndDepartment()//Set Role and Department of User
           await this.configUserData()//Set user data
@@ -172,14 +172,13 @@
         //Redirec from Config
         await this.redirectToRoute()
       },
-
       //Check if app is updated
       checkVersionApp() {
         return new Promise(async (resolve, reject) => {
           //Get current versión
           let verisonApp = parseInt(config('app.version').split('.').join(''))
           //Get version from backend
-          let newVersion = await appServices.crud.index('apiRoutes.site.appVersion', {remember: false})
+          let newVersion = await appServices.crud.index('apiRoutes.qsite.appVersion', {remember: false})
           newVersion = parseInt(newVersion.data.split('.').join(''))
           //update progress percentage
           this.setRandompercentage()
@@ -191,7 +190,6 @@
           }
         })
       },
-
       //Set departments and roles form user
       setRoleAndDepartment() {
         return new Promise(async (resolve, reject) => {
@@ -229,14 +227,13 @@
           resolve(true)//Resolve promise
         })
       },
-
       //Config user data
       configUserData() {
         return new Promise(async (resolve, reject) => {
           //Set settings and permissions of user
-          await this.$store.dispatch('auth/SET_PERMISSIONS');
+          await this.$store.dispatch('quserAuth/SET_PERMISSIONS');
           this.setRandompercentage() //update progress percentage
-          await this.$store.dispatch('auth/SET_SETTINGS');
+          await this.$store.dispatch('quserAuth/SET_SETTINGS');
           this.setRandompercentage() //update progress percentage
 
           //Check if user has permission of login
@@ -250,24 +247,22 @@
 
           //Get Departments
           if (auth.hasAccess('profile.departments.index'))
-            await this.$store.dispatch('auth/GET_DEPARTMENTS')
+            await this.$store.dispatch('quserAuth/GET_DEPARTMENTS')
           this.setRandompercentage()//Change load percentage
           resolve(true)//Resolve promise
         })
       },
-
       //Custom Additional Configs
       additionalConfigs() {
         return new Promise(async (resolve, reject) => {
           // here you custom dispatch
-          await this.$store.dispatch('site/GET_SITE_SETTINGS');
+          await this.$store.dispatch('qsiteSettings/GET_SITE_SETTINGS');
           this.setRandompercentage()//Change load percentage
           resolve(true)//Resolve Promise
         })
       },
-
       //Redirect after config data from page
-      redirectToRoute() {
+      async redirectToRoute() {
         this.setRandompercentage() //update progress percentage
 
         //Redirect route
@@ -289,13 +284,14 @@
         else if (!permissionRoute) route.name = this.fromRoute.name
         else if (auth.hasAccess(permissionRoute)) route.name = this.fromRoute.name
 
-        //If route id from login, redirect to home
-        if(route.name == 'auth.login') route.name = 'app.home'
+        //If route id from login and is loged, redirect to home
+        let userToken = await this.$helper.storage.get.item('userToken')
+        if (userToken && this.$store.state.quserAuth.userToken)
+          if(route.name == 'auth.login') route.name = 'app.home'
 
         //Redirect
         this.$router.push(route)
       },
-
       //remove querys from route
       removeQueries() {
         let query = Object.assign({}, this.$route.query);
@@ -303,7 +299,6 @@
         delete query.getData;
         this.$router.replace({query});
       },
-
       //Set random percentage of load
       setRandompercentage() {
         let range = Math.round(100 / this.percentageChangeNumber)//Get range bettewn change of porcentage
@@ -315,7 +310,6 @@
         this.progressPercentage = randomPercentage
         this.currentRangePercentage = untilNumber
       },
-
       //Refresh site
       refreshSite() {
         window.location.reload(false)

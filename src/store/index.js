@@ -7,16 +7,24 @@ const appConfig = require('src/config/app').default//Get config APP
 //Auto load stores from modules available in: src/config/app.js "modules"
 //Not edit
 let stores = {}
-if(appConfig && appConfig.modulesDev){
-  const modules = appConfig.modulesDev
+if(appConfig && appConfig.modules){
+  const modules = appConfig.modules
 
   modules.forEach(name => {
     try {
       let storeModule = require(`@imagina/${name}/_store/index`).default
-      stores[name] = storeModule
+      for(var itemName in storeModule){
+        let keyName = name+(itemName.charAt(0).toUpperCase() + itemName.slice(1))
+        stores[keyName] = storeModule[itemName]
+      }
     }catch (e) {}
   })
 }
+
+//Add extra stores
+//#example: stores.<name> = require('path-store-index').default
+stores.app = require('src/store/app/index').default
+
 
 Vue.use(Vuex)//Add VUEX to VUE
 const store = new Vuex.Store({

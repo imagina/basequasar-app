@@ -4,8 +4,8 @@ import appConfig from 'src/config/app'
 //Not edit
 let pages = {}
 
-if (appConfig && appConfig.modulesDev) {
-  const modules = appConfig.modulesDev
+if (appConfig && appConfig.modules) {
+  const modules = appConfig.modules
 
   modules.forEach(name => {
     try {
@@ -21,5 +21,6 @@ if (appConfig && appConfig.modulesDev) {
 
 //Add or update extra apiRoutes
 //#example: pages.<name-page> = require('path-page').default
+pages.app = require('src/config/pages/application').default //Pages of APP
 
 export default pages
