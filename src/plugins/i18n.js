@@ -1,41 +1,27 @@
 import VueI18n from 'vue-i18n'
-import messages from 'src/i18n'
+import Quasar from 'quasar'
+import customFormats from 'src/i18n/formats/customFormats'
+import numberFormats from 'src/i18n/formats/currencyFormats'
+import dateTimeFormats from 'src/i18n/formats/dateTimeFormats'
+import messages from 'src/i18n/index'
 
-/*=== Number Formats ===*/
-const numberFormats = {
-  'en-us': {
-    currency: {
-      style: 'currency',
-      currency: 'USD'
-    }
-  }
-}
-
-/*=== Date Formats ===*/
-const dateTimeFormats = {
-  'en-us': {
-    short: {
-      year: 'numeric', month: 'short', day: 'numeric'
-    },
-    long: {
-      year: 'numeric', month: 'short', day: 'numeric',
-      hour: 'numeric', minute: 'numeric'
-    },
-    time:{
-      hour: 'numeric', minute: 'numeric'
-    }
-  },
-}
-
-export default ({ app, Vue }) => {
-  Vue.use(VueI18n)
+export default ({app, Vue}) => {
+  Vue.use(VueI18n)// Use i18n
+  //Get default language from app config
+  let defaultLanguage = config('app.languages.default')
 
   // Set i18n instance on app
   app.i18n = new VueI18n({
-    locale: 'en-us',
-    fallbackLocale: 'en-us',
+    locale: defaultLanguage,
+    fallbackLocale: defaultLanguage,
+    formatter: new customFormats(),
     numberFormats,
     dateTimeFormats,
     messages
+  })
+
+  //Set default language to quasar
+  import(`quasar-framework/i18n/${defaultLanguage}`).then(lang => {
+    Quasar.i18n.set(lang.default)
   })
 }

@@ -1,7 +1,8 @@
-// This is just an example,
-// so you can safely delete all default props below
+import appConfig from 'src/config/app'
+import words from 'src/i18n/en-us/words'
+import ui from 'src/i18n/en-us/ui'
 
 export default {
-  failed: 'Action failed',
-  success: 'Action was successful'
+  word: words,
+  ui : ui
 }
