@@ -2,13 +2,13 @@ export default {
   'en-us': {
     currency: {
       style: 'currency',
-        currency: 'USD'
+      currency: 'USD'
     }
   },
   'es': {
     currency: {
       style: 'currency',
-      currency: 'USD'
-    }
+      currency: 'COP'
+    },
   }
 }
