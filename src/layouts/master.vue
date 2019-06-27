@@ -1,22 +1,26 @@
 <template>
   <q-layout view="lHh LpR lFr" v-if="$store.state.app.active && loadedApp">
     <!-- HEADER -->
-    <master-header></master-header>
+    <admin-header v-if="appIdBackend"></admin-header>
+    <frontend-header v-else></frontend-header>
 
     <!-- ROUTER VIEW -->
     <q-page-container>
-      <router-view v-if="loadedApp" />
+      <router-view v-if="loadedApp"/>
     </q-page-container>
 
     <!-- FOOTER -->
-    <master-footer></master-footer>
+    <admin-footer v-if="appIdBackend"></admin-footer>
+    <frontend-footer v-else></frontend-footer>
   </q-layout>
 </template>
 
 <script>
   /*Components*/
-  import masterHeader from 'src/components/master/header'
-  import masterFooter from 'src/components/master/footer'
+  import adminHeader from 'src/components/master/admin/header'
+  import adminFooter from 'src/components/master/admin/footer'
+  import frontendHeader from 'src/components/master/frontend/header'
+  import frontendFooter from 'src/components/master/frontend/footer'
 
   //Services
   import appServices from 'src/services/application/index'
@@ -32,8 +36,8 @@
       }
     },
     components: {
-      masterHeader,
-      masterFooter
+      adminHeader, adminFooter,
+      frontendHeader, frontendFooter
     },
     mounted() {
       this.$nextTick(async function () {
@@ -51,7 +55,8 @@
     },
     data() {
       return {
-        loadedApp: false
+        loadedApp: false,
+        appIdBackend : config('app.isBackend')
       }
     },
     computed: {
