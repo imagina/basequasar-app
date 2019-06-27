@@ -117,7 +117,7 @@
       return {
         //Percentage of config
         progressPercentage: 1,
-        percentageChangeNumber: 2,
+        percentageChangeNumber: 3,
         currentRangePercentage: 1,
         //Dialogs
         dialogUpdateApp: false,
@@ -258,6 +258,10 @@
           // here you custom dispatch
           await this.$store.dispatch('qsiteSettings/GET_SITE_SETTINGS');
           this.setRandompercentage()//Change load percentage
+          
+          await this.$store.dispatch('qmenuMaster/GET_MENUS');
+          this.setRandompercentage()//Change load percentage
+          
           resolve(true)//Resolve Promise
         })
       },

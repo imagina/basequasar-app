@@ -31,4 +31,5 @@ const store = new Vuex.Store({
   modules: stores//Add config of store's
 });
 
+
 export default store

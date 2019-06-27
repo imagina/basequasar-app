@@ -1,19 +1,32 @@
 <template>
-	<q-list separator link no-border id="listMenu" class="q-pa-none">
-		<!--Single Item-->
-		<q-item :to="{name : item.name}" v-if="checkItemSingle(item)" exact
-		        v-for="(item,key) in menu" :key="key">
-			<q-item-side :icon="item.icon"/>
-			<q-item-main>{{item.title}}</q-item-main>
-		</q-item>
-
-		<!-- Dropdwon Item -->
-		<q-collapsible v-else-if="checkItemMultiple(item)"
-		               :icon="item.icon" :label="item.title">
-			<recursive-menu :key="key" :menu="item.children"/>
-		</q-collapsible>
-	</q-list>
+  <q-list separator link no-border id="listMenu" class="q-pa-none">
+  
+    <div v-for="(item,key) in menu" :key="key">
+      
+      <!-- Internal Single-->
+      <q-item
+        style="cursor: pointer"
+        v-if="checkItemSingle(item)"
+        @click.native="goTo(item)"
+        exact>
+          <q-item-side :icon="item.icon"/>
+          <q-item-main>{{item.title}}</q-item-main>
+      </q-item>
+      
+      <!-- Internal Dropdwon-->
+      <q-collapsible
+        v-else-if="checkItemMultiple(item)"
+        :icon="item.icon"
+        :label="item.title">
+          <recursive-menu
+            :key="key"
+            :menu="item.children"/>
+      </q-collapsible>
+    
+    </div>
+  </q-list>
 </template>
+
 <script>
 	//Plugins
 	import auth from '@imagina/quser/_plugins/auth'
@@ -24,6 +37,11 @@
 		props: {
 			menu: {default: false}
 		},
+    filters:{
+      url(val){
+        return `https://${val}`
+      }
+    },
 		created() {
 			this.$nextTick(function () {
 				this.checkCollapsibles()
@@ -54,7 +72,20 @@
 							group.style.display = 'none'
 					}
 				}
-			}
+			},
+      checkItemExternalLink(item){
+			  if (item.linkType == 'external'){
+			    return true
+        }
+        return false
+      },
+      goTo(item){
+        if (item.linkType == 'external'){
+          window.open(`https://${item.url}`,item.target);
+        }else{
+          this.$router.push({name: item.name})
+        }
+      }
 		}
 	}
 </script>

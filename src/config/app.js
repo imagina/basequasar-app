@@ -1,7 +1,7 @@
 export default {
   version: '0.0.1',
   registerUsers : true,//Permit register users
-  isBackend : true, //Define if project is to admin
+  isBackend : false, //Define if project is to admin
   modules : [
     'qblog',
     'qcommerce',
