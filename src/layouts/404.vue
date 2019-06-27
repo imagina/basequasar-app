@@ -6,12 +6,14 @@
         style="width:30vw;max-width:150px;"
       >
     </p>
-    <p class="text-faded">Sorry, nothing here...<strong>(404)</strong></p>
+    <p class="text-faded">
+      {{$t('ui.messages.notFound')}}...<strong>(404)</strong>
+    </p>
     <q-btn
       color="blue-grey"
       style="width:200px;"
-      @click="$router.push({name: 'app.home'})"
-    >Go to home
+      @click="$router.push({name: 'app.home'})">
+      {{$t('ui.messages.goToHome')}}
     </q-btn>
   </div>
 </template>

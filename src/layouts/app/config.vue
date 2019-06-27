@@ -4,7 +4,7 @@
     <div class="text-center full-height q-pa-lg">
       <q-spinner-gears color="blue-grey" size="80px"/>
       <h6 class="q-ma-none q-mt-md text-blue-grey">
-        Loading ({{progressPercentage}}%)
+        {{$t('ui.label.loading', {capitalize : true})}} ({{progressPercentage}}%)
       </h6>
       <!--Bar Loading-->
       <q-progress :percentage="progressPercentage" color="blue-grey" class="q-mt-sm"/>
@@ -90,6 +90,11 @@
   import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 
   export default {
+    meta() {
+      return {
+        title: this.$t('ui.label.loading'),
+      }
+    },
     props: {},
     components: {Treeselect},
     beforeRouteEnter(to, from, next) {
@@ -256,7 +261,7 @@
       additionalConfigs() {
         return new Promise(async (resolve, reject) => {
           // here you custom dispatch
-          await this.$store.dispatch('qsiteSettings/GET_SITE_SETTINGS');
+          await this.$store.dispatch('qsiteSettings/GET_SITE_SETTINGS', this);
           this.setRandompercentage()//Change load percentage
           resolve(true)//Resolve Promise
         })

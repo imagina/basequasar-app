@@ -1,4 +1,7 @@
+import words from 'src/i18n/es/words'
+import ui from 'src/i18n/es/ui'
+
 export default {
-  failed: 'Action failed',
-  success: 'Acción completada'
+  word : words,
+  ui : ui
 }
