@@ -85,7 +85,6 @@
     watch: {},
     mounted() {
       this.$nextTick(function () {
-        console.warn()
       })
     },
     data() {
@@ -97,7 +96,7 @@
           config: false,
           notification: false
         },
-        menu: config('sidebar'),
+        menu: (this.$store.getters['qmenuMaster/menu'](9)).items,
         logo : this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo1').path
       }
     },

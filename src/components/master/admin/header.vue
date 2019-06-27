@@ -84,11 +84,7 @@
     },
     watch: {},
     mounted() {
-      this.$nextTick(function () {
-        if(!config('app.isBackend')){
-          this.menu = (this.$store.getters['qmenuMaster/menu'](9)).items
-        }
-      })
+      this.$nextTick(function () {})
     },
     data() {
       return {
