@@ -1,7 +1,4 @@
 import appConfig from 'src/config/app'
-import enUS from './en-us'
-import es from './es'
-
 let languagesAvailables = config('app.languages.availables')
 
 //Auto load locales from modules available in: src/config/app.js "modules"

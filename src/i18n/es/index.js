@@ -1,7 +1,7 @@
-import words from 'src/i18n/es/words'
 import ui from 'src/i18n/es/ui'
+import sidebar from 'src/i18n/es/sidebar'
 
 export default {
-  word : words,
-  ui : ui
+  ui : ui,
+  sidebar: sidebar
 }

@@ -4,7 +4,9 @@ import * as moment from 'moment';
 import customFormats from 'src/i18n/formats/customFormats'
 import numberFormats from 'src/i18n/formats/currencyFormats'
 import dateTimeFormats from 'src/i18n/formats/dateTimeFormats'
+import store from "../store";
 import messages from 'src/i18n/index'
+import cloneDeep from 'lodash.clonedeep'
 
 export default ({app, Vue}) => {
   Vue.use(VueI18n)// Use i18n

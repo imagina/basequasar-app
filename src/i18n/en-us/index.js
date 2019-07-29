@@ -1,8 +1,8 @@
 import appConfig from 'src/config/app'
-import words from 'src/i18n/en-us/words'
 import ui from 'src/i18n/en-us/ui'
+import sidebar from 'src/i18n/en-us/sidebar'
 
 export default {
-  word: words,
-  ui : ui
+  ui : ui,
+  sidebar : sidebar
 }
