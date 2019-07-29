@@ -1,46 +1,40 @@
 export default {
-  version: '0.0.1',
-  registerUsers : true,//Permit register users
+  version: '1.0.0',
   isBackend : true, //Define if project is to admin
   //UI Languages
   languages : {
     default : 'es',
-    availables : ['en-us', 'es'],
-    select : [
-      {label: 'English (en-us)', value: 'en-us'},
-      {label: 'Español (es)', value: 'es'}
-    ],
+    availables : ['en-us', 'es']
   },
   //Modules
   modules : [
+    'qhelper',
+    'qcrud',
+    'quser',
     'qblog',
     'qcommerce',
-    'quser',
     'qplace',
-    'qcrud',
-    'qhelper',
-    'qmedia',
     'qmenu',
-    'qnotification',
-    'qoffline',
-    'qsite',
-    'qslider'
+    'qmedia',
+    'qslider',
+    'qsite'
   ],
   //Storage
   saveStorage : {
     refresh : [
-      'userToken',
-      'userId',
-      'userData',
+      'sessionData',
       'offlineRequests',
       'notifications',
       'auth.department.id',
       'auth.role.id',
       'redirect.to.from.login',
-      'dataAddress'
+      'site.default.locale',
+      'dataAddress',
+      'impersonatorData'
     ],
     logout : [
-      'offlineRequests'
+      'offlineRequests',
+      'site.default.locale',
     ]
   }
 }

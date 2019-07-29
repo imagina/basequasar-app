@@ -16,7 +16,7 @@ export default {
 		name: 'app.home',
 		layout: require('src/layouts/index').default,
 		containerLayout: master,
-		title: 'Home',
+		title: 'sidebar.pageHome',
 		icon: 'fas fa-home',
 		middleware: [auth]
 	},
@@ -28,7 +28,7 @@ export default {
 		name: 'app.config',
 		layout: require('src/layouts/app/config').default,
 		containerLayout: config,
-		title: 'Config',
+		title: 'sidebar.pageConfig',
 		icon: 'fas fa-home',
 	},
 	//Not found Page
@@ -39,7 +39,7 @@ export default {
 		name: 'app.not.found',
 		layout: null,
 		containerLayout: notFound,
-		title: 'Not Found',
+		title: 'sidebar.pageNotFound',
 		icon: 'fas fa-chart-bar'
 	},
 }

@@ -1,3 +1,5 @@
 export default {
-  active: true
+  active: true,
+  hasConfiguration : false,
+  updateAvailable : false
 }

@@ -1,7 +1,7 @@
 import appConfig from 'src/config/app'
 
 //Auto load api routes from modules available in: src/config/app.js "modules"
-//Not edit
+//===== Not edit
 let pages = {}
 
 if (appConfig && appConfig.modules) {
@@ -18,9 +18,11 @@ if (appConfig && appConfig.modules) {
     } catch (e) {}
   })
 }
-
-//Add or update extra apiRoutes
-//#example: pages.<name-page> = require('path-page').default
 pages.app = require('src/config/pages/application').default //Pages of APP
+
+
+
+//======= Add or update extra apiRoutes
+//#example: pages.<name-page> = require('path-page').default
 
 export default pages
