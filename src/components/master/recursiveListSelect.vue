@@ -8,12 +8,13 @@
       </div>
       <!-- Search -->
       <div :class="'col-12 q-mb-md '+ (icon && title ? 'col-md-6 ' : '')">
-        <q-search v-model="search" placeholder="Search..." clearable hide-underline/>
+        <q-search v-model="search" clearable hide-underline/>
       </div>
     </div>
     <!-- List -->
     <q-scroll-area style="width: 100%; height: 250px;">
       <q-tree
+        v-if="items.length"
         :nodes="items"
         default-expand-all
         color="primary"

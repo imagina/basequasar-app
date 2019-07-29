@@ -15,7 +15,9 @@ module.exports = function (ctx) {
       'moment',
       'helper',
       'auth',
-      'clone'
+      'clone',
+      'crud',
+      'globalComponents'
     ],
     css: [
       'app.styl'
@@ -47,38 +49,12 @@ module.exports = function (ctx) {
       }
     },
     devServer: {
-      // https: true,
-      // port: 8080,
+      //https: true,
+      port: 8080,
       open: true // opens browser window automatically
     },
     // framework: 'all' --- includes everything; for dev only!
     framework: 'all',
-    /*components: [
-      'QLayout',
-      'QLayoutHeader',
-      'QLayoutDrawer',
-      'QPageContainer',
-      'QPage',
-      'QToolbar',
-      'QToolbarTitle',
-      'QBtn',
-      'QIcon',
-      'QList',
-      'QListHeader',
-      'QItem',
-      'QItemMain',
-      'QItemSide'
-    ],
-    directives: [
-      'Ripple'
-    ],
-    // Quasar plugins
-    plugins: [
-      'Notify'
-    ]
-    // iconSet: ctx.theme.mat ? 'material-icons' : 'ionicons'
-    // i18n: 'de' // Quasar language
-  },*/
     // animations: 'all' --- includes all animations
     animations: [],
     ssr: {

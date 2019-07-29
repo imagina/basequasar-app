@@ -1,18 +1,14 @@
 <template>
-  <div id="notResultsComponent" class="text-center">
-    <h4 class="q-ma-none text-dark">
-      Ups!
-      <q-icon name="far fa-meh" color="secondary"></q-icon>
-    </h4>
-    <p class="text-faded">
-      No Se encontrarón resultados
+  <div id="emptyComponent" class="text-center">
+    <p>
+      <q-icon name="far fa-meh" color="grey-5" size="150px"></q-icon>
     </p>
+    <p class="text-faded">{{$tr('ui.message.searchNotFound')}}...</p>
     <q-btn
       color="primary"
-      icon-right="fas fa-home"
       style="width:200px;"
-      label="Regresar"
-      @click="$router.push({name: 'home'})">
+      @click="$router.push({name: 'home'})"
+    >{{$tr('ui.message.goToHome')}}
     </q-btn>
   </div>
 </template>
@@ -25,6 +21,6 @@
 
 <style lang="stylus">
   @import "~variables";
-  #notResultsComponent
-    padding 100px 0
+  #emptyComponent
+    padding 100px 0 100px 0
 </style>

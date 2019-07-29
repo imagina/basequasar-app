@@ -3,12 +3,13 @@
     <p>
       <q-icon name="far fa-meh" color="grey-5" size="150px"></q-icon>
     </p>
-    <p class="text-faded">Sorry, nothing here...</p>
+    <p class="text-faded">{{$tr('ui.message.searchNotFound')}}...</p>
     <q-btn
       color="primary"
       style="width:200px;"
       @click="$router.push({name: 'home'})"
-    >Go to Home</q-btn>
+    >{{$tr('ui.message.goToHome')}}
+    </q-btn>
   </div>
 </template>
 

@@ -92,7 +92,7 @@
   export default {
     meta() {
       return {
-        title: this.$t('ui.label.loading'),
+        title: `${this.$tr('ui.label.loading',{capitalize : true})}...`,
       }
     },
     props: {},
@@ -150,57 +150,44 @@
       async init() {
         //Init Global Broadcast Channel
         if (env('PUSHER_ACTIVE') == 'true') notification.global()
+        let sessionData = await this.$helper.storage.get.item('sessionData')
         //Reset data of APP
         if (this.$route.params.refresh) {
           await this.$store.dispatch('app/RESET_STORE')//Reset Store
           await this.$helper.storage.restore(config('app.saveStorage.refresh'))//Restore storage
-          if(await this.$helper.storage.get.item('userToken'))//Reset Auth
-            await this.$store.dispatch('quserAuth/AUTH_UPDATE')
-          if (navigator && navigator.serviceWorker && navigator.serviceWorker.controller) {//Reset Service Worker
+          //Reset Auth
+          if (sessionData) await this.$store.dispatch('quserAuth/AUTH_UPDATE')
+          //Reset Service Worker
+          if (navigator && navigator.serviceWorker && navigator.serviceWorker.controller) {
             navigator.serviceWorker.controller.postMessage({
               msg: "clearCache"
             });
           }
         }
-
         //Check version of App
-        await this.checkVersionApp()
-        //If there is User loged, config user data
-        let userToken = await this.$helper.storage.get.item('userToken')
-        if (userToken && this.$store.state.quserAuth.userToken) {
-          this.percentageChangeNumber += 4
-          await this.setRoleAndDepartment()//Set Role and Department of User
-          await this.configUserData()//Set user data
-        }
-        //Call aditional condigs
-        await this.additionalConfigs()
-        //Redirec from Config
-        await this.redirectToRoute()
-      },
-      //Check if app is updated
-      checkVersionApp() {
-        return new Promise(async (resolve, reject) => {
-          //Get current versión
-          let verisonApp = parseInt(config('app.version').split('.').join(''))
-          //Get version from backend
-          let newVersion = await appServices.crud.index('apiRoutes.qsite.appVersion', {remember: false})
-          newVersion = parseInt(newVersion.data.split('.').join(''))
-          //update progress percentage
-          this.setRandompercentage()
-          //Check version
-          if (verisonApp >= newVersion) {
-            resolve(true)
-          } else {
-            this.dialog.updateApp = true
+        if (this.$store.state.app.updateAvailable)
+          this.dialog.updateApp = true
+        else {
+          //If there is User loged, config user data
+          if (sessionData && this.$store.state.quserAuth.userToken) {
+            this.percentageChangeNumber += 4
+            await this.setRoleAndDepartment()//Set Role and Department of User
+            await this.configUserData()//Set user data
           }
-        })
+          //Call aditional condigs
+          await this.additionalConfigs()
+          //Set status configuration in store
+          await this.$store.dispatch('app/SET_CONFIGURATION_STATE')
+          //Redirec from Config
+          await this.redirectToRoute()
+        }
       },
       //Set departments and roles form user
       setRoleAndDepartment() {
         return new Promise(async (resolve, reject) => {
-          const userData = await this.$helper.storage.get.item('userData')//Get user data from store
-          const roles = userData.roles//Get roles from user
-          const departments = userData.departments//Get departments from user
+          const sessionData = await this.$helper.storage.get.item('sessionData')//Get user data from store
+          const roles = sessionData.userData.roles//Get roles from user
+          const departments = sessionData.userData.departments//Get departments from user
           let roleUser = await this.$helper.storage.get.item('auth.role.id')//Get role form storage
           let departmentUser = await this.$helper.storage.get.item('auth.department.id')//Get department form storage
 
@@ -223,9 +210,7 @@
             await this.$helper.storage.set('auth.role.id', roleUser)
             await this.$helper.storage.set('auth.department.id', departmentUser)
             //Set in axios how default params
-            axios.defaults.params = {
-              setting: {departmentId: departmentUser, roleId: roleUser}
-            }
+            axios.defaults.params.setting = {departmentId: departmentUser, roleId: roleUser}
           }
 
           this.setRandompercentage()//Change load percentage
@@ -265,7 +250,7 @@
           this.setRandompercentage()//Change load percentage
 
           //Additional configs only when is not backend
-          if(!config('app.isBackend')){
+          if (!config('app.isBackend')) {
             await this.$store.dispatch('qmenuMaster/GET_MENUS');
             this.setRandompercentage()//Change load percentage
           }
@@ -276,11 +261,9 @@
       //Redirect after config data from page
       async redirectToRoute() {
         this.setRandompercentage() //update progress percentage
-
-        //Redirect route
         this.removeQueries()//Remove queries from URL
 
-        //Check if request permission to go to route
+        //Check if route has permissions
         let permissionRoute = (this.fromRoute && this.fromRoute.meta) ?
           this.fromRoute.meta.permission : null
 
@@ -297,9 +280,9 @@
         else if (auth.hasAccess(permissionRoute)) route.name = this.fromRoute.name
 
         //If route id from login and is loged, redirect to home
-        let userToken = await this.$helper.storage.get.item('userToken')
-        if (userToken && this.$store.state.quserAuth.userToken)
-          if(route.name == 'auth.login') route.name = 'app.home'
+        let sessionData = await this.$helper.storage.get.item('sessionData')
+        if (sessionData && this.$store.state.quserAuth.userToken)
+          if (route.name == 'auth.login') route.name = 'app.home'
 
         //Redirect
         this.$router.push(route)

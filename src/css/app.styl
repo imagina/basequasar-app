@@ -5,6 +5,43 @@
   a
     text-decoration none
 
+  //=================== responsive visibilities
+  .q-hide
+    display none !important
+  .q-xs-hide
+    @media screen and (min-width: $breakpoint-xs)
+      display none !important
+  .q-sm-hide
+    @media screen and (min-width: $breakpoint-sm)
+      display none !important
+  .q-md-hide
+    @media screen and (min-width: $breakpoint-md)
+      display none !important
+  .q-lg-hide
+    @media screen and (min-width: $breakpoint-lg)
+      display none !important
+  .q-xl-hide
+    @media screen and (min-width: $breakpoint-xl)
+      display none !important
+
+  .q-show
+    display block !important
+  .q-xs-show
+    @media screen and (min-width: $breakpoint-xs)
+      display block !important
+  .q-sm-show
+    @media screen and (min-width: $breakpoint-sm)
+      display block !important
+  .q-md-show
+    @media screen and (min-width: $breakpoint-md)
+      display block !important
+  .q-lg-show
+    @media screen and (min-width: $breakpoint-lg)
+      display block !important
+  .q-xl-show
+    @media screen and (min-width: $breakpoint-xl)
+      display block !important
+
   //=================== Round bordes modified
 
   .round-borders
@@ -25,7 +62,67 @@
     @media screen and (min-width: $breakpoint-lg)
       max-width 1140px
 
+  //====================== Alerts notifications
+
+  .q-notification
+    .q-alert
+      color white !important
+
+      .q-alert-side
+        background-color white
+
+      .q-alert-actions
+        color white !important
+
+      //Per type
+
+      &.bg-positive
+        .q-alert-side
+          border-left 3px solid $positive !important
+
+        .q-alert-side
+          color $positive !important
+
+      &.bg-negative
+        .q-alert-side
+          border-left 3px solid $negative !important
+
+        .q-alert-side
+          color $negative !important
+
+      &.bg-cyan
+        .q-alert-side
+          border-left 3px solid $cyan !important
+
+        .q-alert-side
+          color $cyan !important
+
+      &.bg-warning
+        .q-alert-side
+          border-left 3px solid $warning !important
+
+        .q-alert-side
+          color $warning !important
+
+      &.bg-faded
+        .q-alert-side
+          border-left 3px solid $faded !important
+
+        .q-alert-side
+          color $faded !important
+
+      &.bg-black
+        .q-alert-side
+          border-left 3px solid black !important
+
+        .q-alert-side
+          color black !important
+
+
   //===================== VUE TREE SELECT
+
+  .vue-treeselect__portal-target
+    z-index 99999999 !important
 
   .vue-treeselect
     border 1px solid $grey-4
@@ -39,9 +136,11 @@
         height 36px
         padding 5px 3px
         line-height 1.8
+        text-transform capitalize
 
       .vue-treeselect__multi-value-item-container
         padding-top 2px
+        text-transform capitalize
 
       .vue-treeselect__multi-value-item
         background: $primary
@@ -49,6 +148,7 @@
         font-size: 14px
         border-radius: 15px
         padding: 2px
+        text-transform capitalize
 
         &:hover
           .vue-treeselect__icon
@@ -75,10 +175,10 @@
 
     .vue-treeselect__list-item
       .vue-treeselect__option
-        padding 6px 0
+        padding 5px 0 5x 5px
 
     .vue-treeselect__portal-target
-      z-index 9999 !important
+      z-index 99999999 !important
 
   .table-responsive
     min-height: .01%;
@@ -98,6 +198,10 @@
   //================== Styles only to backend
 
   .backend-page
+    .q-table-container
+      .q-table-top
+        padding 8px 15px !important
+
     .q-btn, .q-btn-group //All buttons with border radius
       border-radius 28px
       box-shadow none
@@ -109,18 +213,38 @@
       &.q-table-container, &.q-card
         padding 0px
 
+    .btn-small
+      min-height 22px
+      font-size 12px !important
+      padding 4px 10px
+
+      .q-icon
+        font-size 13px
+        margin-right 5px
     .input-title //Label to input fields
+      position relative
       color $grey-8
       font-size 12px
       margin-left 4px
-      padding 6px 0
+      padding 8px 0
 
-    .q-input, .q-select, .q-datetime-input //Style to input select and date time
+      .q-btn
+        min-height 22px
+        position absolute
+        top 4px
+        right 0
+        font-size 12px !important
+        padding 4px 10px
+
+        .q-icon
+          font-size 13px
+          margin-right 5px
+
+    .q-input, .q-select, .q-datetime-input, .q-chips-input //Style to input select and date time
       padding-bottom 0px
 
       &:before
         border 1px solid transparent
-
       .q-if-inner
         border 1px solid $grey-4
         padding 5px 3px
@@ -131,10 +255,25 @@
 
     .q-field //Field inputs
 
-      .q-field-bottom
-        padding-top 3px
-        margin 0px
-        border none
+      .q-field-content
+        position relative
+        padding 0px !important
+
+        .q-field-bottom
+          display none
+          padding-top 3px
+          margin 0px
+          border none
+
+      &.q-field-with-error
+        .input-title, .q-if-label
+          color $red !important
+
+        .q-field-bottom
+          display block
+
+          .q-field-error
+            color $red-3
 
     .q-select, .q-datetime-input //q select and q date time
 
@@ -147,6 +286,7 @@
         height 36px
         padding 5px 3px
         margin 0px
+        max-height 36px
 
       .q-input-target
         padding-left 4px
@@ -164,6 +304,25 @@
       .q-chip-small
         min-height 24px
 
+    .q-chips-input //q-chips-input
+
+      .q-if-inner
+        padding-right 25px
+
+      .q-icon
+        padding 0
+        border 0
+        height auto
+
+        &.q-if-control
+          position absolute
+          right 0
+          padding 7px
+          max-height 34px
+
+        &.invisible
+          visibility visible !important
+
     .q-table-bottom //Q table bottom
 
       .q-select
@@ -173,6 +332,8 @@
           border 0px
 
     .q-modal-layout //Modal
+      @media screen and (min-width: $breakpoint-sm)
+        max-width 95vw !important
 
       .q-layout-header, .q-layout-footer
         box-shadow none !important
@@ -187,13 +348,16 @@
       display inline-flex
       margin-right 7px
 
-      @media screen and (max-width: $breakpoint-md)
+      @media screen and (max-width: $breakpoint-sm)
         width 100%
         margin-bottom 10px
 
-      .stack-label
+      .stack-label, .input-title
+        float left
         padding 9px 4px
         color $primary
+        font-size 16px
+        text-transform capitalize
 
       .vue-treeselect, .q-if-inner, .q-if-control
         float right

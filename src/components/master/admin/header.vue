@@ -5,7 +5,7 @@
       <q-toolbar color="primary">
         <!--= BUTTON MENU =-->
         <q-btn flat dense round
-               @click="toggleDrawer('menu',!drawer.menu)"
+               @click="drawer.menu = !drawer.menu"
                aria-label="Menu">
           <q-icon name="menu"/>
         </q-btn>
@@ -34,14 +34,14 @@
 
         <!--== Button Config ==-->
         <q-btn round dense flat icon="fas fa-cog"
-               @click="toggleDrawer('config',!drawer.config)">
+               @click="drawer.config = !drawer.config">
         </q-btn>
       </q-toolbar>
     </q-layout-header>
 
     <!-- ============= DRAWERS ======================= -->
     <!-- MENU -->
-    <q-layout-drawer id="menu_master" :overlay="true"
+    <q-layout-drawer id="menu_master"
                      v-model="drawer.menu"
                      :content-class="'bg-grey-2'"
     >
@@ -91,7 +91,7 @@
         projectName: this.$store.getters['qsiteSettings/getSettingValueByName']('core::site-name'),
         userData: this.$store.state.quserAuth.userData,
         drawer: {
-          menu: false,
+          menu: true,
           config: false,
           notification: false
         },

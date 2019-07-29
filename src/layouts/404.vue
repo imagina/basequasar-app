@@ -7,13 +7,13 @@
       >
     </p>
     <p class="text-faded">
-      {{$t('ui.messages.notFound')}}...<strong>(404)</strong>
+      {{$t('ui.message.notFound')}}...<strong>(404)</strong>
     </p>
     <q-btn
       color="blue-grey"
       style="width:200px;"
       @click="$router.push({name: 'app.home'})">
-      {{$t('ui.messages.goToHome')}}
+      {{$t('ui.message.goToHome')}}
     </q-btn>
   </div>
 </template>

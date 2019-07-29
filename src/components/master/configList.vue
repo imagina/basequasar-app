@@ -5,11 +5,11 @@
       <q-list-header>
         <h1 class="q-title text-primary q-ma-none">
           <q-icon name="fas fa-cog"></q-icon>
-          {{$tc('word.configuration', 1, {capitalize : true})}}
+          {{$tr('ui.label.configuration', {capitalize : true})}}
         </h1>
       </q-list-header>
 
-      <!--Settings User-->
+      <!--== User logged as ==-->
       <div v-if="$store.state.quserAuth.userToken">
         <q-item-separator/>
 
@@ -24,7 +24,7 @@
         <q-item class="q-py-none">
           <div class="full-width text-primary">
             <q-icon name="fas fa-user-tag" class="q-mr-sm"></q-icon>
-            {{$tc('word.role' , 1, {capitalize : true})}}
+            {{$tr('ui.label.role' , {capitalize : true})}}
             <q-select :options="options.roles" filter hide-underline v-if="show.roles"
                       v-model="roleId" class="full-width q-mt-xs" @input="updateDepRolUser">
             </q-select>
@@ -38,8 +38,8 @@
         <q-item class="q-py-none relative-position">
           <div class="full-width q-mt-sm text-primary">
             <q-icon name="fas fa-user-shield" class="q-mr-sm"></q-icon>
-            {{$tc('word.department', 1, {capitalize : true})}}
-            <treeselect
+            {{$tr('ui.label.department', {capitalize : true})}}
+            <tree-select
               :clearable="false"
               :append-to-body="true"
               v-if="show.departments"
@@ -55,21 +55,68 @@
             </h1>
           </div>
         </q-item>
+
+        <q-item-separator/>
+
+        <!--Select User to impersonate-->
+        <q-item class="q-py-none" v-if="$auth.hasAccess('profile.user.impersonate') && !isImpersonate">
+          <div class="full-width text-primary">
+            <q-icon name="fas fa-user-secret" class="q-mr-sm"></q-icon>
+            {{$tr('ui.label.impersonate')}}
+            <!--Select-->
+            <div class="q-pl-md" v-if="!loadingImpersonate">
+              <tree-select
+                v-model="userToImpersonate"
+                :placeholder="`${$tr('ui.label.find')} ${$tr('ui.label.user')}...`"
+                :async="true"
+                :load-options="getUsers"
+                :loadingText="`${$tr('ui.label.loading')}...`"
+                :searchPromptText="`${$tr('ui.message.searchByIdOrName')}...`"
+                :noResultsText="`${$tr('ui.message.searchNotFound')}...`"
+                @input="impersonate"
+              />
+            </div>
+            <!--Loading-->
+            <div v-if="loadingImpersonate" class="q-py-sm">
+              <q-spinner class="q-mr-sm"/>
+              {{`${$tr('ui.label.loading')}...`}}
+            </div>
+          </div>
+        </q-item>
+
+        <!--Leave impersonating-->
+        <q-item tag="label" link v-if="isImpersonate" @click.native="impersonate">
+          <q-item-side>
+            <!--Icon-->
+            <q-icon v-if="!loadingImpersonate" color="negative" name="fas fa-sign-out-alt" size="20px"/>
+            <!--Loading-->
+            <div v-if="loadingImpersonate" class="q-py-sm">
+              <q-spinner class="q-mr-sm"/>
+              {{`${$tr('ui.label.loading')}...`}}
+            </div>
+          </q-item-side>
+          <q-item-main>
+            <q-item-tile v-if="!loadingImpersonate" color="grey-10" style="text-decoration: none">
+              {{$t('ui.configList.leaveImpersonating', {capitalize : true})}}
+            </q-item-tile>
+          </q-item-main>
+        </q-item>
       </div>
 
       <q-item-separator/>
 
-      <!--Language-->
+      <!--== Language ==-->
       <div class="q-px-sm">
         <div class="round-borders q-py-xs q-px-md bg-primary text-white">
-          {{$tc('word.language', 2, {capitalize : true})}}
+          {{$tr('ui.label.language', {capitalize : true})}}
         </div>
       </div>
+
       <!--Data language-->
       <q-item class="q-py-none q-my-sm">
         <div class="full-width text-primary">
           <q-icon name="fas fa-language" class="q-mr-sm"></q-icon>
-          {{$tc('word.language', 1, {capitalize : true})}}
+          {{$tr('ui.label.language', {capitalize : true})}}
           <q-select :options="options.locales"
                     filter hide-underline v-if="show.locales" @input="updateLocale"
                     v-model="locale" class="full-width q-if-focused q-if-focusable">
@@ -79,38 +126,13 @@
           </h1>
         </div>
       </q-item>
-      <!--UI language-->
-      <q-item class="q-py-none q-my-sm">
-        <div class="full-width text-primary">
-          <q-icon name="fas fa-language" class="q-mr-sm"></q-icon>
-          {{$tc('word.interface', 1, {capitalize : true})}}
-          <q-select :options="options.ui"
-                    filter hide-underline v-if="options.ui.length" @input="updateLanguageUi"
-                    v-model="languageUI" class="full-width q-if-focused q-if-focusable">
-          </q-select>
-          <h1 v-else class="ellipsis q-subheading q-ma-none text-grey-8 q-ml-md">
-            {{options.ui[0].label}}
-          </h1>
-        </div>
-      </q-item>
-      <!--Currenci language-->
-      <q-item class="q-py-none q-my-sm">
-        <div class="full-width text-primary">
-          <q-icon name="fas fa-money-bill-wave" class="q-mr-sm"></q-icon>
-          {{$tc('word.currency', 1, {capitalize : true})}}
-          <q-select :options="options.locales" filter hide-underline v-if="show.locales"
-                    @input="updateLocale" v-model="locale"
-                    class="full-width q-if-focused q-if-focusable">
-          </q-select>
-          <h1 v-else class="ellipsis q-subheading q-ma-none text-grey-8 q-ml-md">
-            {{options.locales[0].label}}
-          </h1>
-        </div>
-      </q-item>
 
+      <q-item-separator/>
+
+      <!--== Settings ==-->
       <div class="q-px-sm">
         <div class="round-borders q-py-xs q-px-md bg-primary text-white">
-          {{$tc('word.setting', 2, {capitalize : true})}}
+          {{$trp('ui.label.setting', {capitalize : true})}}
         </div>
       </div>
 
@@ -163,17 +185,14 @@
   </div>
 </template>
 <script>
-  /*Components*/
-  import Treeselect from '@riophae/vue-treeselect'
-  import '@riophae/vue-treeselect/dist/vue-treeselect.css'
-
   export default {
     props: {},
-    components: {Treeselect},
+    components: {},
     watch: {},
     created() {
       this.$nextTick(async function () {
         this.setOptions()
+        this.checkImpersonate()
       })
     },
     data() {
@@ -182,12 +201,10 @@
         roleId: false,
         departmentId: false,
         locale: this.$store.state.qsiteSettings.defaultLocale,
-        languageUI: this.$q.i18n.lang,
         options: {
           roles: this.$store.getters['quserAuth/userRolesSelect'],
           departments: this.$store.getters['quserAuth/userDepartmentsSelect'],
-          locales: this.$store.getters['qsiteSettings/getSelectedLocalesSelect'],
-          ui: config('app.languages.select')
+          locales: this.$store.getters['qsiteSettings/getSelectedLocalesSelect']
         },
         show: {
           roles: false,
@@ -195,6 +212,9 @@
           locales: false
         },
         fullScreen: this.$q.fullscreen.isActive,
+        userToImpersonate: null,
+        loadingImpersonate: false,
+        isImpersonate: false,
       }
     },
     computed: {
@@ -247,18 +267,46 @@
           'qsiteSettings/SET_LOCALE',
           {locale: this.locale, vue: this}
         )
-        this.$router.push({name: 'app.config'})
+        this.$router.push({name: 'app.config', params: {refresh: true}})
       },
-      //update Locale
-      async updateLanguageUi() {
-        let locale = this.languageUI
-        import(`quasar-framework/i18n/${locale}`).then(lang => {
-          this.$q.i18n.set(lang.default)
-        })
-        import(`src/i18n/index`).then(({default: messages}) => {
-          this.$i18n.locale = locale
-          this.$i18n.setLocaleMessage(locale, messages[locale])
-        })
+
+      //Get users to impersonate
+      getUsers({action, searchQuery, callback, instanceId}) {
+        if (action === 'ASYNC_SEARCH') {
+          let params = {params: {take: 100, filter: {search: searchQuery}}}
+          //Request
+          this.$crud.index('apiRoutes.quser.users', params).then(response => {
+            let userId = this.$store.state.quserAuth.userId
+            let options = []
+            response.data.forEach(item => {
+              if (item.id != userId) options.push({label: item.fullName, id: item.id})
+            })
+            callback(null, options)//Response
+          })
+        } else {
+          callback(null, [])
+        }
+      },
+
+      //Chek if is impersonate
+      async checkImpersonate() {
+        let impersonatorData = await this.$helper.storage.get.item('impersonatorData')
+        if (impersonatorData) this.isImpersonate = true
+      },
+
+      //toggle impersonate
+      impersonate() {
+        //LEave impersonating
+        if (this.isImpersonate) {
+          this.loadingImpersonate = true
+          this.$store.dispatch('quserAuth/USER_LEAVE_IMPERSONATE');
+        }
+
+        //Impersonate
+        if (!this.isImpersonate && this.userToImpersonate) {
+          this.loadingImpersonate = true
+          this.$store.dispatch('quserAuth/USER_IMPERSONATE', this.userToImpersonate);
+        }
       }
     }
   }
@@ -266,14 +314,17 @@
 <style lang="stylus">
   @import "~variables";
   #configList
-    .vue-treeselect__control
-      background transparent !important
-      font-size 16px
-      border none !important
-      cursor pointer
+    .vue-treeselect
+      border 0px !important
 
-      .vue-treeselect__single-value
-        padding-left 15px
+      .vue-treeselect__control
+        background transparent !important
+        font-size 16px
+        border none !important
+        cursor pointer
+
+        .vue-treeselect__single-value
+          padding-left 15px
 
     .q-select
       .q-input-target

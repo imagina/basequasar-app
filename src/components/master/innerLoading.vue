@@ -2,7 +2,7 @@
   <q-inner-loading id="innerLoadingMaster" :visible="visible">
     <div class="q-box-inner-loading">
       <q-spinner size="50px" color="primary"/>
-      <h6 class="q-ma-none text-primary q-title">{{label}}</h6>
+      <h6 class="q-ma-none text-primary q-title">{{message}}</h6>
     </div>
   </q-inner-loading>
 </template>
@@ -10,16 +10,25 @@
   export default {
     props: {
       visible: {default: false},
-      label: {default: 'Loading...'}
+      label: {default: false}
     },
     components: {},
     watch: {},
     mounted() {
       this.$nextTick(function () {
+        if(this.label) this.labelMessage = this.$clone(this.label)
+        else this.labelMessage = this.message
       })
     },
     data() {
-      return {}
+      return {
+        labelMessage : ''
+      }
+    },
+    computed : {
+      message(){
+        return this.$tr('ui.label.loading')
+      }
     },
     methods: {}
 

@@ -6,12 +6,12 @@
 						class="single-item"
             @click.native="redirectTo(item)">
 			<q-item-side :icon="item.icon"/>
-			<q-item-main>{{item.title}}</q-item-main>
+			<q-item-main>{{$tr(item.title)}}</q-item-main>
 		</q-item>
 
 		<!-- Dropdwon Item -->
 		<q-collapsible v-else-if="checkItemMultiple(item)"
-		               :icon="item.icon" :label="item.title">
+		               :icon="item.icon" :label="$tr(item.title)">
 			<recursive-menu :key="key" :menu="item.children"/>
 		</q-collapsible>
 	</q-list>
