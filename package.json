@@ -13,7 +13,7 @@
   "dependencies": {
     "@imagina/qblog": "^1.0.0",
     "@imagina/qcommerce": "^1.0.0",
-    "@imagina/quser": "^1.0.0",
+    "@imagina/quser": "^1.0.1",
     "@imagina/qplace": "^1.0.0",
     "@imagina/qcrud": "^1.0.0",
     "@imagina/qhelper": "^1.0.0",
