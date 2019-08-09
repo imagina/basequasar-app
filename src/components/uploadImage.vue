@@ -5,9 +5,11 @@
       <!--Content to upload image-->
       <div class="content-manage-file text-center">
         <!--Button edit image-->
-        <q-btn icon="fas fa-edit" :color="color">
+        <q-btn icon="fas fa-camera" :color="color" :loading="loading">
           <!--tooltip-->
-          <q-tooltip>{{$tr('ui.message.editImage')}}</q-tooltip>
+          <q-tooltip v-if="this.$q.platform.is.desktop && $store.state.quserAuth.userToken">
+            {{$tr('ui.message.editImage')}}
+          </q-tooltip>
           <!--actions popover-->
           <q-popover anchor="bottom middle" self="bottom middle">
             <q-list separator link>
@@ -120,6 +122,7 @@
 <style lang="stylus">
   @import "~variables";
   #uploadImageComponent
+    margin-bottom 20px
     .img-file
       position relative
       margin 0 auto
@@ -128,7 +131,7 @@
       background-size cover
       background-position center
       background-repeat no-repeat
-      overflow hidden
+      max-width 100%
 
       .content-manage-file
         width 100%
@@ -136,6 +139,9 @@
         bottom 0
 
         .q-btn
-          border-radius 0 !important
-          width 100%
+          border-radius 10px
+          height 40px !important
+          width 40px !important
+          margin-bottom -20px
+          width max-content
 </style>

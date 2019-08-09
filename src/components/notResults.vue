@@ -1,26 +1,16 @@
 <template>
-  <div id="emptyComponent" class="text-center">
-    <p>
-      <q-icon name="far fa-meh" color="grey-5" size="150px"></q-icon>
-    </p>
-    <p class="text-faded">{{$tr('ui.message.searchNotFound')}}...</p>
-    <q-btn
-      color="primary"
-      style="width:200px;"
-      @click="$router.push({name: 'home'})"
-    >{{$tr('ui.message.goToHome')}}
-    </q-btn>
+  <div id="notResult" class="text-center">
+    <q-icon name="fas fa-search-minus" color="grey-5" size="20px"/>
+    {{$tr('ui.message.searchNotFound')}}...
   </div>
 </template>
 
 <script>
   export default {
-    name: 'Error404'
+    name: 'notResult'
   }
 </script>
 
 <style lang="stylus">
   @import "~variables";
-  #emptyComponent
-    padding 100px 0 100px 0
 </style>

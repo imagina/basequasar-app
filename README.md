@@ -43,7 +43,6 @@ the pusher data if it's necessary
   | NAME | ROUTE | GLOBAL |
   | ------------- | ------------- | ------------- |
   | 404 | src/components/404 | False |
-  | Empty | src/components/empty | False |
   | Not Results | src/components/notResults | True |
   | Upload Image | src/components/uploadImage | True |
   | comments Facebook | src/components/commentsFB | False |
