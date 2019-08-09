@@ -63,7 +63,10 @@ export default {
     home : 'Home',
     find : 'Find',
     user : 'User',
-    impersonate : 'Impersonate'
+    impersonate : 'Impersonate',
+    address : 'Address | Addresses',
+    contacts : 'contact | Contacts',
+    sociaNetwork : 'Social Network | Social Networks',
   },
   message: {
     notFound: 'Sorry, nothing here',
@@ -157,7 +160,11 @@ export default {
     icon : 'Icon | Icons',
     masterRecord : 'Master record',
     birthday : 'Birthday',
-    identification : 'Identification'
+    identification : 'Identification',
+    city : 'City | cities',
+    state : 'State | State',
+    zipCode : 'Zip Code',
+    socialNetwork : 'Social Network | Social Networks'
   },
   configList: {
     loggedAs: 'logged as',

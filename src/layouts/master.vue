@@ -1,12 +1,14 @@
 <template>
-  <q-layout view="lHh LpR lFr" v-if="$store.state.app.active">
+  <q-layout view="lHh LpR lFr"
+            :class="appIsBackend ? 'bg-grey-1' : ''"
+            v-if="$store.state.app.active">
     <!-- HEADER -->
     <admin-header v-if="appIsBackend" />
     <frontend-header v-else />
 
     <!-- ROUTER VIEW -->
     <q-page-container>
-      <router-view/>
+      <router-view :class="appIsBackend ? 'q-layout-page layout-padding' : ''" />
     </q-page-container>
 
     <!-- FOOTER -->
@@ -21,9 +23,6 @@
   import adminFooter from 'src/components/master/admin/footer'
   import frontendHeader from 'src/components/master/frontend/header'
   import frontendFooter from 'src/components/master/frontend/footer'
-
-  //Services
-  import appServices from 'src/services/application/index'
 
   export default {
     meta() {

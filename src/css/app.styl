@@ -198,6 +198,19 @@
   //================== Styles only to backend
 
   .backend-page
+    .box
+      border-top 3px solid $primary
+      border-radius 5px
+      box-shadow $shadow-1
+      background-color white
+      padding 15px
+
+    .box-table
+      border-top 3px solid $primary
+      border-radius 5px
+      box-shadow $shadow-1
+      background-color white
+
     .q-table-container
       .q-table-top
         padding 8px 15px !important
@@ -205,6 +218,9 @@
     .q-btn, .q-btn-group //All buttons with border radius
       border-radius 28px
       box-shadow none
+
+    .border
+      border 1px solid $grey-4
 
     .border-top-color //border top color
       border-top 3px solid $primary
@@ -221,12 +237,13 @@
       .q-icon
         font-size 13px
         margin-right 5px
+
     .input-title //Label to input fields
       position relative
       color $grey-8
       font-size 12px
       margin-left 4px
-      padding 8px 0
+      padding 12px 0 8px 0
 
       .q-btn
         min-height 22px
@@ -242,6 +259,7 @@
 
     .q-input, .q-select, .q-datetime-input, .q-chips-input //Style to input select and date time
       padding-bottom 0px
+      padding-top 29px
 
       &:before
         border 1px solid transparent
@@ -327,6 +345,7 @@
 
       .q-select
         border 0px
+        padding 0px
 
         .q-if-inner, .q-icon
           border 0px
@@ -354,7 +373,7 @@
 
       .stack-label, .input-title
         float left
-        padding 9px 4px
+        padding 12px 4px
         color $primary
         font-size 16px
         text-transform capitalize

@@ -2,16 +2,23 @@
 	<q-list separator link no-border id="listMenu" class="q-pa-none">
 		<!--Single Item-->
 		<q-item v-for="(item,key) in menu" :key="key"
-            v-if="checkItemSingle(item)" exact
-						class="single-item"
+            v-if="checkItemSingle(item)"
+						:class="`single-item ${$route.name == item.name ? 'router-link-active' : ''}`"
             @click.native="redirectTo(item)">
 			<q-item-side :icon="item.icon"/>
 			<q-item-main>{{$tr(item.title)}}</q-item-main>
 		</q-item>
 
 		<!-- Dropdwon Item -->
-		<q-collapsible v-else-if="checkItemMultiple(item)"
-		               :icon="item.icon" :label="$tr(item.title)">
+		<q-collapsible v-else-if="checkItemMultiple(item)" :class="selectedChildren(item)">
+			<!--Custom Header-->
+			<template slot="header">
+				<q-item-main>
+					<q-icon :name="item.icon" class="icon-collapsible q-mr-sm text-grey-8" />
+					<span class="icon-collapsible">{{$tr(item.title)}}</span>
+				</q-item-main>
+			</template>
+			<!--Recursive item-->
 			<recursive-menu :key="key" :menu="item.children"/>
 		</q-collapsible>
 	</q-list>
@@ -64,7 +71,19 @@
         }else{
           this.$router.push({name: itemClone.name})
         }
-      }
+      },
+			selectedChildren(item){
+				let response = ''//Defualt response
+
+				//If has children's
+				if(item.children){
+					let routeName = this.$route.name
+					let isSelectedChildren = item.children.find(item => item.name == routeName)
+					if(isSelectedChildren) response = 'collapsible-active'
+				}
+
+				return response //Response
+			}
 		}
 	}
 </script>
@@ -77,6 +96,23 @@
 		.q-collapsible-inner
 			a, .q-collapsible
 				border-top none !important
+			.q-collapsible-sub-item
+				padding 0 15px
+				padding-right 0
+
+		.collapsible-active
+			.icon-collapsible
+				transition .5s
+				color $primary !important
+				font-weight bold
+
+		.router-link-active
+			transition .5s
+			background-color $primary
+			color white
+			.q-icon
+				transition .5s
+				color white !important
 
 		.q-item, q-collapsible
 			min-height 38px !important

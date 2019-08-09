@@ -11,25 +11,20 @@
         </q-btn>
 
         <!--= TITLE =-->
-        <q-toolbar-title>
-          <div class="content gt-xs">
-            <router-link :to="{ name: 'app.home'}">
-              <a class="text-white">
-                {{projectName}}
-              </a>
-            </router-link>
-          </div>
+        <q-toolbar-title class="items-center">
+          <!--Toogle Menu-->
+          <q-btn :label="$tr($route.meta.title)" flat
+                 @click="drawer.menu = !drawer.menu"
+                 class="btn-page-title"
+                 :icon="$route.meta.icon"/>
         </q-toolbar-title>
 
         <!--== Button User ==-->
-        <q-btn :to="{name: 'user.profile.me'}" flat
-               v-if="this.$q.platform.is.desktop && $store.state.quserAuth.userToken">
-
-          <img :src="getImageUrl"
-               style="border-radius: 100%; margin-right: 5px; width: 25px;height: 25px;"
-               width="28px">
-
-          {{userData.firstName}}
+        <q-btn :to="{name: 'user.profile.me'}" flat no-caps>
+          <div class="button-profile-image" :style="`background-image: url('${userData.smallImage}')`"/>
+          <span class="q-hide q-md-show">
+            {{userData.firstName}}
+          </span>
         </q-btn>
 
         <!--== Button Config ==-->
@@ -41,10 +36,7 @@
 
     <!-- ============= DRAWERS ======================= -->
     <!-- MENU -->
-    <q-layout-drawer id="menu_master"
-                     v-model="drawer.menu"
-                     :content-class="'bg-grey-2'"
-    >
+    <q-layout-drawer id="menu_master" class="no-shadow" v-model="drawer.menu">
       <q-list no-border link inset-delimiter>
         <!-- === LOGO === -->
         <q-list-header class="text-center">
@@ -62,9 +54,7 @@
 
     <!-- Config -->
     <q-layout-drawer id="menu_master" :overlay="true"
-                     v-model="drawer.config"
-                     :content-class="'bg-grey-2'"
-                     side="right"
+                     v-model="drawer.config" side="right"
     >
       <config-list></config-list>
     </q-layout-drawer>
@@ -84,25 +74,28 @@
     },
     watch: {},
     mounted() {
-      this.$nextTick(function () {})
+      this.$nextTick(function () {
+      })
     },
     data() {
       return {
         projectName: this.$store.getters['qsiteSettings/getSettingValueByName']('core::site-name'),
-        userData: this.$store.state.quserAuth.userData,
         drawer: {
           menu: true,
           config: false,
           notification: false
         },
         menu: config('sidebar'),
-        logo : this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo1').path
+        logo: this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo1').path
       }
     },
     computed: {
       getImageUrl() {
         return config('apiRoutes.api.base_url') + '/' + this.userData.smallImage;
-      }
+      },
+      userData() {
+        return this.$store.state.quserAuth.userData
+      },
     },
     methods: {
       //Show drawer specific
@@ -118,4 +111,38 @@
 </script>
 <style lang="stylus">
   @import "~variables";
+  #masterHeader
+    .q-toolbar-title
+      padding 0 5px
+      .btn-page-title
+        padding 5px
+        .q-icon
+          background-color white
+          border-radius 50%
+          height 25px
+          width 25px
+          color $primary
+          font-size 15px
+          padding 5px
+          margin-right 5px
+          transition .5s
+          &.on-right
+            margin-left 5px
+          @media screen and (max-width: $breakpoint-xs)
+            display none
+        &.menu-openend
+          .q-icon
+            transform rotate(90deg)
+
+    .q-layout-drawer-delimiter
+      box-shadow $shadow-1
+
+    .button-profile-image
+      height 25px
+      width 25px
+      border-radius 50%
+      background-repeat no-repeat
+      background-position center
+      background-size cover
+      margin-right 5px
 </style>
