@@ -3,7 +3,7 @@
     <!--Schedules-->
     <q-list highlight separator class="q-pa-none">
       <!--Title-->
-      <q-list-header class="q-px-sm">
+      <q-list-header class="q-px-sm" v-if="!readonly">
         <!--Title-->
         <div class="float-left">{{$trp('ui.form.schedule')}}</div>
         <!--Button update-->
@@ -112,7 +112,8 @@
 
   export default {
     props: {
-      value: {default: false}
+      value: {default: false},
+      readonly : {default : false}
     },
     components: {},
     watch: {
