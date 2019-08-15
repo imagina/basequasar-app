@@ -250,10 +250,10 @@
           this.setRandompercentage()//Change load percentage
 
           //Additional configs only when is not backend
-          if (!config('app.isBackend')) {
+          /*if (!config('app.isBackend')) {
             await this.$store.dispatch('qmenuMaster/GET_MENUS');
             this.setRandompercentage()//Change load percentage
-          }
+          }*/
 
           resolve(true)//Resolve Promise
         })

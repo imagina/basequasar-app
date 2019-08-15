@@ -1,87 +1,23 @@
 <template>
-  <div>
-    <!--=== Content Footer ===-->
-    <div class="bg-primary desktop-only">
-      <div class="row q-container full-height gutter-x-xl">
-        <div class="col-12 col-md-4">
-          <div class="text-center desktop-only q-my-xl" >
-            <img :src="$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo1').path" width="80%">
-          </div>
-          <p class="q-my-lg text-white" align="justify">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci
-            assumenda atque, dolore illo illum laborum maxime natus nesciunt officia
-            officiis placeat, quod ut, voluptatibus! Autem ducimus illum magnam nulla similique?
-          </p>
-        </div>
-
-        <div class="col-12 col-md-4">
-          <menu-list :menu="menu" class="q-mt-xl text-white"/>
-        </div>
-
-        <div class="col-12 col-md-4 text-white">
-          <p class="q-mt-xl" align="justify">
-            Contacto
-          </p>
-          <div class="block">
-            <q-icon name="fas fa-home"></q-icon>
-            Calle 29 #7-54, Belalcazar
-            <p>Ibagué - Colombia</p>
-          </div>
-          <div class="block">
-            <q-icon name="fas fa-phone"></q-icon>
-            2664999 <span class="mobile-only">-</span>
-            <p>300 782 63 87 - 316 396 12 95</p>
-          </div>
-          <div class="block">
-            <p>
-              <q-icon name="fas fa-envelope"></q-icon>
-              soporte@imaginacolombia.com
-            </p>
-          </div>
-          <div class="block flex flex-center">
-            <a target="_blank"
-               href="https://www.facebook.com/imaginacol">
-              <q-icon name="fab fa-facebook" color="white" class="q-px-md"></q-icon>
-            </a>
-            <a target="_blank"
-               href="https://twitter.com/imaginacolombia">
-              <q-icon name="fab fa-twitter" color="white" class="q-px-md"></q-icon>
-            </a>
-            <a target="_blank"
-               href="https://www.instagram.com/imagina_colombia/">
-              <q-icon name="fab fa-instagram" color="white" class="q-px-md"></q-icon>
-            </a>
-            <a target="_blank"
-               href="https://www.youtube.com/channel/UCZA9gQP6lt2b5Qg3d8XQD1A">
-              <q-icon name="fab fa-youtube" color="white" class="q-px-md"></q-icon>
-            </a>
-          </div>
-        </div>
-      </div>
+  <div id="footer">
+    <!-- Menu -->
+    <div class="menuFooter">
+      <menu-list class="q-container" :menu="menu"/>
     </div>
-    <!--=== Copyright ===-->
-    <div class="bg-dark">
-      <div class="row flex flex-center gutter-x-sm q-py-sm">
-        <div>
-          <logo-imagina></logo-imagina>
-        </div>
-        <div class="text-white q-caption">
-          Copyright {{ new Date().getFullYear() }} © Imagina Derechos Reservados.
-        </div>
-      </div>
+
+    <!-- Copi right -->
+    <div class="q-hide q-md-show text-center bg-dark q-caption text-white q-pb-sm">
+      Copyright 2019 © {{ $store.getters['qsiteSettings/getSettingValueByName']('core::site-name') }}. Todos Los
+      Derechos Reservados
     </div>
   </div>
 </template>
 <script>
-  import logoImagina from 'src/components/master/imaginaSVG'
-  import menuFooter from '@imagina/qmenu/_components/menu-footer'
   import menuList from "../recursiveItem";
 
   export default {
     props: {},
     components: {
-      logoImagina,
-      menuFooter,
       menuList
     },
     watch: {},
@@ -89,11 +25,74 @@
       this.$nextTick(function () {
       })
     },
+    created() {
+      this.executeScript()
+    },
     data() {
-      return {
-        menu: (this.$store.getters['qmenuMaster/menu'](9)).items,
+      return {}
+    },
+    computed: {
+      menu() {
+        let menu = config('sidebar')
+        let menufooter = ['app.home', 'app.reservations', 'app.branchOffices', 'app.contact']
+        let response = []
+        //Get just menufooter items
+        menu.forEach(item => {
+          if(menufooter.indexOf(item.name) != -1) response.push(item)
+        })
+        return response//Response
       }
     },
-    methods: {}
+    methods: {
+      executeScript() {
+        let scriptValue = this.$store.getters['qsiteSettings/getSettingValueByName']('core::analytics-script')
+        if (JSON.stringify(scriptValue).indexOf('script') != -1) {
+          let script = scriptValue.replace(/<\/?script>/g, "")
+          eval(script)
+        }
+      }
+    }
+
   }
 </script>
+<style lang="stylus">
+  @import "~variables";
+  #footer
+    @media screen and (max-width: $breakpoint-md)
+      padding-bottom 50px
+    .menuFooter
+      text-align center
+      background-color $dark
+      color white
+      padding 5px 0
+      @media screen and (max-width: $breakpoint-md)
+        padding 2px 0
+        position fixed
+        bottom 0
+        width 100%
+      @media screen and (max-width: $breakpoint-sm)
+        padding 0
+
+      .q-item
+        display inline-block
+        border 0px !important
+
+        .q-item-side
+          display inline-block
+
+          .q-icon
+            font-size 17px
+            color white
+            @media screen and (max-width: $breakpoint-sm)
+              font-size 10px !important
+
+        .q-item-main
+          display inline-block
+          margin-left 5px
+          font-size 17px !important
+          @media screen and (max-width: $breakpoint-sm)
+            font-size 10px !important
+
+        &.router-link-active
+          background transparent !important
+</style>

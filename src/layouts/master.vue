@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh LpR lFr"
+  <q-layout :view="(appIsBackend || $q.platform.is.mobile) ? 'lHh LpR lff' : 'lhh LpR lFr'"
             :class="appIsBackend ? 'bg-grey-1' : ''"
             v-if="$store.state.app.active">
     <!-- HEADER -->
