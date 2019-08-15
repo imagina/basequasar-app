@@ -3,10 +3,12 @@
 		<!--Single Item-->
 		<q-item v-for="(item,key) in menu" :key="key"
             v-if="checkItemSingle(item)"
-						:class="`single-item ${$route.name == item.name ? 'router-link-active' : ''}`"
+						:class="getClassItem(item)"
             @click.native="redirectTo(item)">
-			<q-item-side :icon="item.icon"/>
-			<q-item-main>{{$tr(item.title)}}</q-item-main>
+			<q-item-side v-if="item.icon && showIcons" :icon="item.icon"/>
+			<q-item-main>
+				{{translatable ? $tr(item.title) : item.title}}
+			</q-item-main>
 		</q-item>
 
 		<!-- Dropdwon Item -->
@@ -15,11 +17,14 @@
 			<template slot="header">
 				<q-item-main>
 					<q-icon :name="item.icon" class="icon-collapsible q-mr-sm text-grey-8" />
-					<span class="icon-collapsible">{{$tr(item.title)}}</span>
+					<span class="icon-collapsible">
+						{{translatable ? $tr(item.title) : item.title}}
+					</span>
 				</q-item-main>
 			</template>
 			<!--Recursive item-->
-			<recursive-menu :key="key" :menu="item.children"/>
+			<recursive-menu :translatable="translatable" :show-icons="showIcons"
+											:key="key" :menu="item.children"/>
 		</q-collapsible>
 	</q-list>
 </template>
@@ -31,7 +36,9 @@
 		name: 'recursiveMenu',
 		components: {},
 		props: {
-			menu: {default: false}
+			menu: {default: false},
+			showIcons : {type : Boolean, default: true},
+			translatable : {type : Boolean, default : true}
 		},
 		created() {
 			this.$nextTick(function () {
@@ -69,7 +76,7 @@
         if (itemClone.linkType == 'external'){
           window.open(`https://${itemClone.url}`,itemClone.target);
         }else{
-          this.$router.push({name: itemClone.name})
+          this.$router.push({name: itemClone.name, params : itemClone.params || {}})
         }
       },
 			selectedChildren(item){
@@ -83,6 +90,15 @@
 				}
 
 				return response //Response
+			},
+			getClassItem(item){
+				let response = 'single-item'
+
+				if(this.$route.name == item.name)
+					if(JSON.stringify(this.$route.params) == JSON.stringify(item.params || {}))
+						response += ' router-link-active'
+
+				return response
 			}
 		}
 	}
@@ -117,6 +133,8 @@
 		.q-item, q-collapsible
 			min-height 38px !important
 			padding 6px 10px
+			i
+				vertical-align baseline
 </style>
 
 
