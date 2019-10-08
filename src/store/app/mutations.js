@@ -1,7 +1,7 @@
-export function TOGGLE_APP(state, data) {
-  state.active = data
+export function LOAD_PAGE(state,data) {
+  state.loadPage = data
 }
 
-export function UPDATE_CONFIGURATION_SATE(state) {
-  state.hasConfiguration = true
+export function TEST_MUTATION(state) {
+  state.test = true
 }

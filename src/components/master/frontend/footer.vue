@@ -7,8 +7,8 @@
 
     <!-- Copi right -->
     <div class="q-hide q-md-show text-center bg-dark q-caption text-white q-pb-sm">
-      Copyright 2019 © {{ $store.getters['qsiteSettings/getSettingValueByName']('core::site-name') }}. Todos Los
-      Derechos Reservados
+      <!--Copyright 2019 © {{ $store.getters['qsiteSettings/getSettingValueByName']('core::site-name') }}. Todos Los
+      Derechos Reservados-->
     </div>
   </div>
 </template>
@@ -45,7 +45,7 @@
     },
     methods: {
       executeScript() {
-        let scriptValue = this.$store.getters['qsiteSettings/getSettingValueByName']('core::analytics-script')
+        let scriptValue = false//this.$store.getters['qsiteSettings/getSettingValueByName']('core::analytics-script')
         if (JSON.stringify(scriptValue).indexOf('script') != -1) {
           let script = scriptValue.replace(/<\/?script>/g, "")
           eval(script)
@@ -56,7 +56,6 @@
   }
 </script>
 <style lang="stylus">
-  @import "~variables";
   #footer
     @media screen and (max-width: $breakpoint-md)
       padding-bottom 50px

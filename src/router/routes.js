@@ -1,6 +1,4 @@
 import Route from 'vue-routisan'
-import configMiddleware from 'src/router/middlewares/config'
-
 //Create all routes from pages
 const pages = config('pages')//Get pages from config
 
@@ -14,25 +12,20 @@ for (var nameGroupPage in pages) {
     for (var namePage in groupPages) {
       let page = groupPages[namePage]//Get page
       let middlewares = (page.middleware ? page.middleware : [])
-      middlewares.push(configMiddleware) //Set middleware config
 
       if (page.activated) {//Check if page is activated
         //Create Route
-        Route.view('/', page.containerLayout)
+        Route.view(page.path, page.layout)
           .children(() => {
-            Route.view(page.path, page.layout).options({
+            Route.view('/', page.page).options({
               name: page.name,
               meta: {
                 permission: (page.permission ? page.permission : null),
                 title : page.title,
-                icon : page.icon
+                icon : page.icon,
+                authenticated : page.authenticated
               },
-              guard: middlewares,
-              props: (route) => {
-                let propsData = page.props ? page.props : {}
-                propsData.parentId = route.params.parentId || null
-                return propsData
-              },
+              beforeEnter: middlewares,
             });
           })
       }

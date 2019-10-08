@@ -19,22 +19,22 @@ export default {
     'qslider',
     'qsite'
   ],
-  //Storage
-  saveStorage : {
+  //Cache
+  saveCache : {
     refresh : [
       'sessionData',
-      'offlineRequests',
-      'notifications',
       'auth.department.id',
       'auth.role.id',
-      'redirect.to.from.login',
       'site.default.locale',
-      'dataAddress',
       'impersonatorData'
     ],
     logout : [
       'offlineRequests',
       'site.default.locale',
     ]
-  }
+  },
+  //Reset Store
+  resteStores : [
+    'quserAuth/RESET'
+  ]
 }

@@ -1,7 +1,7 @@
 <template>
   <div id="masterHeader">
-    <!-- ============= HEADER ======================= -->
-    <q-layout-header class="no-shadow">
+    <!-- HEADER -->
+    <q-header class="no-shadow">
       <q-toolbar color="primary">
         <!--= BUTTON MENU =-->
         <q-btn flat dense round
@@ -20,68 +20,61 @@
         </q-toolbar-title>
 
         <!--== Button User ==-->
-        <q-btn :to="{name: 'user.profile.me'}" flat no-caps>
-          <div class="button-profile-image" :style="`background-image: url('${userData.smallImage}')`"/>
-          <span class="q-hide q-md-show">
-            {{userData.firstName}}
-          </span>
-        </q-btn>
+        <q-no-ssr>
+          <q-btn :to="{name: 'user.profile.me'}" flat no-caps v-if="quserState.authenticated">
+            <q-avatar size="25px">
+              <img :src="quserState.userData.mainImage">
+            </q-avatar>
+            <div class="q-ml-xs">{{quserState.userData.firstName}}</div>
+          </q-btn>
+        </q-no-ssr>
 
         <!--== Button Config ==-->
         <q-btn round dense flat icon="fas fa-cog"
                @click="drawer.config = !drawer.config">
         </q-btn>
       </q-toolbar>
-    </q-layout-header>
+    </q-header>
 
-    <!-- ============= DRAWERS ======================= -->
     <!-- MENU -->
-    <q-layout-drawer id="menu_master" class="no-shadow" v-model="drawer.menu">
-      <q-list no-border link inset-delimiter>
-        <!-- === LOGO === -->
-        <q-list-header class="text-center">
-          <router-link :to="{ name: 'app.home'}">
-            <a>
-              <img :src="logo" width="90%">
-            </a>
-          </router-link>
-        </q-list-header>
+    <q-drawer id="menu_master" class="no-shadow" v-model="drawer.menu">
+      <!-- === LOGO === -->
+      <div class="text-center q-py-md q-px-sm full-width">
+        <router-link :to="{ name: 'app.home'}" tag="a">
+          <img :src="logo">
+        </router-link>
+      </div>
 
-        <!--= MENU =-->
-        <menu-list :menu="menu"/>
-      </q-list>
-    </q-layout-drawer>
+      <!--= MENU =-->
+      <menu-list :menu="menu"/>
+    </q-drawer>
 
     <!-- Config -->
-    <q-layout-drawer id="menu_master" :overlay="true"
-                     v-model="drawer.config" side="right"
-    >
-      <config-list></config-list>
-    </q-layout-drawer>
+    <q-drawer id="menu_master" :overlay="true" v-model="drawer.config" side="right">
+      <config-list/>
+    </q-drawer>
   </div>
 </template>
 <script>
-  import WidgetUser from "@imagina/quser/_components/widget-user";
-  import configList from '../configList';
-  import menuList from "../recursiveItem";
+  import configList from '../configList'
+  import menuList from '../recursiveItem'
 
   export default {
     props: {},
     components: {
-      WidgetUser,
       configList,
       menuList
     },
     watch: {},
-    mounted() {
+    mounted () {
       this.$nextTick(function () {
       })
     },
-    data() {
+    data () {
       return {
         projectName: this.$store.getters['qsiteSettings/getSettingValueByName']('core::site-name'),
         drawer: {
-          menu: true,
+          menu: false,
           config: false,
           notification: false
         },
@@ -90,16 +83,13 @@
       }
     },
     computed: {
-      getImageUrl() {
-        return config('apiRoutes.api.base_url') + '/' + this.userData.smallImage;
-      },
-      userData() {
-        return this.$store.state.quserAuth.userData
-      },
+      quserState () {
+        return this.$store.state.quserAuth
+      }
     },
     methods: {
       //Show drawer specific
-      toggleDrawer(name, show) {
+      toggleDrawer (name, show) {
         //Hidden all drawers
         for (var drawer in this.drawer) {
           this.drawer[drawer] = false
@@ -110,12 +100,15 @@
   }
 </script>
 <style lang="stylus">
-  @import "~variables";
   #masterHeader
+    img
+      max-width 100% !important
     .q-toolbar-title
       padding 0 5px
+
       .btn-page-title
         padding 5px
+
         .q-icon
           background-color white
           border-radius 50%
@@ -126,10 +119,12 @@
           padding 5px
           margin-right 5px
           transition .5s
+
           &.on-right
             margin-left 5px
           @media screen and (max-width: $breakpoint-xs)
             display none
+
         &.menu-openend
           .q-icon
             transform rotate(90deg)

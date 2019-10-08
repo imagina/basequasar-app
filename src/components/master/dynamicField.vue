@@ -1,123 +1,131 @@
 <template>
-  <div id="dynamicFieldComponent" class="backend-page q-mt-xs" v-if="success">
-    <!--Label-->
-    <div class="input-title capitalize"
-         v-if="['select','html','multiSelect'].indexOf(field.type) != -1">
+  <div id="dynamicFieldComponent" class="backend-page" v-if="success">
+    <div class="row">
       <!--Label-->
-      {{fieldLabel}}
+      <div class="col-6">
+        <div class="input-title text-capitalize"
+             v-if="['html','multiSelect'].indexOf(field.type) != -1">
+          {{fieldLabel}}
+        </div>
+      </div>
       <!--Crud component-->
-      <crud :crud-data="field.create.component" v-if="field.create && field.create.component"
-            :key="field.name" ref="crudComponent" just-create @created="getOptions"/>
+      <div class="col-6">
+        <crud class="text-right q-mb-xs" :crud-data="field.create.component"
+              v-if="field.create && field.create.component"
+              :key="field.name" ref="crudComponent" just-create @created="getOptions"/>
+      </div>
     </div>
     <!--Text-->
-    <q-input v-model="responseValue"
+    <q-input v-model="responseValue" bg-color="white" outlined dense :rules="field.rules"
              v-if="['text','email'].indexOf(field.type) != -1"
-             :stack-label="fieldLabel" @keyup.enter="$emit('enter')"/>
+             :label="fieldLabel" @keyup.enter="$emit('enter')"/>
     <!--Number-->
-    <q-input v-model="responseValue" v-if="field.type == 'number'"
-             type="number" :stack-label="fieldLabel" @keyup.enter="$emit('enter')"/>
+    <q-input v-model="responseValue" bg-color="white" v-if="field.type == 'number'"
+             outlined dense :rules="field.rules" type="number" :label="fieldLabel"
+             @keyup.enter="$emit('enter')"/>
+    <!--Phone-->
+    <q-input v-model="responseValue" bg-color="white" v-if="field.type == 'phone'" unmasked-value
+             outlined dense :rules="field.rules" :label="fieldLabel"
+             @keyup.enter="$emit('enter')" mask="phone"/>
     <!--Password-->
-    <q-input v-model="responseValue"
+    <q-input v-model="responseValue" bg-color="white" outlined dense :rules="field.rules"
              v-if="['password','checkPassword'].indexOf(field.type) != -1"
-             type="password" :stack-label="fieldLabel" @keyup.enter="$emit('enter')"/>
+             type="password" :label="fieldLabel" @keyup.enter="$emit('enter')"/>
     <!--Textarea-->
-    <q-input v-model="responseValue" v-if="field.type == 'textarea'"
-             type="textarea" rows="3" :stack-label="fieldLabel"/>
+    <q-input v-model="responseValue" bg-color="white" v-if="field.type == 'textarea'" outlined dense
+             type="textarea" rows="3" :label="fieldLabel" :rules="field.rules"/>
     <!--Chips-->
-    <q-chips-input v-model="responseValue" v-if="field.type == 'chips'"
-                   :stack-label="fieldLabel" @input="matchTags()"/>
-    <!--Date - time - datetime-->
-    <q-datetime v-if="['date','time','datetime'].indexOf(field.type) != -1"
-                :format="field.format || formatDateTime"
-                v-model="responseValue" :type="field.type" :stack-label="fieldLabel"/>
-    <!--HTML-->
-    <q-editor v-model="responseValue" v-if="field.type == 'html'"
-              :toolbar="editorText.toolbar"/>
-    <!--multiSelect-->
-    <recursive-select v-if="field.type == 'multiSelect'"
-                      v-model="responseValue" :items="options"/>
-    <!--Checkbox-->
-    <q-checkbox v-model="responseValue" class="q-my-sm"
-                v-if="field.type == 'checkbox'" :label="fieldLabel"/>
+    <q-select :label="fieldLabel" bg-color="white" v-model="responseValue" use-input use-chips multiple
+              hide-dropdown-icon input-debounce="0" new-value-mode="add-unique" :rules="field.rules"
+              v-if="field.type == 'chips'" style="width: 100%" @input="matchTags()" outlined dense/>
     <!--Select-->
-    <tree-select
-      :multiple="field.multiple || false"
-      v-if="field.type == 'select'"
-      :clearable="field.clearable || false"
-      :options="options"
-      :append-to-body="true"
-      :value-consists-of="field.valueConsistsOf || 'BRANCH_PRIORITY'"
-      v-model="responseValue"
-      placeholder=""
-    >
-      <label slot="option-label" slot-scope="{node}" class="q-px-sm capitalize">
-        {{node.label.toLowerCase()}}
-      </label>
-    </tree-select>
+    <q-select outlined dense bg-color="white" v-model="responseValue" :options="options" :label="fieldLabel"
+              style="width: 100%;" :rules="field.rules" v-if="field.type == 'select'" :loading="loading"
+              :multiple="field.multiple || false" :clearable="field.clearable || false" emit-value map-options/>
+    <!--Date - time - datetime-->
+    <q-input dense mask="date" bg-color="white" v-model="responseValue" color="primary" :rules="field.rules"
+             :label="fieldLabel" outlined placeholder="YYYY/MM/DD" v-if="field.type == 'date'">
+      <template v-slot:append>
+        <q-icon name="fas fa-calendar-day"/>
+        <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
+          <q-date v-model="responseValue" @input="() => $refs.qDateProxy.hide()"/>
+        </q-popup-proxy>
+      </template>
+    </q-input>
+    <!--HTML-->
+    <q-field v-model="responseValue" borderless :rules="field.rules" v-if="field.type == 'html'">
+      <q-editor v-model="responseValue" class="full-width" :toolbar="editorText.toolbar"
+                content-class="text-grey-9" toolbar-text-color="grey-9"/>
+    </q-field>
+    <!--multiSelect-->
+    <q-field dense v-model="responseValue" borderless :rules="field.rules" v-if="field.type == 'multiSelect'">
+      <recursive-select v-model="responseValue" class="bg-white full-width" :items="options"/>
+    </q-field>
+    <!--Checkbox-->
+    <q-field v-model="responseValue" borderless :rules="field.rules" v-if="field.type == 'checkbox'">
+      <q-checkbox v-model="responseValue" class="q-my-sm" :label="fieldLabel"/>
+    </q-field>
     <!--Media-->
-    <upload-img
-      :multiple="field.zone == 'gallery'"
-      v-if="field.type == 'media'"
-      :entity="field.entity"
-      :entity-id="field.enitityId || itemId"
-      v-model="responseValue"
-      :label="field.label"
-      :zone="field.zone"
-    />
+    <q-field v-model="responseValue" borderless :rules="field.rules" v-if="field.type == 'media'">
+      <upload-img
+        class="bg-white"
+        :multiple="field.zone == 'gallery'"
+        :entity="field.entity"
+        :entity-id="field.enitityId || itemId"
+        v-model="responseValue"
+        :label="field.label"
+        :zone="field.zone"
+      />
+    </q-field>
     <!--Manage Permission-->
-    <manage-permissions v-model="responseValue" class="q-mt-sm" v-if="field.type == 'permissions'"
+    <manage-permissions v-model="responseValue" class="q-mb-sm" v-if="field.type == 'permissions'"
                         @input="watchValue" :get-all="field.getAll ? true : false"/>
     <!--Manage Settings-->
-    <manage-settings v-model="responseValue" class="q-mt-sm" :settings="field.settings"
+    <manage-settings v-model="responseValue" class="q-mb-sm" :settings="field.settings"
                      v-if="field.type == 'settings'" @input="watchValue"/>
-    <!--Loading-->
-    <q-progress
-      v-if="loading"
-      indeterminate
-      color="blue-grey"
-      style="height: 2px"
-    />
   </div>
 </template>
 <script>
   //Component
-  import uploadImg from '@imagina/qmedia/_components/form'
   import recursiveSelect from 'src/components/master/recursiveListSelect'
   import managePermissions from '@imagina/qsite/_components/managePermissions'
   import manageSettings from '@imagina/qsite/_components/manageSettings'
+  import uploadImg from '@imagina/qmedia/_components/form'
 
   export default {
     name: 'dynamicField',
-    beforeDestroy() {
+    beforeDestroy () {
       //Close listen event
-      if (this.$refs.crudComponent)
+      if (this.$refs.crudComponent) {
         this.$root.$off(`crudForm${this.$refs.crudComponent.params.apiRoute}Created`)
+      }
     },
     props: {
-      value: {default: false},
-      field: {default: false},
-      language: {default: false},
-      itemId: {default: ''}
+      value: { default: false },
+      field: { default: false },
+      language: { default: false },
+      itemId: { default: '' }
     },
-    components: {managePermissions, manageSettings, recursiveSelect, uploadImg},
+    components: { managePermissions, manageSettings, recursiveSelect, uploadImg },
     watch: {
-      value(newValue, oldValue) {
-        if (newValue != oldValue)
-          this.setDefaultVModel(newValue)//Order Value
+      value (newValue, oldValue) {
+        if (newValue != oldValue) {
+          this.setDefaultVModel(newValue)
+        }//Order Value
       },
-      responseValue(value) {
+      responseValue (value) {
         this.watchValue(value)
       }
     },
-    validations() {
+    validations () {
       return {}
     },
-    mounted() {
+    mounted () {
       this.$nextTick(function () {
         this.init()
       })
     },
-    data() {
+    data () {
       return {
         success: false,//global component status
         loading: false,
@@ -145,85 +153,87 @@
     },
     computed: {
       //Return label to field
-      fieldLabel() {
+      fieldLabel () {
         let response = ''
         if (this.field.label) {
           response = this.field.label
           if (this.field.isTranslatable) response = `${response} (${this.language})`
-          if (this.field.isRequired) response = `${response} *`
         }
         return response
       },
       //Return format of datetime
-      formatDateTime(){
+      formatDateTime () {
         let response = ''
 
-        if(this.field.type == 'date') response = 'MMM DD, YYYY'
-        if(this.field.type == 'time') response = 'HH:mm a'
-        if(this.field.type == 'datetime') response = 'MMM DD, YYYY - HH:mm a'
+        if (this.field.type == 'date') response = 'MMM DD, YYYY'
+        if (this.field.type == 'time') response = 'HH:mm a'
+        if (this.field.type == 'datetime') response = 'MMM DD, YYYY - HH:mm a'
 
         return response
       }
     },
     methods: {
       //initi
-      async init() {
+      async init () {
         if (this.field.type) {
           this.setDefaultVModel(this.field.value)//Set default values by field type
           this.listenEventCrud()//config dynamic component
           this.success = true//sucess
           //Set options if is type select
-          if (['select', 'multiSelect'].indexOf(this.field.type) != -1)
-            if (this.field.loadOptions) await this.getOptions()//Get options
+          if (['select', 'multiSelect'].indexOf(this.field.type) != -1) {
+            if (this.field.loadOptions) {
+              await this.getOptions()
+            }//Get options
             else if (this.field.options) this.options = this.field.options
+          }
         }
       },
       //Set default values by type
-      setDefaultVModel(value) {
+      setDefaultVModel (value) {
         let propValue = this.$clone(value)
         switch (this.field.type) {
           case 'text':
             this.responseValue = propValue || null
-            break;
+            break
           case 'number':
             this.responseValue = (propValue >= 0) ? propValue : null
-            break;
+            break
           case 'textarea':
             this.responseValue = propValue || null
-            break;
+            break
           case 'chips':
             this.responseValue = propValue || []
-            break;
+            break
           case 'html':
             this.responseValue = propValue || ''
-            break;
+            break
           case 'select':
             this.responseValue = (propValue != undefined) ? propValue : null
-            break;
+            break
           case 'multiSelect':
             this.responseValue = propValue || []
-            break;
+            break
           case 'checkbox':
             this.responseValue = propValue || false
-            break;
+            break
           case 'media':
             this.responseValue = propValue || {}
-            break;
+            break
           case 'permissions':
             this.responseValue = (propValue.length == undefined) ? propValue : {}
-            break;
+            break
           case 'settings':
             this.responseValue = propValue || {}
-            break;
+            break
           default :
             ''
             this.responseValue = propValue || null
-            break;
+            break
         }
         this.orderOptions()//Order Value
       },
       //Order options if is a object
-      orderOptions() {
+      orderOptions () {
         //If field is select, order values
         if (['select', 'multiSelect'].indexOf(this.field.type) != -1) {
           if (Array.isArray(this.responseValue) && this.responseValue.length) {
@@ -238,7 +248,7 @@
         }
       },
       //Config dynamic component
-      listenEventCrud() {
+      listenEventCrud () {
         setTimeout(() => {
           if (this.field.create && this.field.create.component) {
             let componentCrud = this.$refs.crudComponent
@@ -252,7 +262,7 @@
         }, 500)
       },
       //Get options if is load options
-      getOptions() {
+      getOptions () {
         return new Promise((resolve, reject) => {
           let loadOptions = this.$clone(this.field.loadOptions)
           this.loading = true//Open loading
@@ -260,7 +270,7 @@
           //==== Request options
           if (loadOptions.apiRoute) {
             this.options = []//Reset options
-            let fieldSelect = {label: 'title', id: 'id'}
+            let fieldSelect = { label: 'title', id: 'id' }
 
             let params = {//Params to request
               refresh: true,
@@ -275,18 +285,14 @@
             this.$crud.index(loadOptions.apiRoute, params).then(response => {
               let formatedOptions = []
               //Format response as tree
-              if (this.field.tree == false) {
-                formatedOptions = this.$helper.array.select(response.data, loadOptions.select || fieldSelect)
-                //Format response as select
-              } else
-                formatedOptions = this.$helper.array.tree(response.data, loadOptions.select || fieldSelect)
+              formatedOptions = this.$array.tree(response.data, loadOptions.select || fieldSelect)
 
               //Assign options
               this.options = this.$clone((this.field.options || []).concat(formatedOptions))//set option
               this.loading = false
               resolve(true)
             }).catch(error => {
-              this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+              this.$alert.error({ message: this.$tr('ui.message.errorRequest'), pos: 'bottom' })
               this.loading = false
               reject(true)
             })
@@ -307,7 +313,7 @@
         })
       },
       //Reges to tags
-      matchTags() {
+      matchTags () {
         let tags = []
         //only letters and spaces
         this.responseValue.forEach((tag, index) => {
@@ -318,7 +324,7 @@
         this.responseValue = this.$clone(tags)
       },
       //Check if value change
-      watchValue() {
+      watchValue () {
         let value = this.$clone(this.value)
         let response = this.$clone(this.responseValue)
 
@@ -330,5 +336,4 @@
   }
 </script>
 <style lang="stylus">
-  @import "~variables";
 </style>

@@ -7,6 +7,7 @@ let pages = {}
 if (appConfig && appConfig.modules) {
   const modules = appConfig.modules
 
+  // Get each config page from package
   modules.forEach(name => {
     try {
       //Get pages according to app config in: src/config/app.js "isBackend"
@@ -18,6 +19,7 @@ if (appConfig && appConfig.modules) {
     } catch (e) {}
   })
 }
+
 pages.app = require('src/config/pages/application').default //Pages of APP
 
 

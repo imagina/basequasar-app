@@ -1,5 +1,4 @@
 export default {
-  active: true,
-  hasConfiguration : false,
-  updateAvailable : false
+  loadPage : true,
+  test : false
 }

@@ -1,9 +1,9 @@
 <template>
   <div id="masterFooter">
     <!-- === FOOTER === -->
-    <q-layout-footer class="no-shadow">
+    <q-footer class="no-shadow">
 
-    </q-layout-footer>
+    </q-footer>
   </div>
 </template>
 <script>
@@ -22,5 +22,4 @@
   }
 </script>
 <style lang="stylus">
-  @import "~variables";
 </style>

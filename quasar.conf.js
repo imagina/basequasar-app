@@ -1,35 +1,46 @@
 // Configuration for your app
 var webpack = require('webpack')
 var path = require('path')
-
+const nodeExternals = require('webpack-node-externals')
 // Get our env variables
 const envparser = require('./env/envparser')
 
 module.exports = function (ctx) {
   return {
-    // app plugins (/src/plugins)
-    plugins: [
-      'i18n',
-      'vuelidate',
+    preFetch: false,
+    boot: [//Keep this order
       'axios',
-      'moment',
       'helper',
-      'auth',
-      'clone',
-      'crud',
-      'globalComponents'
+      'server-side',
+      'i18n',
+      { server: false, path: 'client-side' },
+      { server: false, path: 'authenticated' },
+      'components',
     ],
+
     css: [
       'app.styl'
     ],
+
     extras: [
-      ctx.theme.mat ? 'roboto-font' : null,
-      'material-icons', // optional, you are not bound to it
-      'fontawesome'
-      // 'ionicons',
-      // 'mdi',
+      // 'ionicons-v4',
+      // 'mdi-v3',
+      'fontawesome-v5',
+      // 'eva-icons',
+      // 'themify',
+      // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
+      'roboto-font', // optional, you are not bound to it
+      'material-icons' // optional, you are not bound to it
     ],
+
+    framework: {
+      // iconSet: 'ionicons-v4',
+      // lang: 'de', // Quasar language
+      all: true, // --- includes everything; for dev only!
+    },
+
     supportIE: false,
+
     build: {
       scopeHoisting: true,
       env: envparser(),
@@ -46,51 +57,45 @@ module.exports = function (ctx) {
             config: [path.resolve(__dirname, 'src/config/index'), 'default']
           })
         )
+      },
+      chainWebpack (chain, { isServer, isClient }) {
+        if (isServer) {
+          chain.externals(nodeExternals({
+            // do not externalize CSS files in case we need to import it from a dep
+            whitelist: /(\.css$|\.vue$|\?vue&type=style|@imagina|@quasar|quasar[\\/])/
+          }))
+        }
       }
     },
+
     devServer: {
-      //https: true,
-      port: 8080,
+      // https: true,
+      // port: 8080,
       open: true // opens browser window automatically
     },
-    // framework: 'all' --- includes everything; for dev only!
-    framework: 'all',
-    // animations: 'all' --- includes all animations
+
+    // animations: 'all', // --- includes all animations
     animations: [],
+
     ssr: {
-      pwa: false
+      pwa: true
     },
+
     pwa: {
-      workboxPluginMode: 'InjectManifest',
-      workboxOptions: {},
+      // workboxPluginMode: 'InjectManifest',
+      // workboxOptions: {}, // only for NON InjectManifest
       manifest: {
-        name: 'APP',
-        short_name: 'APP',
-        description: '',
+        // name: 'Quasar App',
+        // short_name: 'Quasar App',
+        // description: 'A Quasar Framework app',
+        display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
-        theme_color: '#ffffff',
-        display: "standalone",
-        serviceWorker: {
-          src: "service-worker.js",
-          scope: "/",
-          use_cache: true,
-          skipWaiting: true
-        },
+        theme_color: '#027be3',
         icons: [
           {
             'src': 'statics/icons/icon-128x128.png',
             'sizes': '128x128',
-            'type': 'image/png'
-          },
-          {
-            'src': 'statics/icons/apple-icon-152x152.png',
-            'sizes': '152x152',
-            'type': 'image/png'
-          },
-          {
-            'src': 'statics/icons/ms-icon-144x144.png',
-            'sizes': '144x144',
             'type': 'image/png'
           },
           {
@@ -116,14 +121,20 @@ module.exports = function (ctx) {
         ]
       }
     },
+
     cordova: {
-      // id: 'org.cordova.quasar.app'
+      // id: 'org.cordova.quasar.app',
+      // noIosLegacyBuildFlag: true, // uncomment only if you know what you are doing
     },
+
     electron: {
       // bundler: 'builder', // or 'packager'
+
       extendWebpack (cfg) {
-        // do something with Electron process Webpack cfg
+        // do something with Electron main process Webpack cfg
+        // chainWebpack also available besides this extendWebpack
       },
+
       packager: {
         // https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#options
 
@@ -133,13 +144,14 @@ module.exports = function (ctx) {
         // osxSign: '',
         // protocol: 'myapp://path',
 
-        // Window only
+        // Windows only
         // win32metadata: { ... }
       },
+
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        // appId: 'quasar-app'
+        // appId: 'front-end-v1'
       }
     }
   }

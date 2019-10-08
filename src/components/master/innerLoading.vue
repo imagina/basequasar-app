@@ -1,5 +1,5 @@
 <template>
-  <q-inner-loading id="innerLoadingMaster" :visible="visible">
+  <q-inner-loading id="innerLoadingMaster" :showing="visible">
     <div class="q-box-inner-loading">
       <q-spinner size="50px" color="primary"/>
       <h6 class="q-ma-none text-primary q-title">{{message}}</h6>
@@ -35,7 +35,6 @@
   }
 </script>
 <style lang="stylus">
-  @import "~variables";
   #innerLoadingMaster
     &.q-inner-loading
       .q-box-inner-loading

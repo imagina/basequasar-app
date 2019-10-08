@@ -190,7 +190,6 @@
   }
 </script>
 <style lang="stylus">
-  @import "~variables";
   #logo-imagina-svg
     .imaginalogo
       fill white

@@ -79,18 +79,17 @@
     },
     data() {
       return {
-        projectName: this.$store.getters['qsiteSettings/getSettingValueByName']('core::site-name'),
+        projectName: 'Test',//this.$store.getters['qsiteSettings/getSettingValueByName']('core::site-name'),
         drawer: {
           menu: false
         },
         menu: config('sidebar'),
-        logo: this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo1').path,
+        logo: '',//this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo1').path,
         modal: {
           show: true,
           search: ''
         },
-        logo: this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo1').path,
-        phones: this.$store.getters['qsiteSettings/getSettingValueByName']('isite::phones')
+        phones: [],//this.$store.getters['qsiteSettings/getSettingValueByName']('isite::phones')
       }
     },
     computed: {
@@ -98,11 +97,11 @@
         return config('apiRoutes.api.base_url') + '/' + this.userData.smallImage;
       },
       userData() {
-        return this.$store.state.quserAuth.userData
+        return []//this.$store.state.quserAuth.userData
       },
       socialNetworks() {
         let response = {}
-        let socialNetworks = this.$store.getters['qsiteSettings/getSettingValueByName']('isite::socialNetworks')
+        let socialNetworks = []//this.$store.getters['qsiteSettings/getSettingValueByName']('isite::socialNetworks')
         //format social networks
         socialNetworks.forEach(item => {
           if (item.label == 'facebook') response[item.label] = `https://facebook.com/${item.value}`
@@ -129,7 +128,6 @@
   }
 </script>
 <style lang="stylus">
-  @import "~variables";
   #masterHeader
     .q-layout-drawer-delimiter
       box-shadow $shadow-1

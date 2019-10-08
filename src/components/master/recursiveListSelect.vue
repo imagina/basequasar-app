@@ -6,9 +6,15 @@
         <q-icon :name="icon" v-if="icon && title" class="q-mr-md"></q-icon>
         <span v-if="title">{{title}}</span>
       </div>
+
       <!-- Search -->
       <div :class="'col-12 q-mb-md '+ (icon && title ? 'col-md-6 ' : '')">
-        <q-search v-model="search" clearable hide-underline/>
+        <q-input v-model="search" outlined dense debounce="800"
+                 :placeholder="`${$tr('ui.label.search',{capitalize : true})}...`">
+          <template v-slot:append>
+            <q-icon name="search"/>
+          </template>
+        </q-input>
       </div>
     </div>
     <!-- List -->
@@ -28,33 +34,31 @@
   </div>
 </template>
 <script>
-  //Plugins
-  import auth from '@imagina/quser/_plugins/auth'
-
   export default {
     name: 'recursiveList',
     components: {},
     props: {
-      items: {default: false},
-      title: {default: false},
-      icon: {default: false},
-      value: {default: []},
+      items: { default: false },
+      title: { default: false },
+      icon: { default: false },
+      value: { default: [] },
     },
     watch: {
-      itemsSelected() {
+      itemsSelected () {
         this.changeSelectedItems()
       },
-      value() {
+      value () {
         this.itemsSelected = this.value
       }
     },
-    mounted() {
+    mounted () {
       this.$nextTick(function () {
-        if (this.value && this.value.length)
+        if (this.value && this.value.length) {
           this.itemsSelected = this.value
+        }
       })
     },
-    data() {
+    data () {
       return {
         itemsSelected: [],
         ticked: [],
@@ -63,15 +67,13 @@
     },
     methods: {
       //Event when change selected items
-      changeSelectedItems() {
+      changeSelectedItems () {
         this.$emit('input', this.itemsSelected)
       }
     }
   }
 </script>
 <style lang="stylus">
-  @import "~variables";
-
   #treeListSelect
     .header-list
       border-bottom 1px solid $grey-4

@@ -35,7 +35,6 @@
 </script>
 
 <style lang="stylus">
-  @import "~variables";
   #notFoundComponent
     padding 160px 0 100px 0
 </style>
