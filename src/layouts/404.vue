@@ -21,13 +21,13 @@
 <script>
   export default {
     meta() {
-      let routetitle = (this.$route.meta && this.$route.meta.title) ? this.$route.meta.title : ''
+      /*let routetitle = (this.$route.meta && this.$route.meta.title) ? this.$route.meta.title : ''
       let siteName = this.$store.getters['qsiteSettings/getSettingValueByName']('core::site-name')
       let iconHref = this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::favicon').path
       return {
         title: `${siteName} | ${routetitle}`,
         link: [{rel: 'icon', href: iconHref, id: 'icon'}],
-      }
+      }*/
     },
     mounted() {
       this.$nextTick(async function () {

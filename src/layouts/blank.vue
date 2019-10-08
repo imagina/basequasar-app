@@ -10,25 +10,21 @@
 
 <script>
   export default {
-    meta() {
-      let routetitle = (this.$route.meta && this.$route.meta.title) ? this.$route.meta.title : null
+    meta () {
+      let routetitle = ((this.$route.meta && this.$route.meta.title) ? this.$route.meta.title : '')
       let siteName = this.$store.getters['qsiteSettings/getSettingValueByName']('core::site-name')
+      let siteDescription = this.$store.getters['qsiteSettings/getSettingValueByName']('core::site-description')
       let iconHref = this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::favicon').path
+
       return {
-        title: `${siteName} | ${this.$tr(routetitle)}`,
+        title: `${this.$tr(routetitle)} | ${siteName}`,
+        meta : {
+          description: { name: 'description', content: (siteDescription || siteName) },
+        },
         link: [{rel: 'icon', href: iconHref, id: 'icon'}],
       }
     },
-    components: {},
-    mounted() {
-      this.$nextTick(async function () {
-        //Call to config when is mounted
-        let params = this.$route.params
-      })
-    },
-    data() {
-      return {}
-    },
-    methods: {}
+    async mounted () {
+    }
   }
 </script>

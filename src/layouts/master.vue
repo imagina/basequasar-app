@@ -1,19 +1,20 @@
 <template>
   <q-layout :view="(appIsBackend || $q.platform.is.mobile) ? 'lHh LpR lff' : 'lhh LpR lFr'"
-            :class="appIsBackend ? 'bg-grey-1' : ''"
-            v-if="$store.state.app.active">
+            :class="appIsBackend ? 'bg-grey-1' : ''">
     <!-- HEADER -->
-    <admin-header v-if="appIsBackend" />
-    <frontend-header v-else />
+    <admin-header v-if="appIsBackend && appState.loadPage"/>
+    <!--<frontend-header v-else />-->
 
     <!-- ROUTER VIEW -->
     <q-page-container>
-      <router-view :class="appIsBackend ? 'q-layout-page layout-padding' : ''" />
+      <q-pull-to-refresh @refresh="refreshPage">
+        <router-view v-if="appState.loadPage" :class="appIsBackend ? 'layout-padding' : ''"/>
+      </q-pull-to-refresh>
     </q-page-container>
 
     <!-- FOOTER -->
-    <admin-footer v-if="appIsBackend" />
-    <frontend-footer v-else />
+    <admin-footer v-if="appIsBackend"/>
+    <!--<frontend-footer v-else />-->
   </q-layout>
 </template>
 
@@ -21,73 +22,56 @@
   /*Components*/
   import adminHeader from 'src/components/master/admin/header'
   import adminFooter from 'src/components/master/admin/footer'
-  import frontendHeader from 'src/components/master/frontend/header'
-  import frontendFooter from 'src/components/master/frontend/footer'
+  //import frontendHeader from 'src/components/master/frontend/header'
+  //import frontendFooter from 'src/components/master/frontend/footer'
 
   export default {
-    meta() {
+    meta () {
       let routetitle = ((this.$route.meta && this.$route.meta.title) ? this.$route.meta.title : '')
       let siteName = this.$store.getters['qsiteSettings/getSettingValueByName']('core::site-name')
+      let siteDescription = this.$store.getters['qsiteSettings/getSettingValueByName']('core::site-description')
       let iconHref = this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::favicon').path
+
       return {
-        title: `${siteName} | ${this.$tr(routetitle)}`,
-        link: [{rel: 'icon', href: iconHref, id: 'icon'}],
+        title: `${this.$tr(routetitle)} | ${siteName}`,
+        meta: {
+          description: { name: 'description', content: (siteDescription || siteName) },
+        },
+        link: [{ rel: 'icon', href: iconHref, id: 'icon' }],
       }
     },
-    beforeRouteLeave(to, from, next) {
-      next()
-    },
     components: {
-      adminHeader, adminFooter,
-      frontendHeader, frontendFooter
+      adminHeader,
+      adminFooter,
+      //frontendHeader,
+      //frontendFooter
     },
-    mounted() {
+    mounted () {
       this.$nextTick(async function () {
-        //Call to config when is mounted
-        let params = this.$route.params
       })
     },
-    data() {
+    data () {
       return {
         appIsBackend: config('app.isBackend')
       }
     },
     computed: {
-      showApp() {
-        return this.$store.state.app.show
+      quserState () {
+        return this.$store.state.quserAuth
       },
+      appState () {
+        return this.$store.state.app
+      }
     },
     methods: {
-      isInStandaloneMode() {
-        (window.matchMedia('(display-mode: standalone)').matches) || (window.navigator.standalone);
-      },
+      async refreshPage(done){
+        await this.$store.dispatch('app/REFRESH_PAGE')
+        done()
+      }
     }
   }
 </script>
 
 <style lang="stylus">
-  @import "~variables";
-
-  #list_menu
-    .q-icon
-      font-size: 16px
-
-    .q-item-side
-      min-width 20px !important
-
-  .q-item-main
-    font-size: 15px !important
-
-  #menu_leads
-    .q-item
-      padding: 8px 0px
-
-  .q-item-side
-    min-width: auto
-
-  .border-content
-    border 2px solid $grey-4
-    border-radius 3px
-
 
 </style>
