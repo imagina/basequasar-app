@@ -21,7 +21,7 @@ export const TEST_ACTION = ({ commit }) => {
 //Reset values form Store
 export const RESET_STORE = ({ commit, dispatch }) => {
   return new Promise((resolve, reject) => {
-    let stores = config('app.resteStores') || []
+    let stores = config('app.resetStores') || []
     stores.forEach(name => commit(name, null, { root: true }))
     resolve(true)
   })

@@ -34,7 +34,7 @@ export default {
     ]
   },
   //Reset Store
-  resteStores : [
+  resetStores : [
     'quserAuth/RESET'
   ]
 }
