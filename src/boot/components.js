@@ -1,9 +1,10 @@
-import crud from '@imagina/qcrud/_components/crud'
 import treeSelect from '@riophae/vue-treeselect'
+import '@riophae/vue-treeselect/dist/vue-treeselect.css'
+import crud from '@imagina/qcrud/_components/crud'
 import innerLoading from 'src/components/master/innerLoading'
-import notFound from 'src/components/404'
-import notResult from 'src/components/notResults'
-import uploadImg from 'src/components/uploadImage'
+import notFound from 'src/components/master/404'
+import notResult from 'src/components/master/notResults'
+import uploadImg from 'src/components/master/uploadImage'
 import dynamicField from 'src/components/master/dynamicField'
 
 export default ({app, router, store, Vue}) => {

@@ -14,7 +14,7 @@ module.exports = function (ctx) {
       'server-side',
       'i18n',
       { server: false, path: 'client-side' },
-      { server: false, path: 'authenticated' },
+      { server: false, path: 'middleware' },
       'components',
     ],
 
