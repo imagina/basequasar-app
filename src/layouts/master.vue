@@ -1,9 +1,9 @@
 <template>
-  <q-layout :view="(appIsBackend || $q.platform.is.mobile) ? 'lHh LpR lff' : 'lhh LpR lFr'"
+  <q-layout :view="(appIsBackend || $q.platform.is.mobile) ? 'lHh LpR lff' : 'hhh LpR lFr'"
             :class="appIsBackend ? 'bg-grey-1' : ''">
     <!-- HEADER -->
     <admin-header v-if="appIsBackend && appState.loadPage"/>
-    <!--<frontend-header v-else />-->
+    <frontend-header v-else-if="appState.loadPage" />
 
     <!-- ROUTER VIEW -->
     <q-page-container>
@@ -14,7 +14,7 @@
 
     <!-- FOOTER -->
     <admin-footer v-if="appIsBackend"/>
-    <!--<frontend-footer v-else />-->
+    <frontend-footer v-else-if="appState.loadPage" />
   </q-layout>
 </template>
 
@@ -22,8 +22,8 @@
   /*Components*/
   import adminHeader from 'src/components/master/admin/header'
   import adminFooter from 'src/components/master/admin/footer'
-  //import frontendHeader from 'src/components/master/frontend/header'
-  //import frontendFooter from 'src/components/master/frontend/footer'
+  import frontendHeader from 'src/components/master/frontend/header'
+  import frontendFooter from 'src/components/master/frontend/footer'
 
   export default {
     meta () {
@@ -35,7 +35,7 @@
       return {
         title: `${this.$tr(routetitle)} | ${siteName}`,
         meta: {
-          description: { name: 'description', content: (siteDescription || siteName) },
+          description: { name: 'description', content: siteDescription || siteName },
         },
         link: [{ rel: 'icon', href: iconHref, id: 'icon' }],
       }
@@ -43,8 +43,8 @@
     components: {
       adminHeader,
       adminFooter,
-      //frontendHeader,
-      //frontendFooter
+      frontendHeader,
+      frontendFooter
     },
     mounted () {
       this.$nextTick(async function () {
@@ -71,7 +71,3 @@
     }
   }
 </script>
-
-<style lang="stylus">
-
-</style>

@@ -25,9 +25,6 @@
       this.$nextTick(function () {
       })
     },
-    created() {
-      this.executeScript()
-    },
     data() {
       return {}
     },
@@ -44,13 +41,6 @@
       }
     },
     methods: {
-      executeScript() {
-        let scriptValue = false//this.$store.getters['qsiteSettings/getSettingValueByName']('core::analytics-script')
-        if (JSON.stringify(scriptValue).indexOf('script') != -1) {
-          let script = scriptValue.replace(/<\/?script>/g, "")
-          eval(script)
-        }
-      }
     }
 
   }

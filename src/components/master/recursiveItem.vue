@@ -1,23 +1,27 @@
 <template>
-  <div id="listMenu">
-    <div v-for="(item,key) in props.menu" :key="key">
-      <!--Single Item-->
-      <q-item :class="getClassItem(item)" v-if="checkItemSingle(item)" @click.native="redirectTo(item)">
-        <q-item-section v-if="item.icon && props.showIcons" avatar>
-          <q-icon :name="item.icon"/>
-        </q-item-section>
-        <q-item-section> {{props.translatable ? $tr(item.title) : item.title}}</q-item-section>
-      </q-item>
+  <div>
+    <div id="listMenu">
+      <q-no-ssr>
+        <!--Single Item-->
+        <q-item :class="getClassItem(item)" v-if="checkItemSingle(item)"
+                v-for="(item,key) in props.menu" :key="key"
+                @click.native="redirectTo(item)" clickable>
+          <q-item-section v-if="item.icon && props.showIcons" avatar>
+            <q-icon :name="item.icon"/>
+          </q-item-section>
+          <q-item-section> {{props.translatable ? $tr(item.title) : item.title}}</q-item-section>
+        </q-item>
 
-      <!-- Dropdwon Item -->
-      <q-expansion-item v-else-if="checkItemMultiple(item)" :icon="item.icon" :key="key"
-                        :label="props.translatable ? $tr(item.title) : item.title"
-                        :header-class="selectedChildren(item)"
-                        :class="selectedChildren(item) ? 'bg-primary' : ''">
-        <!--Recursive item-->
-        <recursive-menu :translatable="props.translatable" :show-icons="props.showIcons"
-                        :key="key" :menu="item.children"/>
-      </q-expansion-item>
+        <!-- Dropdwon Item -->
+        <q-expansion-item v-else-if="checkItemMultiple(item)" :icon="item.icon" :key="key"
+                          :label="props.translatable ? $tr(item.title) : item.title"
+                          :header-class="selectedChildren(item)"
+                          :class="selectedChildren(item) ? 'bg-primary' : ''">
+          <!--Recursive item-->
+          <recursive-menu :translatable="props.translatable" :show-icons="props.showIcons"
+                          :key="key" :menu="item.children"/>
+        </q-expansion-item>
+      </q-no-ssr>
     </div>
   </div>
 </template>
@@ -26,30 +30,35 @@
     name: 'recursiveMenu',
     components: {},
     props: {
-      menu: { default: false },
-      showIcons: { type: Boolean, default: true },
-      translatable: { type: Boolean, default: true }
+      menu: {default: false},
+      showIcons: {type: Boolean, default: true},
+      translatable: {type: Boolean, default: true}
     },
-    mounted () {
+    watch: {
+      menu() {
+        this.init()
+      }
+    },
+    mounted() {
       this.$nextTick(function () {
         this.init()
       })
     },
-    data () {
+    data() {
       return {
         props: {}
       }
     },
     methods: {
       //init
-      init () {
+      init() {
         this.props = this.$clone(this.$props)
         setTimeout(() => {
           this.checkCollapsibles()
         }, 100)
       },
       //Validate if should load single-item
-      checkItemSingle (item) {
+      checkItemSingle(item) {
         let response = true
         if (!item.activated) response = false
         if (item.children) response = false
@@ -58,7 +67,7 @@
         return response//Response
       },
       //Validate if should load multi-item
-      checkItemMultiple (item) {
+      checkItemMultiple(item) {
         let response = true
         if (!item.children) response = false
         if (item.children && !item.children.length) response = false
@@ -66,7 +75,7 @@
         return response//Response
       },
       //Validate if should load all multi-item
-      checkCollapsibles () {
+      checkCollapsibles() {
         let collapsibles = this.$el.getElementsByClassName('q-expansion-item')
 
         for (let group of collapsibles) {
@@ -75,15 +84,15 @@
         }
       },
       //Redirect to route of pages
-      redirectTo (item) {
+      redirectTo(item) {
         if (item.linkType && (item.linkType == 'external')) {
           window.open(`https://${item.url}`, item.target)
         } else {
-          this.$router.push({ name: item.name, params: item.params || {} })
+          this.$router.push({name: item.name, params: item.params || {}})
         }
       },
       //Validate if children of multi-item is selected
-      selectedChildren (item) {
+      selectedChildren(item) {
         let response = ''//Defualt response
 
         //If has children's
@@ -96,7 +105,7 @@
         return response //Response
       },
       //Validate if item is same of current page
-      getClassItem (item) {
+      getClassItem(item) {
         let response = 'single-item'
 
         if (this.$route.name == item.name) {
@@ -121,18 +130,24 @@
       cursor pointer
       background-color white
       color $grey-9
+
       .q-item__section--avatar
         min-width 20px
         padding-right 10px
+
       .q-icon
         font-size 16px
+
       &:hover
         background-color $grey-4
         color $primary
+
         .q-icon
           color $primary
+
       &.item-is-active
         background-color $primary
+
         .q-item__section, .q-icon
           color white
 </style>

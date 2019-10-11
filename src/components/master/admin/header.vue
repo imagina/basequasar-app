@@ -37,7 +37,7 @@
     </q-header>
 
     <!-- MENU -->
-    <q-drawer id="menu_master" class="no-shadow" v-model="drawer.menu">
+    <q-drawer bordered id="menu_master" class="no-shadow" v-model="drawer.menu">
       <!-- === LOGO === -->
       <div class="text-center q-py-md q-px-sm full-width">
         <router-link :to="{ name: 'app.home'}" tag="a">
@@ -50,7 +50,7 @@
     </q-drawer>
 
     <!-- Config -->
-    <q-drawer id="menu_master" :overlay="true" v-model="drawer.config" side="right">
+    <q-drawer bordered id="menu_master" :overlay="true" v-model="drawer.config" side="right">
       <config-list/>
     </q-drawer>
   </div>
