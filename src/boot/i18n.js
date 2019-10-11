@@ -12,17 +12,19 @@ import messages from 'src/i18n/index'
 
 Vue.use(VueI18n)
 
-export default async ({ router, app, Vue, store, ssrContext  }) => {
+export default async ({router, app, Vue, store, ssrContext}) => {
   //===== Get default language
-  let defaultLanguage = await cache.get.item('site.default.locale')
+  //From URL
+  let fullUrl = ssrContext ?
+    (ssrContext.req.protocol + "://" + ssrContext.req.headers.host + ssrContext.url) : window.location.href
+  let urlContext = new URL(fullUrl)
+  let langFromUrl = urlContext.searchParams.get('lang')
+  let defaultLanguage = langFromUrl || false
+  //From Cache
+  if(!defaultLanguage) defaultLanguage = await cache.get.item('site.default.locale')
+  //From VUEX Store or Config APP
   if (!defaultLanguage) defaultLanguage = store.state.qsiteSettings.defaultLocale || config('app.languages.default')
-  //Find language in URL
-  if(ssrContext) {
-    let fullUrl = ssrContext.req.protocol + "://" + ssrContext.req.headers.host + ssrContext.url
-    let urlContext = new URL(fullUrl)
-    let langFromUrl = urlContext.searchParams.get('lang')
-    if(langFromUrl) defaultLanguage = langFromUrl
-  }
+
 
   //====== Config i18n and set instance i18n
   app.i18n = new VueI18n({
@@ -55,7 +57,7 @@ export default async ({ router, app, Vue, store, ssrContext  }) => {
     return app.i18n.tc(key, 2, params)
   }
   //Date translate
-  Vue.prototype.$trd = (date, params = { type: 'short' }) => {
+  Vue.prototype.$trd = (date, params = {type: 'short'}) => {
     return app.i18n.d(moment(date, 'YYYY-MM-DD HH:mm').toDate(), params.type)
   }
 }

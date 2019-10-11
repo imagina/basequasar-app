@@ -1,7 +1,8 @@
-import { Loading } from 'quasar'
-
-export default async ({ app, router, store, Vue }) => {
+export default async ({app, router, store, Vue}) => {
+  //====== Load colors
   store.dispatch('qsiteSettings/SET_SITE_COLORS')
 
-  setTimeout(() => Loading.hide(), 500)//Kepp at last
+  //====== Load Tawk
+  let scriptString = store.getters['qsiteSettings/getSettingValueByName']('core::analytics-script')
+  if (scriptString) eval(scriptString.replace(/<\/?script>/g, ""))
 }

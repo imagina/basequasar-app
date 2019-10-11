@@ -7,7 +7,7 @@ const envparser = require('./env/envparser')
 
 module.exports = function (ctx) {
   return {
-    preFetch: false,
+    preFetch: true,
     boot: [//Keep this order
       'axios',
       'helper',
@@ -15,6 +15,7 @@ module.exports = function (ctx) {
       'i18n',
       { server: false, path: 'client-side' },
       { server: false, path: 'middleware' },
+      { server: false, path: 'components-client-side' },
       'components',
     ],
 
