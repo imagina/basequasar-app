@@ -8,6 +8,7 @@
 !/env
 !/src
 !/src-pwa
+!/src-ssr
 !.env-example
 
 #other fields
