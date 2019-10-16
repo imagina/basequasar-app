@@ -18,3 +18,4 @@
 !/README.md
 !/.babelrc
 !/.postcssrc.js
+!/babel.config.js
