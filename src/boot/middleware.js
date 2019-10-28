@@ -1,4 +1,4 @@
-export default ({ router, store, Vue }) => {
+export default ({router, store, Vue}) => {
   router.beforeEach(async (to, from, next) => {
     let redirectTo = false
 
@@ -16,27 +16,25 @@ export default ({ router, store, Vue }) => {
         store.dispatch('quserAuth/AUTH_UPDATE')
 
         //Validate permission of route
-        if (to.meta.permission) {
-          if (to.meta && to.meta.permission && !store.getters['quserAuth/hasAccess'](to.meta.permission)) {
-            redirectTo = { name: 'app.home' }
-          }
+        if (to.meta && to.meta.permission) {
+          if (!store.getters['quserAuth/hasAccess'](to.meta.permission)) redirectTo = {name: 'app.home'}
         }
 
         // if page is login redirect to home
-        if (!redirectTo && to.name == 'auth.login') redirectTo = { name: 'app.home' }
+        if (!redirectTo && to.name == 'auth.login') redirectTo = {name: 'app.home'}
       } else {//Redirect if is not authenticated
-        if (to.name != 'auth.login') redirectTo = { name: 'auth.login' }
+        if (to.name != 'auth.login') redirectTo = {name: 'auth.login'}
       }
     }
 
     //====== Redirect and set default language
     let defaultLangue = store.state.qsiteSettings.defaultLocale
 
-    if (redirectTo) {
-      redirectTo.query = { lang: defaultLangue }
-      return next()
+    if (redirectTo && (redirectTo.name != to.name)) {
+      redirectTo.query = {lang: defaultLangue}
+      return next(redirectTo)
     } else if (!to.query.lang) {
-      next({ path: to.path, query: { lang: defaultLangue } })
+      next({path: to.path, query: {lang: defaultLangue}})
     } else {
       next()
     }

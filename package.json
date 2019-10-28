@@ -24,6 +24,8 @@
     "@imagina/qsite": ">=2",
     "@imagina/qslider": ">=2",
     "@imagina/quser": ">=2",
+    "@imagina/qmenu": ">=2",
+    "@imagina/qform": ">=2",
     "@riophae/vue-treeselect": "0.0.38",
     "dotenv": "^6.0.0",
     "localforage": "^1.7.2",

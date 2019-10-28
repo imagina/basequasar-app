@@ -13,7 +13,7 @@ if (appConfig.isBackend) {
       if (moduleSidebar && moduleSidebar[0]) {
         localSidebar = localSidebar.concat(moduleSidebar)
       }
-    } catch (e) {    }
+    } catch (e) {}
   })
 }
 

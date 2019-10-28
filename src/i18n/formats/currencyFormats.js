@@ -6,6 +6,11 @@ export default {
     currency: {
       style: 'currency',
       currency: 'USD'
+    },
+    percent: {
+      style: 'percent',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 2
     }
   },
   'es': {
@@ -13,5 +18,10 @@ export default {
       style: 'currency',
       currency: 'USD' //To show symbol "$". COP show as symbol "COP"
     },
+    percent: {
+      style: 'percent',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 2
+    }
   }
 }

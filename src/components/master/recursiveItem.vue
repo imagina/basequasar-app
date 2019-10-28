@@ -55,7 +55,7 @@
         this.props = this.$clone(this.$props)
         setTimeout(() => {
           this.checkCollapsibles()
-        }, 100)
+        }, 300)
       },
       //Validate if should load single-item
       checkItemSingle(item) {

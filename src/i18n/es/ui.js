@@ -108,7 +108,7 @@ export default {
     password : 'Contraseña | Contraseñas',
     checkPassword : 'Confirmar Contraseña | Confirmar Contraseñas',
     name: 'Nombre | Nombres',
-    email: 'Email',
+    email: 'Email | Emails',
     slug: 'Slug',
     summary: 'Resumen | Resumenes',
     description: 'Descripción | Descripciones',
@@ -164,7 +164,12 @@ export default {
     city : 'Ciudad | Ciudades',
     state : 'Departamento | Departamentos',
     zipCode : 'Codigo Postal',
-    socialNetwork : 'Red Social | Redes Sociales'
+    socialNetwork : 'Red Social | Redes Sociales',
+    startDate : 'Fecha Inicio',
+    endDate : 'Fecha Fin',
+    code : 'Codigo | Codigos',
+    increase : 'Incrementar',
+    date : 'Fecha | Fechas',
   },
   configList: {
     loggedAs: 'registrado como',

@@ -17,11 +17,12 @@ export default async ({router, app, Vue, store, ssrContext}) => {
   //From URL
   let fullUrl = ssrContext ?
     (ssrContext.req.protocol + "://" + ssrContext.req.headers.host + ssrContext.url) : window.location.href
+  fullUrl = fullUrl.replace('#/','')
   let urlContext = new URL(fullUrl)
   let langFromUrl = urlContext.searchParams.get('lang')
   let defaultLanguage = langFromUrl || false
   //From Cache
-  if(!defaultLanguage) defaultLanguage = await cache.get.item('site.default.locale')
+  if (!defaultLanguage) defaultLanguage = await cache.get.item('site.default.locale')
   //From VUEX Store or Config APP
   if (!defaultLanguage) defaultLanguage = store.state.qsiteSettings.defaultLocale || config('app.languages.default')
 
@@ -47,6 +48,11 @@ export default async ({router, app, Vue, store, ssrContext}) => {
   //Currency translate
   Vue.prototype.$trc = (num) => {
     return app.i18n.n(num, 'currency')
+  }
+  //number translate
+  Vue.prototype.$trn = (num, type) => {
+    if(type == 'percent') num /= 100 //Divide Percent
+    return type ? app.i18n.n(num, type) : app.i18n.n(num)
   }
   //Singular translate
   Vue.prototype.$tr = (key, params = {}) => {

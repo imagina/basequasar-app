@@ -15,19 +15,19 @@ for (var nameGroupPage in pages) {
 
       if (page.activated) {//Check if page is activated
         //Create Route
-        Route.view(page.path, page.layout)
-          .children(() => {
-            Route.view('/', page.page).options({
-              name: page.name,
-              meta: {
-                permission: (page.permission ? page.permission : null),
-                title : page.title,
-                icon : page.icon,
-                authenticated : page.authenticated
-              },
-              beforeEnter: middlewares,
-            });
-          })
+        Route.view(page.path, page.layout).children(() => {
+          Route.view('/', page.page).options({
+            name: page.name,
+            meta: {
+              permission: (page.permission ? page.permission : null),
+              title: page.title,
+              icon: page.icon,
+              authenticated: page.authenticated
+            },
+            props: page.props || true,
+            beforeEnter: middlewares,
+          });
+        })
       }
     }
   }

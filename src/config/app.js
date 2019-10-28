@@ -1,5 +1,5 @@
 export default {
-  version: '1.0.2',
+  version: '2.0.0',
   isBackend : true, //Define if project is to admin
   //UI Languages
   languages : {
@@ -14,7 +14,8 @@ export default {
     'qblog',
     'qcommerce',
     'qplace',
-    //'qmenu',
+    'qform',
+    'qmenu',
     'qmedia',
     'qslider',
     'qsite'

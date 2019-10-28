@@ -13,15 +13,15 @@ if (appConfig && appConfig.modules) {
       //Get pages according to app config in: src/config/app.js "isBackend"
       let page = (appConfig.isBackend) ?
         require(`@imagina/${name}/_config/backendPages`).default :
-          require(`@imagina/${name}/_config/frontendPages`).default
+        require(`@imagina/${name}/_config/frontendPages`).default
 
       pages[name] = page
-    } catch (e) {}
+    } catch (e) {
+    }
   })
 }
 
 pages.app = require('src/config/pages/application').default //Pages of APP
-
 
 
 //======= Add or update extra apiRoutes

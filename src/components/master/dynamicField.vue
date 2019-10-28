@@ -39,7 +39,7 @@
               hide-dropdown-icon input-debounce="0" new-value-mode="add-unique" :rules="field.rules"
               v-if="field.type == 'chips'" style="width: 100%" @input="matchTags()" outlined dense/>
     <!--Select-->
-    <q-select outlined dense bg-color="white" v-model="responseValue" :options="options" :label="fieldLabel"
+    <q-select outlined dense bg-color="white" v-model="responseValue" :options="formatOptions" :label="fieldLabel"
               style="width: 100%;" :rules="field.rules" v-if="field.type == 'select'" :loading="loading"
               :multiple="field.multiple || false" :clearable="field.clearable || false" emit-value map-options/>
     <!--Date - time - datetime-->
@@ -94,38 +94,38 @@
 
   export default {
     name: 'dynamicField',
-    beforeDestroy () {
+    beforeDestroy() {
       //Close listen event
       if (this.$refs.crudComponent) {
         this.$root.$off(`crudForm${this.$refs.crudComponent.params.apiRoute}Created`)
       }
     },
     props: {
-      value: { default: false },
-      field: { default: false },
-      language: { default: false },
-      itemId: { default: '' }
+      value: {default: false},
+      field: {default: false},
+      language: {default: false},
+      itemId: {default: ''}
     },
-    components: { managePermissions, manageSettings, recursiveSelect, uploadImg },
+    components: {managePermissions, manageSettings, recursiveSelect, uploadImg},
     watch: {
-      value (newValue, oldValue) {
+      value(newValue, oldValue) {
         if (newValue != oldValue) {
           this.setDefaultVModel(newValue)
         }//Order Value
       },
-      responseValue (value) {
+      responseValue(value) {
         this.watchValue(value)
       }
     },
-    validations () {
+    validations() {
       return {}
     },
-    mounted () {
+    mounted() {
       this.$nextTick(function () {
         this.init()
       })
     },
-    data () {
+    data() {
       return {
         success: false,//global component status
         loading: false,
@@ -153,7 +153,7 @@
     },
     computed: {
       //Return label to field
-      fieldLabel () {
+      fieldLabel() {
         let response = ''
         if (this.field.label) {
           response = this.field.label
@@ -162,7 +162,7 @@
         return response
       },
       //Return format of datetime
-      formatDateTime () {
+      formatDateTime() {
         let response = ''
 
         if (this.field.type == 'date') response = 'MMM DD, YYYY'
@@ -170,11 +170,22 @@
         if (this.field.type == 'datetime') response = 'MMM DD, YYYY - HH:mm a'
 
         return response
+      },
+      //Convert value of options to string
+      formatOptions() {
+        let options = this.$clone(this.options)
+
+        //Convert to string
+        options.forEach(item => {
+          if (item.value || item.value >= 0) item.value = item.value.toString()
+        })
+
+        return options
       }
     },
     methods: {
       //initi
-      async init () {
+      async init() {
         if (this.field.type) {
           this.setDefaultVModel(this.field.value)//Set default values by field type
           this.listenEventCrud()//config dynamic component
@@ -189,7 +200,7 @@
         }
       },
       //Set default values by type
-      setDefaultVModel (value) {
+      setDefaultVModel(value) {
         let propValue = this.$clone(value)
         switch (this.field.type) {
           case 'text':
@@ -208,7 +219,7 @@
             this.responseValue = propValue || ''
             break
           case 'select':
-            this.responseValue = (propValue != undefined) ? propValue : null
+            this.responseValue = (propValue != undefined) ? propValue.toString() : null
             break
           case 'multiSelect':
             this.responseValue = propValue || []
@@ -233,7 +244,7 @@
         this.orderOptions()//Order Value
       },
       //Order options if is a object
-      orderOptions () {
+      orderOptions() {
         //If field is select, order values
         if (['select', 'multiSelect'].indexOf(this.field.type) != -1) {
           if (Array.isArray(this.responseValue) && this.responseValue.length) {
@@ -248,7 +259,7 @@
         }
       },
       //Config dynamic component
-      listenEventCrud () {
+      listenEventCrud() {
         setTimeout(() => {
           if (this.field.create && this.field.create.component) {
             let componentCrud = this.$refs.crudComponent
@@ -262,7 +273,7 @@
         }, 500)
       },
       //Get options if is load options
-      getOptions () {
+      getOptions() {
         return new Promise((resolve, reject) => {
           let loadOptions = this.$clone(this.field.loadOptions)
           this.loading = true//Open loading
@@ -270,7 +281,7 @@
           //==== Request options
           if (loadOptions.apiRoute) {
             this.options = []//Reset options
-            let fieldSelect = { label: 'title', id: 'id' }
+            let fieldSelect = {label: 'title', id: 'id'}
 
             let params = {//Params to request
               refresh: true,
@@ -292,7 +303,7 @@
               this.loading = false
               resolve(true)
             }).catch(error => {
-              this.$alert.error({ message: this.$tr('ui.message.errorRequest'), pos: 'bottom' })
+              this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
               this.loading = false
               reject(true)
             })
@@ -313,7 +324,7 @@
         })
       },
       //Reges to tags
-      matchTags () {
+      matchTags() {
         let tags = []
         //only letters and spaces
         this.responseValue.forEach((tag, index) => {
@@ -324,7 +335,7 @@
         this.responseValue = this.$clone(tags)
       },
       //Check if value change
-      watchValue () {
+      watchValue() {
         let value = this.$clone(this.value)
         let response = this.$clone(this.responseValue)
 

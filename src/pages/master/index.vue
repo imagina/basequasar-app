@@ -1,6 +1,7 @@
 <template>
   <q-page class="flex flex-center">
-    <img :src="$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo1').path">
+    <img style="max-width: 40vw"
+         :src="$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo1').path">
     <div class="test"></div>
   </q-page>
 </template>

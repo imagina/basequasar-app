@@ -1,5 +1,4 @@
 import axios from 'axios'
-import alert from '@imagina/qhelper/_plugins/alert'
 
 export default function ({ app, router, store, Vue, ssrContext }) {
   //=========== Set base url to axios
