@@ -54,16 +54,16 @@
   | Name | Location | Global Name |
   | ------------- | ------------- | ------------- |
   | 404 | src/components/master/404 | <not-found> |
-  | Not Results | src/components/master/notResults | <not-result> |
-  | Upload Image | src/components/master/uploadImage | <upload-image> |
+  | Not Results | src/components/master/notResults | '<not-result>' |
+  | Upload Image | src/components/master/uploadImage | '<upload-image>' |
   | comments Facebook | src/components/master/commentsFB | - |
-  | Dynamic Field | src/components/master/dynamicField | <dynamic-field> |
+  | Dynamic Field | src/components/master/dynamicField | '<dynamic-field>' |
   | Imagina Logo SVG | src/components/master/imaginaSVG | - |
-  | Inner Loading | src/components/master/innerLoading | <inner-loading> |
+  | Inner Loading | src/components/master/innerLoading | '<inner-loading>' |
   | Recursive Item | src/components/master/recursiveItem | - |
   | Recursive List Select | src/components/master/recursiveListSelect | - |
   | Schedules | src/components/master/schedules | - |
-  | Vue Tree Select | @riophae/vue-treeselect | <tree-select> |
+  | Vue Tree Select | @riophae/vue-treeselect | '<tree-select>' |
   
 ## Pages
   to create new pege, add it in `src/config/pages/...` with next format:
