@@ -32,11 +32,11 @@ export default ({router, store, Vue}) => {
 
     if (redirectTo && (redirectTo.name != to.name)) {
       redirectTo.query = {lang: defaultLangue}
-      return next(redirectTo)
+      return router.push(redirectTo)
     } else if (!to.query.lang) {
-      next({path: to.path, query: {lang: defaultLangue}})
+      return router.push({path: to.path, query: {...to.query, lang: defaultLangue}})
     } else {
-      next()
+      return next()
     }
   })
 }

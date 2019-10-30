@@ -16,6 +16,5 @@ if(appConfig && appConfig.modules){
 
 //Add extra apiRoutes
 //#example: apiRoutes.<name> = require('path-api-route').default
-apiRoutes.api = require('src/config/apiRoutes/api').default
 
 export default apiRoutes

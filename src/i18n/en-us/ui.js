@@ -67,6 +67,8 @@ export default {
     address : 'Address | Addresses',
     contacts : 'contact | Contacts',
     sociaNetwork : 'Social Network | Social Networks',
+    success : 'Success',
+    ready : 'Ready',
   },
   message: {
     notFound: 'Sorry, nothing here',
@@ -170,6 +172,7 @@ export default {
     code : 'Code | Codes',
     increase : 'Increase',
     date : 'Dates | Dates',
+    dueDate : 'Due date'
   },
   configList: {
     loggedAs: 'logged as',

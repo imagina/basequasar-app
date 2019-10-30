@@ -5,7 +5,8 @@ export default function ({ app, router, store, Vue, ssrContext }) {
   //if not exist url in .env, set host as base url
   let host = env('BASE_URL') || (ssrContext ? ssrContext.req.get('host') : window.location.host)
   host = host.replace('http://', '').replace('https://', '')//Parse host
-  axios.defaults.baseURL = `https://${host}/api`// Set base url
+  axios.defaults.baseURL = `https://${host}/api`// Set base url in axios
+  store.commit('app/SET_BASE_URL', `https://${host}`) //Set base Url in store
 
   //========== Set default params: setting
   axios.defaults.params = { setting: {} }

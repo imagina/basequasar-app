@@ -67,6 +67,8 @@ export default {
     address : 'Dirección | Direcciones',
     contact : 'Contacto | Contactos',
     sociaNetwork : 'Red Social | Redes Sociales',
+    success : 'Realizado',
+    ready : 'Listo',
   },
   message: {
     notFound: 'Lo sentimos, no hay nada aquí',
@@ -170,6 +172,7 @@ export default {
     code : 'Codigo | Codigos',
     increase : 'Incrementar',
     date : 'Fecha | Fechas',
+    dueDate : 'Fecha de vencimiento',
   },
   configList: {
     loggedAs: 'registrado como',

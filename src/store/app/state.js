@@ -1,3 +1,4 @@
 export default {
-  loadPage : true
+  loadPage : true,
+  baseUrl : false
 }

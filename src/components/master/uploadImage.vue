@@ -68,7 +68,7 @@
       getImageUrl () {
         let path = '/modules/iprofile/img/default.jpg'//Default path
         if (this.file != '') return this.file//If file exist, add to path
-        return `${config('apiRoutes.api.base_url')}/${path}`//Return path image
+        return `${this.$store.state.app.baseUrl}/${path}`//Return path image
       },
       //Return styles to image
       stylesImage () {
