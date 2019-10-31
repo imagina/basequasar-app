@@ -1,6 +1,3 @@
-//Layouts
-import master from 'src/layouts/master'
-import notFound from 'src/layouts/404'
 import appConfig from 'src/config/app'
 
 let pages = {
@@ -25,8 +22,8 @@ if (process.env.MODE !== 'ssr') {
     activated: true,
     path: '*',
     name: 'app.not.found',
-    layout: () => import('src/layouts/404'),
-    page: null,
+    layout: () => import('src/layouts/blank'),
+    page: () => import('src/pages/master/404'),
     title: 'sidebar.pageNotFound',
     icon: 'fas fa-chart-bar'
   }
