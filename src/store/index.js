@@ -1,24 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import allStores from './stores'
-
 Vue.use(Vuex)
+//Get all stores
+let coreStores = config('stores')
 
-/*
- * If not building with SSR mode, you can
- * directly export the Store instantiation
- */
-let store = false
+//Add here more stores...
 
-export default function (/* { ssrContext } */) {
-  const Store = new Vuex.Store({
-    modules: allStores,
-    // enable strict mode (adds overhead!)
-    // for dev mode only
-    strict: process.env.DEV
-  })
-  store = Store
+//Load Stores in VUEX
+export default function () {
+  const Store = new Vuex.Store({modules: coreStores, strict: process.env.DEV})
   return Store
 }
-
-export {store}

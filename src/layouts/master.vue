@@ -1,29 +1,24 @@
 <template>
-  <q-layout :view="(appIsBackend || $q.platform.is.mobile) ? 'lHh LpR lff' : 'hhh LpR lFr'"
-            :class="appIsBackend ? 'bg-grey-1' : ''">
+  <q-layout view="hhh LpR lFr">
     <!-- HEADER -->
-    <admin-header v-if="appIsBackend && appState.loadPage"/>
-    <frontend-header v-else-if="appState.loadPage" />
+    <header-component v-if="appState.loadPage" />
 
     <!-- ROUTER VIEW -->
     <q-page-container>
       <q-pull-to-refresh @refresh="refreshPage">
-        <router-view v-if="appState.loadPage" :class="appIsBackend ? 'layout-padding' : ''"/>
+        <router-view v-if="appState.loadPage"/>
       </q-pull-to-refresh>
     </q-page-container>
 
     <!-- FOOTER -->
-    <admin-footer v-if="appIsBackend"/>
-    <frontend-footer v-else-if="appState.loadPage" />
+    <footer-componen v-if="appState.loadPage" />
   </q-layout>
 </template>
 
 <script>
   /*Components*/
-  import adminHeader from 'src/components/master/admin/header'
-  import adminFooter from 'src/components/master/admin/footer'
-  import frontendHeader from 'src/components/master/frontend/header'
-  import frontendFooter from 'src/components/master/frontend/footer'
+  import headerComponent from 'src/components/header'
+  import footerComponen from 'src/components/footer'
 
   export default {
     meta () {
@@ -40,25 +35,16 @@
         link: [{ rel: 'icon', href: iconHref, id: 'icon' }],
       }
     },
-    components: {
-      adminHeader,
-      adminFooter,
-      frontendHeader,
-      frontendFooter
-    },
+    components: {headerComponent, footerComponen},
     mounted () {
       this.$nextTick(async function () {
       })
     },
     data () {
       return {
-        appIsBackend: config('app.isBackend')
       }
     },
     computed: {
-      quserState () {
-        return this.$store.state.quserAuth
-      },
       appState () {
         return this.$store.state.app
       }

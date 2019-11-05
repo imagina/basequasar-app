@@ -1,7 +1,7 @@
 <template>
   <div id="masterHeader">
     <!-- ============= HEADER ======================= -->
-    <q-layout-header class="no-shadow">
+    <q-header class="no-shadow">
       <q-toolbar color="primary">
 
         <!--= BUTTON MENU =-->
@@ -44,28 +44,28 @@
         </div>
         <hr class="q-hr q-my-none">
       </div>
-    </q-layout-header>
+    </q-header>
 
     <!-- MENU LEFT -->
-    <q-layout-drawer id="menu_master" class="no-shadow q-md-hide" v-model="drawer.menu">
+    <q-drawer id="menu_master" class="no-shadow q-md-hide" v-model="drawer.menu">
       <q-list no-border link inset-delimiter>
         <!-- === LOGO === -->
-        <q-list-header class="text-center">
+        <q-item-section class="text-center">
           <router-link :to="{ name: 'app.home'}">
             <a>
               <img :src="logo" width="90%">
             </a>
           </router-link>
-        </q-list-header>
+        </q-item-section>
 
         <!--= MENU =-->
         <menu-list :menu="menu"/>
       </q-list>
-    </q-layout-drawer>
+    </q-drawer>
   </div>
 </template>
 <script>
-  import menuList from "../recursiveItem";
+  import menuList from "@imagina/qsite/_components/master/recursiveItem";
 
   export default {
     props: {},

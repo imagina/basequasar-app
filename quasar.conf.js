@@ -9,14 +9,18 @@ module.exports = function (ctx) {
   return {
     preFetch: true,
     boot: [//Keep this order
-      'axios',
-      'helper',
+      //==== Core [Do not remove]
+      '~@imagina/qsite/_boot/core-axios',
+      '~@imagina/qsite/_boot/core-helper',
+      '~@imagina/qsite/_boot/core-server-side',
+      '~@imagina/qsite/_boot/core-i18n',
+      { server: false, path: '~@imagina/qsite/_boot/core-client-side' },
+      { server: false, path: '~@imagina/qsite/_boot/core-middleware' },
+      { server: false, path: '~@imagina/qsite/_boot/core-components-client-side' },
+      '~@imagina/qsite/_boot/core-components',
+      //==== boot from project
       'server-side',
-      'i18n',
       { server: false, path: 'client-side' },
-      { server: false, path: 'middleware' },
-      { server: false, path: 'components-client-side' },
-      'components',
     ],
 
     css: [
@@ -24,14 +28,8 @@ module.exports = function (ctx) {
     ],
 
     extras: [
-      // 'ionicons-v4',
-      // 'mdi-v3',
       'fontawesome-v5',
-      // 'eva-icons',
-      // 'themify',
-      // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
-      'roboto-font', // optional, you are not bound to it
-      'material-icons' // optional, you are not bound to it
+      'material-icons'
     ],
 
     framework: {
@@ -55,7 +53,7 @@ module.exports = function (ctx) {
         cfg.plugins.push(
           new webpack.ProvidePlugin({
             env: [path.resolve(__dirname, 'env/env'), 'default'],
-            config: [path.resolve(__dirname, 'src/config/index'), 'default']
+            config: [path.resolve(__dirname, 'node_modules/@imagina/qsite/_config/master/index'), 'default']
           })
         )
       },

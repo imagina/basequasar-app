@@ -13,7 +13,7 @@
   </div>
 </template>
 <script>
-  import menuList from "../recursiveItem";
+  import menuList from "@imagina/qsite/_components/master/recursiveItem";
 
   export default {
     props: {},
