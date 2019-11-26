@@ -1,35 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import auth from '@imagina/quser/_store/index'; //User
+Vue.use(Vuex)
+//Get all stores
+let coreStores = config('stores')
 
-const appConfig = require('src/config/app').default//Get config APP
+//Add here more stores...
 
-//Auto load stores from modules available in: src/config/app.js "modules"
-//Not edit
-let stores = {}
-if(appConfig && appConfig.modules){
-  const modules = appConfig.modules
-
-  modules.forEach(name => {
-    try {
-      let storeModule = require(`@imagina/${name}/_store/index`).default
-      for(var itemName in storeModule){
-        let keyName = name+(itemName.charAt(0).toUpperCase() + itemName.slice(1))
-        stores[keyName] = storeModule[itemName]
-      }
-    }catch (e) {}
-  })
+//Load Stores in VUEX
+export default function () {
+  const Store = new Vuex.Store({modules: coreStores, strict: process.env.DEV})
+  return Store
 }
-
-//Add extra stores
-//#example: stores.<name> = require('path-store-index').default
-stores.app = require('src/store/app/index').default
-
-
-Vue.use(Vuex)//Add VUEX to VUE
-const store = new Vuex.Store({
-  modules: stores//Add config of store's
-});
-
-
-export default store

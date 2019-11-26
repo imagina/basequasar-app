@@ -8,6 +8,7 @@
 !/env
 !/src
 !/src-pwa
+!/src-ssr
 !.env-example
 
 #other fields
@@ -17,3 +18,4 @@
 !/README.md
 !/.babelrc
 !/.postcssrc.js
+!/babel.config.js

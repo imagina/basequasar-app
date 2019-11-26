@@ -1,7 +1,3 @@
-import ui from 'src/i18n/es/ui'
-import sidebar from 'src/i18n/es/sidebar'
+import layout from 'src/i18n/es/layout'
 
-export default {
-  ui : ui,
-  sidebar: sidebar
-}
+export default {layout}
