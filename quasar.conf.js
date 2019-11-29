@@ -68,7 +68,7 @@ module.exports = function (ctx) {
     },
 
     devServer: {
-      // https: true,
+      //https: true,
       // port: 8080,
       open: true // opens browser window automatically
     },
@@ -81,16 +81,22 @@ module.exports = function (ctx) {
     },
 
     pwa: {
-      // workboxPluginMode: 'InjectManifest',
-      // workboxOptions: {}, // only for NON InjectManifest
+      workboxPluginMode: 'InjectManifest',
+      workboxOptions: {}, // only for NON InjectManifest
       manifest: {
-        // name: 'Quasar App',
-        // short_name: 'Quasar App',
-        // description: 'A Quasar Framework app',
+        name: 'My APP',
+        short_name: 'My APP',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
         theme_color: '#027be3',
+        serviceWorker: {
+          src: "service-worker.js",
+          scope: "/",
+          use_cache: true,
+          skipWaiting: true,
+          debug: false
+        },
         icons: [
           {
             'src': 'statics/icons/icon-128x128.png',
@@ -117,7 +123,8 @@ module.exports = function (ctx) {
             'sizes': '512x512',
             'type': 'image/png'
           }
-        ]
+        ],
+        "prefer_related_applications": true,
       }
     },
 

@@ -9,13 +9,14 @@
 if (workbox) {
   workbox.precaching.precache(self.__precacheManifest)
 
-  const baseUrl = 'https://modulos.imaginacolombia.com'
+  var baseUrl = self.location.hostname
 
   // Set a name for the current cache
   var shellCacheName = 'app_cache';
   var filesToCache = []
-// Default files to always cache
-  self.__precacheManifest.forEach(file =>{
+
+  // Default files to always cache
+  self.__precacheManifest.forEach(file => {
     filesToCache.push(file.url)
   })
 
@@ -23,10 +24,8 @@ if (workbox) {
   self.__precacheManifest = [].concat(self.__precacheManifest || []);
 
   // Listen to installation event
-  self.addEventListener('install', function(event) {
-
-    event.waitUntil(
-      caches.open(shellCacheName).then(function(cache) {
+  self.addEventListener('install', function (event) {
+    event.waitUntil(caches.open(shellCacheName).then(function (cache) {
         // Important to `return` the promise here to have `skipWaiting()`
         // fire after the cache has been updated.
         return cache.addAll(filesToCache);
@@ -36,14 +35,12 @@ if (workbox) {
 
   });
 
-
-
-  self.addEventListener('activate', function(e) {
+  self.addEventListener('activate', function (e) {
 
     e.waitUntil(
       // Get all cache containers
-      caches.keys().then(function(keyList) {
-        return Promise.all(keyList.map(function(key) {
+      caches.keys().then(function (keyList) {
+        return Promise.all(keyList.map(function (key) {
           // Check and remove invalid cache containers
           if (key !== shellCacheName) {
 
@@ -58,25 +55,23 @@ if (workbox) {
   });
 
   self.addEventListener('message', event => {
-
     if (event.data.msg === 'clearCache') {
 
       event.waitUntil(
         // Get all cache containers
-        caches.keys().then(function(keyList) {
-          return Promise.all(keyList.map(function(key) {
+        caches.keys().then(function (keyList) {
+          return Promise.all(keyList.map(function (key) {
             return caches.delete(key);
 
           }));
         })
       )
       event.waitUntil(
-        caches.open(shellCacheName).then(function(cache) {
+        caches.open(shellCacheName).then(function (cache) {
           // Important to `return` the promise here to have `skipWaiting()`
           // fire after the cache has been updated.
           return cache.addAll(filesToCache);
         })
-
       )
 
     }
@@ -85,10 +80,10 @@ if (workbox) {
 
   //Network falling back to the cache
 
-  self.addEventListener('fetch', function(event) {
+  self.addEventListener('fetch', function (event) {
     var requestUrl = event.request.url
-
-    if(requestUrl.startsWith(baseUrl))
+    console.log('>>[SERVICE-WORKER] Resgistered BASE_URL: ', baseUrl)
+    if (requestUrl.startsWith(baseUrl))
       if (event.request.clone().method === 'GET') {
         event.respondWith(
           fetch(event.request)
