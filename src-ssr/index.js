@@ -26,7 +26,7 @@ const serve = (path, cache) => express.static(ssr.resolveWWW(path), {
 })
 
 // gzip
-app.use(compression({ threshold: 0 }))
+app.use(compression({threshold: 0}))
 
 // serve this with no cache, if built with PWA:
 if (ssr.settings.pwa) {
@@ -37,7 +37,7 @@ if (ssr.settings.pwa) {
 app.use('/', serve('.', true))
 
 // we extend the custom common dev & prod parts here
-extension.extendApp({ app, ssr })
+extension.extendApp({app, ssr})
 
 // this should be last get(), rendering with SSR
 app.get('*', (req, res) => {
@@ -73,25 +73,20 @@ app.get('*', (req, res) => {
   // here are a few that you might like to consider adding to your CSP
   // object-src, media-src, script-src, frame-src, unsafe-inline
 
-  ssr.renderToString({ req, res }, (err, html) => {
+  ssr.renderToString({req, res}, (err, html) => {
     if (err) {
       if (err.url) {
         res.redirect(err.url)
-      }
-      else if (err.code === 404) {
+      } else if (err.code === 404) {
         res.status(404).send('404 | Page Not Found')
-      }
-      else {
+      } else {
         // Render Error Page or Redirect
         res.status(500).send('500 | Internal Server Error')
-        if (ssr.settings.debug) {
-          console.error(`500 on ${req.url}`)
-          console.error(err)
-          console.error(err.stack)
-        }
+        console.error(`500 on ${req.url}`)
+        console.error(err)
+        console.error(err.stack)
       }
-    }
-    else {
+    } else {
       res.send(html)
     }
   })
