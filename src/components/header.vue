@@ -19,7 +19,7 @@
         <!--= TITLE =-->
         <q-toolbar-title class="text-center">
           <!--= MENU =-->
-          <menu-list class="q-hide q-md-show" :show-icons="false"
+          <menu-list-desktop class="q-hide q-md-show" :show-icons="false"
                      :menu="menu" id="menuDesktop"/>
         </q-toolbar-title>
 
@@ -66,11 +66,13 @@
 </template>
 <script>
   import menuList from "@imagina/qsite/_components/master/recursiveItem";
+  import menuListDesktop from "@imagina/qsite/_components/master/recursiveMenu";
 
   export default {
     props: {},
     components: {
-      menuList
+      menuList,
+      menuListDesktop
     },
     watch: {},
     mounted() {
