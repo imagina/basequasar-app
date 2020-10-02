@@ -440,7 +440,7 @@
           },
           refresh: refresh
         }
-
+       
         // if folderId is not root path
         if (this.filter.folderId != 0) {
           let breacrumb = await this.$crud.show('apiRoutes.qmedia.breadcrumb', this.filter.folderName, params)
@@ -469,6 +469,7 @@
        * @param refresh
        */
       getDataByFolder(folder, refresh = false) {
+        this.filter.search = ''
         this.filter.folderId = folder.id
         this.filter.folderName = folder.filename || folder.name
         this.getData({ pagination: this.pagination, search: this.filter.search }, refresh)
