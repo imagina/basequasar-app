@@ -11,33 +11,23 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
-    "@quasar/extras": "^1.0.0",
-    "axios": "^0.18.1",
-    "quasar": "^1.0.0",
-    "vue-i18n": "^8.0.0",
-    "@imagina/qblog": "2.x",
-    "@imagina/qcommerce": "2.x",
-    "@imagina/qcrud": "2.x",
-    "@imagina/qhelper": "2.x",
-    "@imagina/qmedia": "2.x",
-    "@imagina/qplace": "2.x",
-    "@imagina/qsite": "2.x",
-    "@imagina/qslider": "2.x",
-    "@imagina/quser": "2.x",
-    "@imagina/qmenu": "2.x",
-    "@imagina/qform": "2.x",
-    "@imagina/qbanner": "1.x",
+    "@ckeditor/ckeditor5-build-classic": "^22.0.0",
+    "@ckeditor/ckeditor5-vue": "^1.0.2",
+    "@quasar/extras": "^1.9.5",
     "@riophae/vue-treeselect": "0.0.38",
+    "axios": "^0.18.1",
     "dotenv": "^6.0.0",
     "localforage": "^1.7.2",
+    "lodash.clonedeep": "~4.5.0",
+    "quasar": "^1.13.2",
+    "vue-i18n": "^8.0.0",
     "vue-moment": "^4.0.0",
     "vue-routisan": "^2.1.2",
     "vuedraggable": "^2.23.2",
-    "vuelidate": "^0.7.4",
-    "lodash.clonedeep": "~4.5.0"
+    "vuelidate": "^0.7.4"
   },
   "devDependencies": {
-    "@quasar/app": "^1.0.0"
+    "@quasar/app": "^1.9.6"
   },
   "engines": {
     "node": ">= 8.9.0",

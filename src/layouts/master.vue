@@ -1,57 +1,71 @@
 <template>
-  <q-layout view="hhh LpR lFr">
-    <!-- HEADER -->
-    <header-component v-if="appState.loadPage" />
+  <q-layout view="lhh LpR lff">
+    <!--Maintenance Page-->
+    <maintenance-page v-if="inMaintenance"/>
+    <!--Master estructure-->
+    <div v-else>
+      <!-- HEADER -->
+      <header-component v-if="appState.loadPage"/>
 
-    <!-- ROUTER VIEW -->
-    <q-page-container>
-      <q-pull-to-refresh @refresh="refreshPage">
+      <!-- ROUTER VIEW -->
+      <q-page-container>
         <router-view v-if="appState.loadPage"/>
-      </q-pull-to-refresh>
-    </q-page-container>
+      </q-page-container>
 
-    <!-- FOOTER -->
-    <footer-componen v-if="appState.loadPage" />
+      <!-- FOOTER -->
+      <footer-componen v-if="appState.loadPage"/>
+
+      <!--modal-login-->
+      <modal-auth/>
+    </div>
   </q-layout>
 </template>
 
 <script>
   /*Components*/
-  import headerComponent from 'src/components/header'
-  import footerComponen from 'src/components/footer'
+  import maintenancePage from '@imagina/qsite/_pages/master/maintenance'
+  import headerComponent from 'src/modules/app/_components/header'
+  import footerComponen from 'src/modules/app/_components/footer'
+  import modalAuth from '@imagina/quser/_components/auth/modal-form'
 
   export default {
-    meta () {
+    meta() {
       let routetitle = ((this.$route.meta && this.$route.meta.title) ? this.$route.meta.title : '')
-      let siteName = this.$store.getters['qsiteSettings/getSettingValueByName']('core::site-name')
-      let siteDescription = this.$store.getters['qsiteSettings/getSettingValueByName']('core::site-description')
-      let iconHref = this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::favicon').path
+      if (this.$route.meta && this.$route.meta.headerTitle) routetitle = this.$route.meta.headerTitle
+      let siteName = this.$store.getters['qsiteApp/getSettingValueByName']('core::site-name')
+      let siteDescription = this.$store.getters['qsiteApp/getSettingValueByName']('core::site-description')
+      let iconHref = this.$store.getters['qsiteApp/getSettingMediaByName']('isite::favicon').path
 
       return {
         title: `${this.$tr(routetitle)} | ${siteName}`,
         meta: {
-          description: { name: 'description', content: siteDescription || siteName },
+          description: {name: 'description', content: siteDescription || siteName},
         },
-        link: [{ rel: 'icon', href: iconHref, id: 'icon' }],
+        link: [{rel: 'icon', href: iconHref, id: 'icon'}],
       }
     },
-    components: {headerComponent, footerComponen},
-    mounted () {
-      this.$nextTick(async function () {
+    components: {maintenancePage, headerComponent, footerComponen, modalAuth},
+    beforeDestroy() {
+      this.$eventBus.$off('global-event-test')
+    },
+    created() {
+      this.$nextTick(function () {
       })
     },
-    data () {
-      return {
-      }
+    data() {
+      return {}
     },
     computed: {
-      appState () {
-        return this.$store.state.app
+      inMaintenance() {
+        return this.$store.getters['qsiteApp/getSettingValueByName']('isite::maintenancePage')
+      },
+      appState() {
+        return this.$store.state.qsiteApp
       }
     },
     methods: {
-      async refreshPage(done){
-        await this.$store.dispatch('app/REFRESH_PAGE')
+      async refreshPage(done) {
+        await this.$store.dispatch('qsiteApp/REFRESH_PAGE')
         done()
       }
     }
