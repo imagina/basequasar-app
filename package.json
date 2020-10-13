@@ -11,8 +11,7 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-build-classic": "^22.0.0",
-    "@ckeditor/ckeditor5-vue": "^1.0.2",
+    "ckeditor4" : "^4.15.0",
     "@quasar/extras": "^1.9.5",
     "@riophae/vue-treeselect": "0.0.38",
     "axios": "^0.18.1",
@@ -24,7 +23,8 @@
     "vue-moment": "^4.0.0",
     "vue-routisan": "^2.1.2",
     "vuedraggable": "^2.23.2",
-    "vuelidate": "^0.7.4"
+    "vuelidate": "^0.7.4",
+    "vue-carousel": "^0.18.0"
   },
   "devDependencies": {
     "@quasar/app": "^1.9.6"
