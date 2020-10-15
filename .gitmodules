@@ -40,3 +40,6 @@
 [submodule "node_modules/@imagina/quser"]
 	path = node_modules/@imagina/quser
 	url = https://github.com/imagina/quser.git
+[submodule "node_modules\\@imagina\\qhelper"]
+	path = node_modules/@imagina/qhelper
+	url = https://github.com/imagina/qhelper.git
