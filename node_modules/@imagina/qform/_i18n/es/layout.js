@@ -8,6 +8,7 @@ export default {
     placeholder: 'Placeholder',
     form: 'Formulario',
     order: 'Orden',
+    suffix: 'Sufijo',
   },
   message : {
 

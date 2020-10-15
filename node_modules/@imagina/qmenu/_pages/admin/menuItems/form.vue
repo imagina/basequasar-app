@@ -4,47 +4,47 @@
     <div class="col-12 box">
       <div class="row">
         <div class="col-12 q-mb-md">
-          <locales v-model="locale" ref="localeComponent" :form="$refs.formContent"/>
+          <locales v-model="locale" ref="localeComponent" :form="$refs.formContent" />
         </div>
         <q-form @submit="itemId ? updateItem() : createItem()"
                 ref="formContent" class="row q-col-gutter-x-sm full-width" autocomplete="off"
                 @validation-error="$alert.error($tr('ui.message.formInvalid'))">
           <!--Form left-->
           <div class="col-7" v-if="locale.success">
-            <q-input outlined dense v-model="locale.formTemplate.title"
+            <q-input data-testid="title" outlined dense v-model="locale.formTemplate.title"
                      :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
                      :label="`${$tr('ui.form.title')} (${locale.language})*`"/>
 
             <dynamic-field v-model="locale.formTemplate.pageId" :field="dynamicFields.pages"
                            v-if="locale.formTemplate.linkType == 'page'"/>
 
-            <q-input outlined dense v-model="locale.formTemplate.url" v-if="locale.formTemplate.linkType == 'external'"
+            <q-input data-testid="url" outlined dense v-model="locale.formTemplate.url" v-if="locale.formTemplate.linkType == 'external'"
                      :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
                      :label="`${$tr('qmenu.layout.form.url')} (${locale.language})*`"/>
 
-            <q-input outlined dense v-model="locale.formTemplate.uri" v-if="locale.formTemplate.linkType == 'internal'"
+            <q-input data-testid="uri" outlined dense v-model="locale.formTemplate.uri" v-if="locale.formTemplate.linkType == 'internal'"
                      :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
                      :label="`${$tr('qmenu.layout.form.uri')} (${locale.language})*`"/>
 
-            <q-select outlined dense bg-color="white" v-model="locale.formTemplate.status"
+            <q-select data-testid="status" outlined dense bg-color="white" v-model="locale.formTemplate.status"
                       :options="status" :label="`${$tr('ui.form.status')} (${locale.language})`"
                       style="width: 100%;" emit-value map-options/>
 
-            <q-input outlined dense v-model="locale.formTemplate.icon" :label="`${$tr('ui.form.icon')}`"/>
+            <q-input data-testid="icon" outlined dense v-model="locale.formTemplate.icon" :label="`${$tr('ui.form.icon')}`"/>
 
-            <q-input outlined dense v-model="locale.formTemplate.class" :label="`${$tr('qmenu.layout.form.class')}`"/>
+            <q-input data-testid="class" outlined dense v-model="locale.formTemplate.class" :label="`${$tr('qmenu.layout.form.class')}`"/>
           </div>
           <!--Form Right-->
           <div class="col-5" v-if="locale.success">
-            <q-select outlined dense bg-color="white" v-model="locale.formTemplate.linkType"
+            <q-select data-testid="linkType" outlined dense bg-color="white" v-model="locale.formTemplate.linkType"
                       :options="linkTypes" :label="$tr('qmenu.layout.form.typeLink')"
                       style="width: 100%;" emit-value map-options/>
 
-            <q-select outlined dense bg-color="white" v-model="locale.formTemplate.target"
+            <q-select data-testid="target" outlined dense bg-color="white" v-model="locale.formTemplate.target"
                       :options="targets" :label="$tr('qmenu.layout.form.target')"
                       style="width: 100%;" emit-value map-options/>
 
-            <q-select outlined dense bg-color="white" v-model="locale.formTemplate.parentId"
+            <q-select data-testid="parentId" outlined dense bg-color="white" v-model="locale.formTemplate.parentId"
                       :options="menuItems" :label="$tr('ui.form.parent')"
                       style="width: 100%;" emit-value map-options/>
           </div>
@@ -133,6 +133,7 @@
       dynamicFields() {
         return {
           pages: {
+            testId: 'pageId',
             value: null,
             type: 'select',
             props: {

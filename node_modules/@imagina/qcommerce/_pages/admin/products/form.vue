@@ -26,21 +26,24 @@
                           <div class="q-pa-sm">
                             <!--name-->
                             <q-input v-model="locale.formTemplate.name" @input="setSlug()" outlined dense
+                                     data-testid="name"
                                      :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
                                      :label="`${$tr('ui.form.name')} (${locale.language})*`"/>
                             <!--Slug-->
                             <q-input v-model="locale.formTemplate.slug" outlined dense
+                                     data-testid="slug"
                                      :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
                                      :label="`${$tr('ui.form.slug')} (${locale.language})*`"/>
                             <!--Sumario-->
                             <q-input v-model="locale.formTemplate.summary" type="textarea" outlined dense
+                                     data-testid="summary"
                                      :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
                                      :label="`${$tr('ui.form.summary')} (${locale.language})*`" rows="3"/>
                             <!--Description-->
                             <div class="input-title">{{`${$tr('ui.form.description')} (${locale.language})*`}}</div>
                             <q-field v-model="locale.formTemplate.description" borderless
                                      :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
-                              <ck-editor v-model="locale.formTemplate.description"/>
+                              <ck-editor v-model="locale.formTemplate.description" data-testid="description"/>
                               <q-editor v-if="false" v-model="locale.formTemplate.description" class="full-width"
                                         :toolbar="editorText.toolbar" content-class="text-grey-9"
                                         toolbar-text-color="grey-9"/>
@@ -59,6 +62,7 @@
                               :label="$tr('ui.form.status')"
                               :options="options.status"
                               v-model="locale.formTemplate.status"
+                              data-testid="status"
                             />
                             <!--Categories-->
                             <div class="relative-position text-right">
@@ -72,10 +76,10 @@
                                              :field="dynamicFields.categories"/>
                             </div>
                             <!--Meta Title-->
-                            <q-input v-model="locale.formTemplate.metaTitle" outlined dense
+                            <q-input data-testid="metaTitle" v-model="locale.formTemplate.metaTitle" outlined dense
                                      :label="`${$tr('ui.form.metaTitle')} (${locale.language})`"/>
                             <!--Meta Description-->
-                            <q-input v-model="locale.formTemplate.metaDescription" type="textarea"
+                            <q-input data-testid="metaDescription" v-model="locale.formTemplate.metaDescription" type="textarea"
                                      outlined dense
                                      :label="`${$tr('ui.form.metaDescription')} (${locale.language})`" rows="3"/>
                           </div>
@@ -95,22 +99,23 @@
                         <!--Left-->
                         <div class="col-12 col-md-6">
                           <!--reference-->
-                          <q-input v-model="locale.formTemplate.reference" outlined dense
+                          <q-input data-testid="reference" v-model="locale.formTemplate.reference" outlined dense
                                    :label="$tr('ui.form.reference')"/>
                           <!--SKU-->
-                          <q-input outlined dense v-model="locale.formTemplate.sku" :label="$tr('ui.form.sku')"/>
+                          <q-input data-testid="sku" outlined dense v-model="locale.formTemplate.sku" :label="$tr('ui.form.sku')"/>
                           <!--Price-->
-                          <q-input v-model="locale.formTemplate.price" outlined dense
+                          <q-input data-testid="price" v-model="locale.formTemplate.price" outlined dense
                                    :label="$tr('ui.form.price')" type="number"/>
                           <!--Quantity-->
-                          <q-input outlined dense v-model="locale.formTemplate.quantity"
+                          <q-input data-testid="quantity" outlined dense v-model="locale.formTemplate.quantity"
                                    :label="$tr('ui.form.quantity')" type="number"/>
                           <!--minimum-->
-                          <q-input :label="$tr('qcommerce.layout.form.minimumOrder')" outlined dense
+                          <q-input data-testid="minimumOrder" :label="$tr('qcommerce.layout.form.minimumOrder')" outlined dense
                                    type="number" v-model="locale.formTemplate.minimum"/>
                           <!--Status-->
                           <div class="input-title">{{$tr('ui.form.stock')}}</div>
                           <tree-select
+                            data-testid="stockStatus"
                             :clearable="false"
                             :append-to-body="true"
                             :options="options.stockStatus"
@@ -120,6 +125,7 @@
                           />
                           <!--Substrac from Stock-->
                           <q-toggle
+                            data-testid="subtract"
                             v-model="locale.formTemplate.subtract"
                             :true-value="true"
                             :false-value="false"
@@ -131,7 +137,7 @@
                         <!--Right-->
                         <div class="col-12 col-md-6">
                           <!--availability date-->
-                          <q-input dense mask="date" v-model="locale.formTemplate.dateAvailable" color="primary"
+                          <q-input data-testid="dateAvailable" dense mask="date" v-model="locale.formTemplate.dateAvailable" color="primary"
                                    unmasked-value :label="$tr('qcommerce.layout.form.availableDate')"
                                    outlined placeholder="YYYY/MM/DD">
                             <template v-slot:append>
@@ -143,35 +149,36 @@
                             </template>
                           </q-input>
                           <!--Points-->
-                          <q-input v-model="locale.formTemplate.points" outlined dense :label="$trp('ui.form.point')"/>
+                          <q-input data-testid="points" v-model="locale.formTemplate.points" outlined dense :label="$trp('ui.form.point')"/>
                           <!--Dimensions-->
                           <div class="row q-col-gutter-xs">
                             <!--length-->
                             <div class="col-xs-12 col-sm-4">
-                              <q-input v-model="locale.formTemplate.length" :label="$tr('ui.form.length')"
+                              <q-input data-testid="length" v-model="locale.formTemplate.length" :label="$tr('ui.form.length')"
                                        outlined dense type="number"/>
                             </div>
                             <!--width-->
                             <div class="col-xs-12 col-sm-4">
-                              <q-input v-model="locale.formTemplate.width" :label="$tr('ui.form.width')"
+                              <q-input data-testid="width" v-model="locale.formTemplate.width" :label="$tr('ui.form.width')"
                                        outlined dense type="number"/>
                             </div>
                             <!--height-->
                             <div class="col-xs-12 col-sm-4">
-                              <q-input v-model="locale.formTemplate.height" :label="$tr('ui.form.height')"
+                              <q-input data-testid="height" v-model="locale.formTemplate.height" :label="$tr('ui.form.height')"
                                        outlined dense type="number"/>
                             </div>
                           </div>
                           <!--weight-->
-                          <q-input v-model="locale.formTemplate.weight" :label="$tr('ui.form.weight')"
+                          <q-input data-testid="weight" v-model="locale.formTemplate.weight" :label="$tr('ui.form.weight')"
                                    outlined dense type="number"/>
                           <!--Order Weight-->
-                          <q-input :label="$tr('qcommerce.layout.form.orderWeight')" outlined dense
+                          <q-input data-testid="orderWeight" :label="$tr('qcommerce.layout.form.orderWeight')" outlined dense
                                    v-model="locale.formTemplate.orderWeight"/>
                           <div class="row">
                             <div class="col-12 col-sm-6">
                               <!--Requires shipping-->
                               <q-toggle
+                                data-testid="shipping"
                                 v-model="locale.formTemplate.shipping"
                                 :true-value="true"
                                 :false-value="false"
@@ -185,6 +192,7 @@
                             <div class="col-12 col-sm-6">
                               <!--Free shipping-->
                               <q-toggle
+                                data-testid="freeShipping"
                                 v-model="locale.formTemplate.freeshipping"
                                 :true-value="true"
                                 :false-value="false"
@@ -214,6 +222,7 @@
                             {{`${$tr('ui.form.masterRecord')}`}}
                           </div>
                           <tree-select
+                            data-testid="masterRecord"
                             :clearable="false"
                             :append-to-body="true"
                             v-model="locale.formTemplate.options.masterRecord"
@@ -226,19 +235,20 @@
                         </div>
                         <!--Crud manufacturer-->
                         <crud :crud-data="import('@imagina/qcommerce/_crud/taxClasses')"
-                              type="select" :crud-props="{label:`${$tr('qcommerce.layout.form.taxClass')}`}"
+                              type="select" :crud-props="{label:`${$tr('qcommerce.layout.form.taxClass')}`, 'data-testid': 'taxClassId'}"
                               v-model="locale.formTemplate.taxClassId"
                               :config="{options: {label: 'name', value: 'id'}}"
                         />
                         <!--Crud manufacturer-->
                         <crud :crud-data="import('@imagina/qcommerce/_crud/manufacturers')"
-                              type="select" :crud-props="{label:`${$tr('qcommerce.layout.form.manufacturer')}`}"
+                              type="select" :crud-props="{label:`${$tr('qcommerce.layout.form.manufacturer')}`,'data-testid': 'manufacturerId'}"
                               v-model="locale.formTemplate.manufacturerId"
                               :config="{options: {label: 'name', value: 'id'}}"
                         />
                         <!--Parent-->
                         <div class="input-title">{{`${$tr('ui.form.parent')}`}}</div>
                         <tree-select
+                          data-testid="parentId"
                           v-model="locale.formTemplate.parentId"
                           :async="true"
                           :append-to-body="true"
@@ -263,6 +273,7 @@
                         <!--Related Products-->
                         <div class="input-title">{{$tr('qcommerce.layout.form.relatedProducts')}}</div>
                         <tree-select
+                          data-testid="relatedProducts"
                           v-model="locale.formTemplate.relatedProducts"
                           :async="true"
                           :multiple="true"
@@ -284,10 +295,11 @@
                     <q-card-section class="q-pa-sm">
                       <div class="q-pa-sm">
                         <!--Video-->
-                        <q-input v-model="locale.formTemplate.options.video" outlined dense
+                        <q-input data-testid="optionsVideo" v-model="locale.formTemplate.options.video" outlined dense
                                  :label="$tr('ui.form.video')"/>
                         <div class="input-title">{{$tr('ui.form.image')}}</div>
                         <upload-media
+                          data-testid="mainImage"
                           v-model="locale.formTemplate.mediasSingle"
                           entity="Modules\Icommerce\Entities\Product"
                           :entity-id="productId ? productId : null"
@@ -295,6 +307,7 @@
                         />
                         <div class="input-title">{{$tr('ui.form.gallery')}}</div>
                         <upload-media
+                          data-testid="gallery"
                           multiple
                           v-model="locale.formTemplate.mediasMulti"
                           entity="Modules\Icommerce\Entities\Product"
@@ -576,6 +589,7 @@
           category: {
             value: null,
             type: 'treeSelect',
+            testId: 'categoryId',
             props: {
               label: this.$tr('ui.form.category') + '*',
               rules: [val => !!val || this.$tr('ui.message.fieldRequired')],
@@ -589,6 +603,7 @@
           categories: {
             value: [],
             type: 'treeSelect',
+            testId: 'categories',
             props: {
               label: this.$trp('ui.form.category') + '*',
               rules: [val => !!val || $tr('ui.message.fieldRequired')],

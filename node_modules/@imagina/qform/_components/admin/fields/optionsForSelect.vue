@@ -5,7 +5,7 @@
       Options
       <q-btn @click="add()" icon="add" dense flat color="primary"/>
     </q-item-section>
-    <q-item v-for="(item, index) in model.selectable" :key="index">
+    <q-item v-for="(item, index) in model.selectable" :key="index" :id="'optionSelect'+index">
       <q-item-section main>
         <q-input outlined dense v-model="item.name" placeholder="Name Option"/>
       </q-item-section>

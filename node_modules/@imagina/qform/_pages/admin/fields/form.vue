@@ -15,26 +15,32 @@
                   @validation-error="$alert.error($tr('ui.message.formInvalid'))">
             <!--Form left-->
             <div class="col-12 col-md-8" v-if="locale.success">
-              <q-input outlined dense v-model="locale.formTemplate.name" :label="`${$tr('ui.form.name')}*`"
+              <q-input data-testid="name" outlined dense v-model="locale.formTemplate.name" :label="`${$tr('ui.form.name')}*`"
                        :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
 
-              <q-input outlined dense v-model="locale.formTemplate.label"
+              <q-input data-testid="label" outlined dense v-model="locale.formTemplate.label"
                        :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
                        :label="`${$tr('qform.layout.form.label')} (${locale.language})*`"/>
 
-              <q-input outlined dense v-model="locale.formTemplate.placeholder"
+              <q-input data-testid="placeholder" outlined dense v-model="locale.formTemplate.placeholder"
                        :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
                        :label="`${$tr('qform.layout.form.placeholder')} (${locale.language})*`"/>
 
-              <q-input outlined dense v-model="locale.formTemplate.description"
+              <q-input data-testid="description" outlined dense v-model="locale.formTemplate.description"
                        :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
                        :label="`${$tr('ui.form.description')} (${locale.language})*`"/>
 
-              <q-select v-model="locale.formTemplate.type" :options="types"
+              <q-input data-testid="prefix" outlined dense v-model="locale.formTemplate.prefix"
+                       :label="`${$tr('ui.form.prefix')}`"/>
+
+              <q-input data-testid="suffix" outlined dense v-model="locale.formTemplate.suffix"
+                       :label="`${$tr('qform.layout.form.suffix')}`"/>
+
+              <q-select data-testid="type" v-model="locale.formTemplate.type" :options="types"
                         :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
                         outlined dense emit-value map-options :label="`${$tr('ui.form.type')}*`"/>
 
-              <div v-if="[5,6,8].indexOf(locale.formTemplate.type) >= 0">
+              <div v-if="[5,6,8].indexOf(locale.formTemplate.type) >= 0" class="options-for-select">
                 <optionsForSelect :model="locale.formTemplate"/>
               </div>
 
@@ -42,8 +48,8 @@
 
             <!--Form right-->
             <div class="col-12 col-md-4" v-if="locale.success">
-              <q-input outlined dense v-model="locale.formTemplate.order" :label="`${$tr('qform.layout.form.order')}`"/>
-              <q-checkbox :label="$tr('ui.form.required')" v-model="locale.formTemplate.required"/>
+              <q-input data-testid="order" outlined dense v-model="locale.formTemplate.order" :label="`${$tr('qform.layout.form.order')}`"/>
+              <q-checkbox data-testid="required" :label="$tr('ui.form.required')" v-model="locale.formTemplate.required"/>
             </div>
 
             <!--buttons-->
@@ -122,6 +128,8 @@
             formId: this.$route.params.formId,
             selectable: [],
             order: 0,
+            prefix: '',
+            suffix: '',
           },
           fieldsTranslatable: {
             label: '',
