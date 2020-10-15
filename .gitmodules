@@ -1,0 +1,42 @@
+[submodule "node_modules/@imagina/qblog"]
+	path = node_modules/@imagina/qblog
+	url = https://github.com/imagina/qblog.git
+[submodule "node_modules/@imagina/qcommerce"]
+	path = node_modules/@imagina/qcommerce
+	url = https://github.com/imagina/qcommerce.git
+[submodule "node_modules/@imagina/qcrud"]
+	path = node_modules/@imagina/qcrud
+	url = https://github.com/imagina/qcrud.git
+[submodule "node_modules/@imagina/qform"]
+	path = node_modules/@imagina/qform
+	url = https://github.com/imagina/qform.git
+[submodule "node_modules/@imagina/qlocations"]
+	path = node_modules/@imagina/qlocations
+	url = https://github.com/imagina/qlocations.git
+[submodule "node_modules/@imagina/qmedia"]
+	path = node_modules/@imagina/qmedia
+	url = https://github.com/imagina/qmedia.git
+[submodule "node_modules/@imagina/qmenu"]
+	path = node_modules/@imagina/qmenu
+	url = https://github.com/imagina/qmenu.git
+[submodule "node_modules/@imagina/qnotification"]
+	path = node_modules/@imagina/qnotification
+	url = https://github.com/imagina/qnotification.git
+[submodule "node_modules/@imagina/qpage"]
+	path = node_modules/@imagina/qpage
+	url = https://github.com/imagina/qpage.git
+[submodule "node_modules/@imagina/qplace"]
+	path = node_modules/@imagina/qplace
+	url = https://github.com/imagina/qplace.git
+[submodule "node_modules/@imagina/qredirect"]
+	path = node_modules/@imagina/qredirect
+	url = https://github.com/imagina/qredirect.git
+[submodule "node_modules/@imagina/qsite"]
+	path = node_modules/@imagina/qsite
+	url = https://github.com/imagina/qsite.git
+[submodule "node_modules/@imagina/qslider"]
+	path = node_modules/@imagina/qslider
+	url = https://github.com/imagina/qslider.git
+[submodule "node_modules/@imagina/quser"]
+	path = node_modules/@imagina/quser
+	url = https://github.com/imagina/quser.git
