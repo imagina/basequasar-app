@@ -27,6 +27,7 @@
     "@imagina/qslider": "^2.1.0",
     "@imagina/quser": "^2.1.0",
     "@imagina/qbanner": "^1.1.0",
+    "@imagina/qdocument": "^0.1.0",
     "ckeditor4": "^4.15.0",
     "@quasar/extras": "^1.9.5",
     "@riophae/vue-treeselect": "0.0.38",
