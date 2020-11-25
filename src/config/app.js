@@ -2,8 +2,7 @@ import coreApp from '@imagina/qsite/_config/master/app'
 
 export default {
   ...coreApp,
-  //version : '2.2.12', //To before laravel 8
-  version : '2.3.4', //To laravel 8
+  version : '2.3.8', //Version
   //isBackend : false, //Define if project is to admin
   //forceRoleAndDepartment : false,//Force to select role and department
   //UI Languages
