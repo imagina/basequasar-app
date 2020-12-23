@@ -2,7 +2,7 @@ import coreApp from '@imagina/qsite/_config/master/app'
 
 export default {
   ...coreApp,
-  version : '2.3.10', //Version
+  version : '2.3.12', //Version
   //isBackend : false, //Define if project is to admin
   //forceRoleAndDepartment : false,//Force to select role and department
   //UI Languages
