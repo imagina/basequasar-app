@@ -11,11 +11,11 @@ module.exports = function (ctx) {
     boot: [//Keep this order
       //==== Core [Do not remove]
       '~@imagina/qsite/_boot/core-axios',
-      '~@imagina/qsite/_boot/core-helper',
       '~@imagina/qsite/_boot/core-server-side',
+      { server: false, path: '~@imagina/qsite/_boot/core-middleware' },
+      '~@imagina/qsite/_boot/core-helper',
       '~@imagina/qsite/_boot/core-i18n',
       { server: false, path: '~@imagina/qsite/_boot/core-client-side' },
-      { server: false, path: '~@imagina/qsite/_boot/core-middleware' },
       { server: false, path: '~@imagina/qsite/_boot/core-components-client-side' },
       '~@imagina/qsite/_boot/core-components',
       //==== boot from project
