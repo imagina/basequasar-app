@@ -13,6 +13,7 @@
   "dependencies": {
     "@imagina/qbanner": "^1.1.0",
     "@imagina/qblog": "^2.1.0",
+    "@imagina/qchat": "^1.0.0",
     "@imagina/qcommerce": "^2.1.0",
     "@imagina/qcrud": "^2.2.0",
     "@imagina/qdocument": "^0.1.0",
@@ -22,7 +23,6 @@
     "@imagina/qlocations": "^1.0.0",
     "@imagina/qmedia": "^2.1.0",
     "@imagina/qmenu": "^2.1.0",
-    "@imagina/qchat": "^1.0.0",
     "@imagina/qnotification": "^2.0.0",
     "@imagina/qpage": "^1.0.0",
     "@imagina/qplace": "^2.1.0",
@@ -38,11 +38,14 @@
     "ckeditor4-vue": "^1.1.0",
     "dotenv": "^6.0.0",
     "install": "^0.13.0",
+    "laravel-echo": "^1.10.0",
     "leaflet": "^1.7.1",
     "localforage": "^1.7.2",
     "lodash.clonedeep": "~4.5.0",
+    "pusher-js": "^7.0.2",
     "quasar": "^1.15.0",
     "vue-carousel": "^0.18.0",
+    "vue-cropperjs": "^4.2.0",
     "vue-i18n": "^8.0.0",
     "vue-moment": "^4.0.0",
     "vue-routisan": "^2.1.2",
@@ -50,9 +53,7 @@
     "vue2-leaflet": "^2.6.0",
     "vuedraggable": "^2.23.2",
     "vuejs-vr": "^1.1.0",
-    "vuelidate": "^0.7.4",
-    "pusher-js" : "^7.0.2",
-    "laravel-echo" : "^1.10.0"
+    "vuelidate": "^0.7.4"
   },
   "devDependencies": {
     "@quasar/app": "^1.9.6",
