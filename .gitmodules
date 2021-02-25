@@ -55,3 +55,9 @@
 [submodule "node_modules/@imagina/qchat"]
 	path = node_modules/@imagina/qchat
 	url = https://github.com/imagina/qchat.git
+[submodule "node_modules/@imagina/qplan"]
+	path = node_modules/@imagina/qplan
+	url = https://github.com/imagina/qplan.git
+[submodule "node_modules/@imagina/qad"]
+	path = node_modules/@imagina/qad
+	url = https://github.com/imagina/qad.git
