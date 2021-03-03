@@ -53,6 +53,8 @@
     "vue-routisan": "^2.1.2",
     "vue-signature-pad": "^2.0.2",
     "vue2-leaflet": "^2.6.0",
+    "leaflet": "^1.7.1",
+    "leaflet-geosearch": "^3.2.1",
     "vuedraggable": "^2.23.2",
     "vuejs-vr": "^1.1.0",
     "vuelidate": "^0.7.4"
