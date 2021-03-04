@@ -1,4 +1,4 @@
-import coreApiRoutes from '@imagina/qsite/_config/master/apiRoutes' //Core ApiRoute [Do not remove]
+import coreApiRoutes from '@imagina/qsite/_config/master/application/apiRoutes' //Core ApiRoute [Do not remove]
 
 let responseApiRoutes = {
   ...coreApiRoutes,

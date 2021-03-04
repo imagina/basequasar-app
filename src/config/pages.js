@@ -1,4 +1,4 @@
-import corePages from '@imagina/qsite/_config/master/pages'//Core pages [Do not remove]
+import corePages from '@imagina/qsite/_config/master/application/pages'//Core pages [Do not remove]
 
 let responsePages = {
   ...corePages,
