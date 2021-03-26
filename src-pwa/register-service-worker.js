@@ -4,6 +4,7 @@
  */
 
 import {register} from 'register-service-worker'
+import eventBus from '@imagina/qsite/_plugins/eventBus'
 
 register(process.env.SERVICE_WORKER_FILE, {
   ready(registration) {
@@ -29,6 +30,7 @@ register(process.env.SERVICE_WORKER_FILE, {
   },
 
   updated(registration) {
+    setTimeout(() => eventBus.$emit('service-worker.update.available'), 3000)
     console.log('[SERVICE-WORKER] New content is available; please refresh.')
   },
 
