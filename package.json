@@ -34,7 +34,7 @@
     "@kevinfaguiar/vue-twemoji-picker": "^5.7.4",
     "@quasar/extras": "^1.9.13",
     "@riophae/vue-treeselect": "0.0.38",
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "ckeditor4": "^4.15.0",
     "ckeditor4-vue": "^1.1.0",
     "dotenv": "^6.0.0",
