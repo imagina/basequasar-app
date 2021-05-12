@@ -3,7 +3,7 @@ import coreApp from '@imagina/qsite/_config/master/application/app'
 export default {
   ...coreApp,
   //version: '2.3.29', //Version
-  // baseUrl: 'http://192.168.0.220',//Define base url
+  baseUrl: 'https://michael.modulos.imaginacolombia.com',//Define base url
   //mode: 'iadmin', //Define load mode
   //forceRoleAndDepartment : false,//Force to select role and department
   //UI Languages
