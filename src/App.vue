@@ -17,7 +17,7 @@ export default {
         this.$alert.info({
           message: this.$tr('ui.message.swUpdateAvailable'),
           pos: 'top',
-          icon: 'fas fa-cloud-upload-alt',
+          icon: 'fas fa-cloud-download-alt',
           timeOut: 15000,
           actions: [
             {
