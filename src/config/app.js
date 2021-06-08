@@ -3,8 +3,8 @@ import coreApp from '@imagina/qsite/_config/master/application/app'
 export default {
   ...coreApp,
   //version: '2.3.29', //Version
-  baseUrl: 'https://sexy-latinas.ozonohosting.com',//Define base url
-  mode: 'ipanel', //Define load mode
+  //baseUrl: 'https://signosdev.ozonohosting.com',//Define base url
+  //mode: 'ipanel', //Define load mode
   //forceRoleAndDepartment : false,//Force to select role and department
   //UI Languages
   /*languages : {
