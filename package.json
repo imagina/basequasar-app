@@ -33,6 +33,7 @@
     "@imagina/quser": "2.x",
     "@imagina/qappointment": "1.x",
     "@imagina/qcheckin": "1.x",
+    "@imagina/qtranslation": "1.x",
     "@kevinfaguiar/vue-twemoji-picker": "^5.7.4",
     "@quasar/extras": "^1.10.3",
     "@riophae/vue-treeselect": "0.0.38",
