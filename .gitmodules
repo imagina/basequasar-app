@@ -70,3 +70,6 @@
 [submodule "node_modules/@imagina/qtranslation"]
 	path = node_modules/@imagina/qtranslation
 	url = https://github.com/imagina/qtranslation.git
+[submodule "node_modules/@imagina/qbooking"]
+	path = node_modules/@imagina/qbooking
+	url = https://github.com/imagina/qbooking.git
