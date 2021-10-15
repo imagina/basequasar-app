@@ -37,7 +37,7 @@
     "@imagina/qbooking": "1.x",
     "@kevinfaguiar/vue-twemoji-picker": "^5.7.4",
     "@quasar/extras": "^1.10.3",
-    "@riophae/vue-treeselect": "0.0.38",
+    "@riophae/vue-treeselect": "^0.4.0",
     "axios": "^0.21.1",
     "chalk": "^4.0.0",
     "ckeditor4": "^4.15.0",
