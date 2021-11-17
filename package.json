@@ -53,6 +53,7 @@
     "lodash.clonedeep": "~4.5.0",
     "pusher-js": "^7.0.2",
     "quasar": "^1.15.10",
+    "v-jsoneditor": "^1.4.5",
     "vue-advanced-chat": "^0.8.5",
     "vue-carousel": "^0.18.0",
     "vue-cropperjs": "^4.2.0",
