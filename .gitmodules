@@ -73,3 +73,6 @@
 [submodule "node_modules/@imagina/qbooking"]
 	path = node_modules/@imagina/qbooking
 	url = https://github.com/imagina/qbooking.git
+[submodule "node_modules/@imagina/qrequestable"]
+	path = node_modules/@imagina/qrequestable
+	url = https://github.com/imagina/qrequestable.git
