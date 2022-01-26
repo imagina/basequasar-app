@@ -76,3 +76,6 @@
 [submodule "node_modules/@imagina/qrequestable"]
 	path = node_modules/@imagina/qrequestable
 	url = https://github.com/imagina/qrequestable.git
+[submodule "node_modules/@imagina/qcredit"]
+	path = node_modules/@imagina/qcredit
+	url = https://github.com/imagina/qcredit.git
