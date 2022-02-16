@@ -79,3 +79,6 @@
 [submodule "node_modules/@imagina/qcredit"]
 	path = node_modules/@imagina/qcredit
 	url = https://github.com/imagina/qcredit.git
+[submodule "node_modules/@imagina/qauction"]
+	path = node_modules/@imagina/qauction
+	url = https://github.com/imagina/qauction.git
