@@ -37,6 +37,7 @@
     "@imagina/qbooking": "1.x",
     "@imagina/qrequestable": "1.x",
     "@imagina/qcredit": "1.x",
+    "@imagina/qauction": "1.x",
     "@kevinfaguiar/vue-twemoji-picker": "^5.7.4",
     "@quasar/extras": "^1.10.3",
     "@riophae/vue-treeselect": "^0.4.0",
