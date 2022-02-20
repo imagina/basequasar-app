@@ -3,7 +3,7 @@ import coreApp from '@imagina/qsite/_config/master/application/app'
 export default {
   ...coreApp,
   //version: '2.3.29', //Version
-  baseUrl: 'https://inmeet.ozonohosting.com',//Define base url
+  //baseUrl: 'https://inmeet.ozonohosting.com',//Define base url
   //mode: 'ipanel', //Define load mode
   //forceRoleAndDepartment : false,//Force to select role and department
   //UI Languages
