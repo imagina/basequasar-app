@@ -15,7 +15,7 @@ export default {
       //Manage badges to button actions
       this.$eventBus.$on('service-worker.update.available', () => {
         this.$alert.info({
-          message: this.$tr('ui.message.swUpdateAvailable'),
+          message: this.$tr('isite.cms.message.swUpdateAvailable'),
           pos: 'top',
           icon: 'fas fa-cloud-download-alt',
           timeOut: 15000,
