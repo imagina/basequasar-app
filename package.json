@@ -38,6 +38,7 @@
     "@imagina/qslider": "2.x",
     "@imagina/qtranslation": "1.x",
     "@imagina/quser": "2.x",
+    "@imagina/qgamification": "1.x",
     "@kevinfaguiar/vue-twemoji-picker": "^5.7.4",
     "@quasar/extras": "^1.10.3",
     "@riophae/vue-treeselect": "^0.4.0",
