@@ -88,3 +88,6 @@
 [submodule "node_modules/@imagina/qfly"]
 	path = node_modules/@imagina/qfly
 	url = https://github.com/imagina/qfly.git
+[submodule "node_modules/@imagina/qramp"]
+	path = node_modules/@imagina/qramp
+	url = https://github.com/imagina/qramp.git
