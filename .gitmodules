@@ -92,5 +92,5 @@
 	path = node_modules/@imagina/qramp
 	url = https://github.com/imagina/qramp.git
 [submodule "node_module/@imagina/qsetupagione"]
-	path = node_module/@imagina/qsetupagione
+	path = node_modules/@imagina/qsetupagione
 	url = https://github.com/imagina/qsetupagione.git
