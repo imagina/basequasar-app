@@ -4,7 +4,7 @@ export default {
   ...coreApp,
   //version: '2.3.29', //Version
   //git submodule foreach --recursive git merge dev
-   baseUrl: 'https://localhost:7116',//Define base url
+  // baseUrl: 'https://localhost:7116',//Define base url
   //mode: 'ipanel', //Define load mode
   //forceRoleAndDepartment : false,//Force to select role and department
   //UI Languages
