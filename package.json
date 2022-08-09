@@ -11,6 +11,7 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
+    "@azure/msal-browser": "^2.28.1",
     "@imagina/qad": "2.x",
     "@imagina/qappointment": "1.x",
     "@imagina/qauction": "1.x",
@@ -24,7 +25,6 @@
     "@imagina/qcrud": "2.x",
     "@imagina/qdocument": "2.x",
     "@imagina/qevent": "2.x",
-    "@imagina/qfly": "1.x",
     "@imagina/qform": "2.x",
     "@imagina/qgamification": "1.x",
     "@imagina/qlocations": "2.x",
@@ -34,7 +34,6 @@
     "@imagina/qpage": "2.x",
     "@imagina/qplace": "2.x",
     "@imagina/qplan": "2.x",
-    "@imagina/qramp": "1.x",
     "@imagina/qredirect": "2.x",
     "@imagina/qrequestable": "1.x",
     "@imagina/qsite": "2.x",
