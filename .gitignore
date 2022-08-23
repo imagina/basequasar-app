@@ -13,6 +13,7 @@
 #other fields
 !/.gitignore
 !/package.json
+!/tailwind.config.js
 !/quasar.conf.js
 !/README.md
 !/.babelrc
