@@ -61,7 +61,7 @@
     "pusher-js": "^7.0.2",
     "quasar": "^1.15.10",
     "v-jsoneditor": "^1.4.5",
-    "vue-advanced-chat": "^0.8.9",
+    "vue-advanced-chat": "^1.5.8",
     "vue-carousel": "^0.18.0",
     "vue-chartjs": "^3.5.1",
     "vue-chartjs-exporter": "^1.0.2",
