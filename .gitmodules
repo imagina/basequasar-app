@@ -85,3 +85,6 @@
 [submodule "node_modules/@imagina/qgamification"]
 	path = node_modules/@imagina/qgamification
 	url = https://github.com/imagina/qgamification.git
+[submodule "node_modules/@imagina/qbuilder"]
+	path = node_modules/@imagina/qbuilder
+	url = https://github.com/imagina/qbuilder.git
