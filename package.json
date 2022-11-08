@@ -61,6 +61,7 @@
     "llaeditor": "^1.4.5",
     "localforage": "^1.7.2",
     "lodash.clonedeep": "~4.5.0",
+    "moment-timezone": "^0.5.38",
     "pusher-js": "^7.0.2",
     "quasar": "^1.15.10",
     "vanilla-jsoneditor": "^0.9.0",
