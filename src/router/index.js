@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import VueCompositionAPI from '@vue/composition-api'
 
-Vue.use(VueCompositionAPI)
 Vue.use(VueRouter)
 
 /*

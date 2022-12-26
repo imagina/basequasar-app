@@ -7,6 +7,7 @@ const envparser = require('./env/envparser')
 
 module.exports = function (ctx) {
   return {
+    supportTS: true,
     preFetch: true,
     boot: [//Keep this order
       //==== Core [Do not remove]
@@ -29,7 +30,7 @@ module.exports = function (ctx) {
 
     extras: [
       'fontawesome-v5',
-      'material-icons'
+      'material-icons',
     ],
 
     framework: {
@@ -61,7 +62,7 @@ module.exports = function (ctx) {
         if (isServer) {
           chain.externals(nodeExternals({
             // do not externalize CSS files in case we need to import it from a dep
-            whitelist: /(\.css$|\.vue$|\?vue&type=style|@imagina|@quasar|quasar[\\/])/
+            whitelist: /(\.css$|\.vue$|\.ts|\?vue&type=style|@imagina|@quasar|quasar[\\/])/
           }))
         }
       }
