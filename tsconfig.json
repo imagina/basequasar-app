@@ -1,0 +1,21 @@
+{
+  "extends": "@quasar/app/tsconfig-preset",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "es5",
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+  },
+  "include": [
+    "src/**/*.ts", 
+    "src/**/*.tsx", 
+    "src/**/*.vue", 
+    "node_modules/@imagina/**/*.ts", 
+    "node_modules/@imagina/**/*.tsx", 
+    "node_modules/@imagina/**/*.vue"
+  ],
+}
