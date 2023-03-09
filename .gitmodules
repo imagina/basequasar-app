@@ -88,3 +88,6 @@
 [submodule "node_modules/@imagina/qbuilder"]
 	path = node_modules/@imagina/qbuilder
 	url = https://github.com/imagina/qbuilder.git
+[submodule "node_modules/@imagina/qoffline"]
+	path = node_modules/@imagina/qoffline
+	url = https://github.com/imagina/qoffline.git
