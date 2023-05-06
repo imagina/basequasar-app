@@ -7,6 +7,7 @@ export default {
   //baseUrl: 'https://dev-booking-test.ozonohosting.com',//Define base url
   //baseUrl: 'https://dev-colchones-amanecer.ozonohosting.com',//Define base url
   //mode: 'ipanel', //Define load mode
+  //useLocalTranslations: true//Define from where use the translations
   //forceRoleAndDepartment : false,//Force to select role and department
   //UI Languages
   /*languages : {
