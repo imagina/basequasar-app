@@ -24,5 +24,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Remove @imagina folder
+        run: rm -rf node_modules/@imagina
+
+      - name: Initialize submodules
+        run: git submodule update --init --remote
+
       - name: Build
         run: quasar build -m pwa
