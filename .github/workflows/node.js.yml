@@ -35,7 +35,6 @@ jobs:
           git submodule foreach --recursive git checkout staging
           git submodule foreach --recursive git pull origin staging
           git checkout -b staging
-          git pull origin staging
-
+          
       - name: Build
         run: quasar build -m pwa
