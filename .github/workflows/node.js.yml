@@ -40,3 +40,16 @@ jobs:
 
       - name: Rename folder PWA to IADMIN
         run: mv dist/pwa iadmin
+
+      - name: Publish iadmin folder in main repositorie
+        uses: dmnemec/copy_file_to_another_repo_action@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source_file: 'iadmin'
+          destination_repo: 'imagina/imaginacmsadmin-theme'
+          destination_branch: 'CD/CI'
+          destination_folder: './'
+          user_email: 'jose.alejandro.sabogal.loiaza@gmail.com'
+          user_name: 'AlejandroDev99'
+          commit_message: 'Implementing CD'
