@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - CD/CI
+  workflow_dispatch:
+    inputs:
+      targetBranch:
+        description: 'Target branch to deploy'
+        required: true
+        default: 'staging'
 
 jobs:
   build-and-deploy:
