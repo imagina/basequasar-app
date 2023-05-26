@@ -1,13 +1,10 @@
 name: Deploy
 
 on:
-  push:
-    branches:
-      - CD/CI
   workflow_dispatch:
     inputs:
       targetBranch:
-        description: 'Target branch to deploy'
+        description: 'Target Branch to release'
         required: true
         default: 'staging'
 
