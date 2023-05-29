@@ -35,8 +35,8 @@ jobs:
 
       - name: Change to branch Staging
         run: |
-          git submodule foreach --recursive git checkout staging
-          git checkout -b staging
+          git submodule foreach --recursive git checkout master
+          git submodule foreach --recursive git pull origin staging
 
       - name: Build
         run: quasar build -m pwa
