@@ -1,12 +1,6 @@
 name: Deploy
-
-on:
-  workflow_dispatch:
-    inputs:
-      targetBranch:
-        description: 'Target Branch to release'
-        required: true
-        default: 'staging'
+        
+on: workflow_dispatch
 
 jobs:
   build-and-deploy:
