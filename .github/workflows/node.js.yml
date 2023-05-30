@@ -1,0 +1,54 @@
+name: Deploy CMS
+ 
+on: workflow_dispatch
+ 
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+ 
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+ 
+      - name: Install Quasar CLI
+        run: npm install -g @quasar/cli
+ 
+      - name: Install dependencies
+        run: npm install
+ 
+      - name: Remove @imagina folder
+        run: rm -rf node_modules/@imagina
+ 
+      - name: Initialize submodules
+        run: git submodule update --init --remote
+ 
+      - name: Up to date master branch
+        run: |
+          git config --global user.name 'Imagina'
+          git config --global user.email 'carlosdevia@imaginacolombia.com'
+          git submodule foreach --recursive git pull origin staging
+          git pull origin staging --no-recurse-submodules --rebase
+ 
+      - name: Build
+        run: quasar build -m pwa
+ 
+      - name: Rename folder PWA to IADMIN
+        run: mv dist/pwa iadmin
+ 
+      - name: Publish iadmin folder in main repositorie
+        uses: dmnemec/copy_file_to_another_repo_action@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.DEPLOY_ADMIN_THEME }}
+        with:
+          source_file: 'iadmin'
+          destination_repo: 'imagina/imaginacmsadmin-theme'
+          destination_branch: 'v8.x'
+          destination_folder: './'
+          user_email: 'carlosdevia@imaginacolombia.com'
+          user_name: 'imagina'
+          commit_message: '+Release: Iadmin'
