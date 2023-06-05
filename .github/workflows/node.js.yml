@@ -29,6 +29,8 @@ jobs:
  
       - name: Up to date master branch
         run: |
+          git config --global user.name 'Imagina'
+          git config --global user.email 'carlosdevia@imaginacolombia.com'
           git fetch --unshallow
           git checkout master
           git pull
