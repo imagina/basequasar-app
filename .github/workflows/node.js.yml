@@ -29,10 +29,13 @@ jobs:
  
       - name: Up to date master branch
         run: |
-          git config --global user.name 'Imagina'
-          git config --global user.email 'carlosdevia@imaginacolombia.com'
-          git submodule foreach --recursive git checkout staging
-          git checkout staging
+          git fetch --unshallow
+          git checkout master
+          git pull
+          git merge --no-ff origin/staging
+          git submodule foreach --recursive git checkout master
+          git submodule foreach --recursive git pull
+          git submodule foreach --recursive git merge --no-ff origin/staging
  
       - name: Build
         run: quasar build -m pwa
