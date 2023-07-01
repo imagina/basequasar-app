@@ -23,24 +23,24 @@ module.exports = function (ctx) {
       'server-side',
       { server: false, path: 'client-side' },
     ],
-
     css: [
       'app.styl'
     ],
-
     extras: [
       'fontawesome-v5',
       'material-icons',
     ],
-
     framework: {
       // iconSet: 'ionicons-v4',
       // lang: 'de', // Quasar language
       all: true, // --- includes everything; for dev only!
+      config: {
+        loadingBar : {
+          skipHijack : true
+        }
+      }
     },
-
     supportIE: false,
-
     build: {
       scopeHoisting: true,
       env: envparser(),
@@ -67,20 +67,16 @@ module.exports = function (ctx) {
         }
       }
     },
-
     devServer: {
       //https: true,
       // port: 8080,
       open: true // opens browser window automatically
     },
-
     // animations: 'all', // --- includes all animations
     animations: [],
-
     ssr: {
       pwa: true
     },
-
     pwa: {
       workboxPluginMode: 'InjectManifest',
       workboxOptions: {}, // only for NON InjectManifest
@@ -128,12 +124,10 @@ module.exports = function (ctx) {
         "prefer_related_applications": true,
       }
     },
-
     cordova: {
       // id: 'org.cordova.quasar.app',
       // noIosLegacyBuildFlag: true, // uncomment only if you know what you are doing
     },
-
     electron: {
       // bundler: 'builder', // or 'packager'
 
