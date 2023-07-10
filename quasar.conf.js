@@ -2,6 +2,7 @@
 var webpack = require('webpack')
 var path = require('path')
 const nodeExternals = require('webpack-node-externals')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 // Get our env variables
 const envparser = require('./env/envparser')
 
@@ -12,6 +13,7 @@ module.exports = function (ctx) {
     boot: [//Keep this order
       //==== Core [Do not remove]
       '~@imagina/qsite/_boot/core-axios',
+      '~@imagina/qsite/_boot/firebase',
       '~@imagina/qsite/_boot/core-server-side',
       { server: false, path: '~@imagina/qsite/_boot/core-middleware' },
       '~@imagina/qsite/_boot/core-helper',
@@ -56,7 +58,14 @@ module.exports = function (ctx) {
             env: [path.resolve(__dirname, 'env/env'), 'default'],
             config: [path.resolve(__dirname, 'node_modules/@imagina/qsite/_config/master/index'), 'default']
           })
-        )
+        );
+        cfg.plugins.push(
+          new CopyWebpackPlugin({
+            patterns: [
+              { from: 'src/statics/', to: '' }
+            ]
+          })
+        );  
       },
       chainWebpack (chain, { isServer, isClient }) {
         if (isServer) {
@@ -83,7 +92,6 @@ module.exports = function (ctx) {
 
     pwa: {
       workboxPluginMode: 'InjectManifest',
-      workboxOptions: {}, // only for NON InjectManifest
       manifest: {
         name: 'My APP',
         short_name: 'My APP',
