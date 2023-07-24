@@ -13,7 +13,6 @@ module.exports = function (ctx) {
     boot: [//Keep this order
       //==== Core [Do not remove]
       '~@imagina/qsite/_boot/core-axios',
-      '~@imagina/qsite/_boot/firebase',
       '~@imagina/qsite/_boot/core-server-side',
       { server: false, path: '~@imagina/qsite/_boot/core-middleware' },
       '~@imagina/qsite/_boot/core-helper',
