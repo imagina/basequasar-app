@@ -1,4 +1,4 @@
-name: Copy Docs to Docusaurus
+name: Publish documentation
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Copy Files to docusaurus Repository
+      - name: Publish documentation to the docusaurus repository
         uses: dmnemec/copy_file_to_another_repo_action@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.REPO_DOCS_KEY }}
