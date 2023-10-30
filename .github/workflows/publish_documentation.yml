@@ -18,10 +18,11 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.REPO_DOCS_KEY }}
         with:
-          source_file: '_docs/VueJs'
+          source_file: 'docs/'
           destination_repo: 'imagina/docs-weygo'
           destination_branch: 'main'
-          destination_folder: './docs'
+          destination_folder: './docs/VueJs/'
           user_email: 'carlosdevia@imaginacolombia.com'
           user_name: 'imagina'
           commit_message: '+Added: principal Doc'
+          use_rsync: true
