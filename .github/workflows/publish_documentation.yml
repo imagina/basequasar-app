@@ -1,6 +1,9 @@
 name: Publish documentation
 
-on: workflow_dispatch
+on:
+  push:
+    branches:
+      - staging
 
 jobs:
   copy_to_another_repo:
