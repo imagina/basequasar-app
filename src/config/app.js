@@ -1,8 +1,9 @@
 import coreApp from '@imagina/qsite/_config/master/application/app'
+import psjson from '../../package.json'
 
 export default {
   ...coreApp,
-  //version: '2.3.29', //Version
+  version: psjson.version, //Version
   //git submodule foreach --recursive git merge dev
   //baseUrl: 'https://dev-waruwa-clone.ozonohosting.com',//Define base url
   //baseUrl: 'https://dev-colchones-amanecer.ozonohosting.com',//Define base url
