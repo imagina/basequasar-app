@@ -1,11 +1,11 @@
 name: Deploy CMS
  
 on: workflow_dispatch
- 
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
- 
+
     steps:
       - uses: actions/checkout@v3
         with:
@@ -16,37 +16,29 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '14'
- 
+
       - name: Install Quasar CLI
         run: npm install -g @quasar/cli
- 
+
       - name: Install dependencies
         run: npm install
- 
+
       - name: Remove @imagina folder
         run: rm -rf node_modules/@imagina
- 
+
       - name: Initialize submodules
         run: git submodule update --init --remote
- 
+
       - name: Up to date master branch
         run: |
           git config --global user.name "Imagina Actions Bot"
           git config --global user.email "carlosdevia@imaginacolombia.com"
           git config --global url."https://${{ secrets.DEPLOY_ADMIN_THEME }}@github.com/".insteadOf "https://github.com/"
 
-      - name: Verify and Create/Change branch
-        run: |
-          git fetch --unshallow
-          new_branch="staging"
-          if git show-ref --quiet refs/heads/$new_branch; then
-            git checkout $new_branch
-          else
-            git checkout -b $new_branch
-          fi
-
       - name: checkout submodules to staging
         run: |
+          git fetch --unshallow
+          git checkout staging
           git merge --no-ff origin/staging
           git submodule foreach --recursive git checkout staging
           git submodule foreach --recursive git pull
@@ -77,9 +69,17 @@ jobs:
         run: |
           git push origin staging
 
+      - name: Verify and Create/Change branch
+        run: |
+          new_branch="master"
+          if git show-ref --quiet refs/heads/$new_branch; then
+            git checkout $new_branch
+          else
+            git checkout -b $new_branch
+          fi
+
       - name: submodules Up to date master with staging
         run: |
-          git checkout master
           git checkout .
           git merge --no-ff origin/staging
           git submodule foreach --recursive git checkout master   
