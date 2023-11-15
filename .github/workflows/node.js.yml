@@ -35,10 +35,18 @@ jobs:
           git config --global user.email "carlosdevia@imaginacolombia.com"
           git config --global url."https://${{ secrets.DEPLOY_ADMIN_THEME }}@github.com/".insteadOf "https://github.com/"
 
-      - name: checkout submodules to staging
+      - name: Verify and Create/Change branch
         run: |
           git fetch --unshallow
-          git checkout -b staging
+          new_branch="staging"
+          if git show-ref --quiet refs/heads/$new_branch; then
+            git checkout $new_branch
+          else
+            git checkout -b $new_branch
+          fi
+
+      - name: checkout submodules to staging
+        run: |
           git merge --no-ff origin/staging
           git submodule foreach --recursive git checkout staging
           git submodule foreach --recursive git pull
