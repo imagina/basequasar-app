@@ -7,9 +7,11 @@ jobs:
     runs-on: ubuntu-latest
  
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
- 
+      - uses: actions/checkout@v3
+        with:
+          repository: imagina/basequasar-app
+          token:  ${{ secrets.DEPLOY_ADMIN_THEME }}
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
@@ -29,16 +31,21 @@ jobs:
  
       - name: Up to date master branch
         run: |
-          git config --global user.name 'Imagina'
-          git config --global user.email 'carlosdevia@imaginacolombia.com'
+          git config --global user.name "Imagina Actions Bot"
+          git config --global user.email "carlosdevia@imaginacolombia.com"
+          git config --global url."https://${{ secrets.DEPLOY_ADMIN_THEME }}@github.com/".insteadOf "https://github.com/"
+
+      - name: checkout submodules to staging
+        run: |
           git fetch --unshallow
-          git checkout master
-          git pull
+          git checkout -b staging
           git merge --no-ff origin/staging
-          git submodule foreach --recursive git checkout master
+          git submodule foreach --recursive git checkout staging
           git submodule foreach --recursive git pull
-          git submodule foreach --recursive git merge --no-ff origin/staging
- 
+          git add .
+          git commit -m "Release" || true
+          npm version patch
+
       - name: Build
         run: quasar build -m pwa
  
@@ -57,3 +64,17 @@ jobs:
           user_email: 'carlosdevia@imaginacolombia.com'
           user_name: 'imagina'
           commit_message: '+Release: Iadmin'
+
+      - name: Update Version Staging
+        run: |
+          git push origin staging
+
+      - name: submodules Up to date master with staging
+        run: |
+          git checkout master
+          git checkout .
+          git merge --no-ff origin/staging
+          git submodule foreach --recursive git checkout master   
+          git submodule foreach --recursive git merge --no-ff origin/staging
+          git submodule foreach --recursive git push -u origin master
+          git push origin master
