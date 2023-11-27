@@ -85,6 +85,7 @@ jobs:
           git submodule foreach --recursive git checkout master   
           git submodule foreach --recursive git merge --no-ff origin/staging
           git submodule foreach --recursive git push -u origin master
+          git config pull.rebase false
           git pull origin master
           git commit -am "Release" || true
           git push origin master
