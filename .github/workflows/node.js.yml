@@ -61,7 +61,7 @@ jobs:
           cp -r ../iadmin ./iadmin
           git add .
           git commit -m "+Release: Iadmin"
-          git push origin githubAction
+          git push origin v8.x
           cd ..
           rm -rf tmp_repo
         env:
