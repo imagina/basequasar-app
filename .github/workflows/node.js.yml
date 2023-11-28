@@ -1,5 +1,5 @@
 name: Deploy CMS
- 
+
 on: workflow_dispatch
 
 jobs:
@@ -51,19 +51,21 @@ jobs:
  
       - name: Rename folder PWA to IADMIN
         run: mv dist/pwa iadmin
- 
-      - name: Publish iadmin folder in main repositorie
-        uses: dmnemec/copy_file_to_another_repo_action@main
+
+      - name: Remove old iadmin and publish iadmin folder in main repository
+        run: |
+          git clone https://github.com/imagina/imaginacmsadmin-theme.git tmp_repo
+          cd tmp_repo
+          git checkout v8.x
+          rm -rf iadmin
+          cp -r ../iadmin ./iadmin
+          git add .
+          git commit -m "+Release: Iadmin"
+          git push origin githubAction
+          cd ..
+          rm -rf tmp_repo
         env:
-          API_TOKEN_GITHUB: ${{ secrets.DEPLOY_ADMIN_THEME }}
-        with:
-          source_file: 'iadmin'
-          destination_repo: 'imagina/imaginacmsadmin-theme'
-          destination_branch: 'v8.x'
-          destination_folder: './'
-          user_email: 'carlosdevia@imaginacolombia.com'
-          user_name: 'imagina'
-          commit_message: '+Release: Iadmin'
+          GITHUB_TOKEN: ${{ secrets.DEPLOY_ADMIN_THEME }}
 
       - name: Update Version Staging
         run: |
