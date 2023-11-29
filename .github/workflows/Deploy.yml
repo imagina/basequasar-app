@@ -1,5 +1,5 @@
 name: Deploy CMS
- 
+
 on: workflow_dispatch
 
 jobs:
@@ -20,7 +20,7 @@ jobs:
       - name: Install Quasar CLI
         run: npm install -g @quasar/cli
 
-      - name: Install dependencies
+      - name: Install npm Dependencies
         run: npm install
 
       - name: Remove @imagina folder
@@ -29,30 +29,28 @@ jobs:
       - name: Initialize submodules
         run: git submodule update --init --remote
 
-      - name: Up to date master branch
+      - name: Github Credentials
         run: |
           git config --global user.name "Imagina Actions Bot"
           git config --global user.email "carlosdevia@imaginacolombia.com"
           git config --global url."https://${{ secrets.DEPLOY_ADMIN_THEME }}@github.com/".insteadOf "https://github.com/"
 
-      - name: checkout submodules to staging
+      - name: Prepare Staging to Release
         run: |
           git fetch --unshallow
           git checkout staging
-          git merge --no-ff origin/staging
           git submodule foreach --recursive git checkout staging
-          git submodule foreach --recursive git pull
           git add .
           git commit -m "Release" || true
           npm version patch
 
-      - name: Build
+      - name: Build as PWA
         run: quasar build -m pwa
- 
-      - name: Rename folder PWA to IADMIN
+
+      - name: Rename folder pwa as iadmin
         run: mv dist/pwa iadmin
- 
-      - name: Publish iadmin folder in main repositorie
+
+      - name: Publish iadmin
         uses: dmnemec/copy_file_to_another_repo_action@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.DEPLOY_ADMIN_THEME }}
@@ -65,26 +63,15 @@ jobs:
           user_name: 'imagina'
           commit_message: '+Release: Iadmin'
 
-      - name: Update Version Staging
+      - name: Push changes to Staging
         run: |
           git push origin staging
 
-      - name: Verify and Create/Change branch
+      - name: Merge release to master
         run: |
-          new_branch="master"
-          if git show-ref --quiet refs/heads/$new_branch; then
-            git checkout $new_branch
-          else
-            git checkout -b $new_branch
-          fi
-
-      - name: submodules Up to date master with staging
-        run: |
-          git checkout .
-          git merge --no-ff origin/staging
+          git checkout master
+          git merge origin/staging
           git submodule foreach --recursive git checkout master   
-          git submodule foreach --recursive git merge --no-ff origin/staging
+          git submodule foreach --recursive git merge origin/staging
           git submodule foreach --recursive git push -u origin master
-          git pull origin master
-          git commit -am "Release" || true
           git push origin master
