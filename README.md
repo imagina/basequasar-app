@@ -1,4 +1,4 @@
-## BASE QUASAR  | 1.0.0
+## BASE QUASAR  | 1.0.1
 
 ## Installation
 
