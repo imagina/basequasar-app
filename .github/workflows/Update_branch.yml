@@ -34,7 +34,7 @@ jobs:
           fi
 
       - name: Update Version
-        if: $branch_to_merge == 'staging'
+        if: ${{ github.ref }} == "refs/heads/staging"
         run: |
           git checkout $branch_to_merge
           git merge origin/$branch_to_merge
