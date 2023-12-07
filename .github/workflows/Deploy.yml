@@ -35,14 +35,23 @@ jobs:
           git config --global user.email "carlosdevia@imaginacolombia.com"
           git config --global url."https://${{ secrets.DEPLOY_ADMIN_THEME }}@github.com/".insteadOf "https://github.com/"
 
+      - name: Set Branch to push deploy
+        id: set_branch
+        run: |
+          branch=$(git rev-parse --abbrev-ref HEAD)
+          echo "current_branch=$branch" >> "$GITHUB_ENV"
+          if [ "${{ github.ref }}" == "refs/heads/master" ]; then
+            echo "branch_deploy=v.8" >> "$GITHUB_ENV"
+          else
+            # Set branch_deploy to the current branch name
+            echo "branch_deploy=$branch" >> "$GITHUB_ENV"
+          fi
+
       - name: Prepare Staging to Release
         run: |
           git fetch --unshallow
-          git checkout staging
-          git submodule foreach --recursive git checkout staging
-          git add .
-          git commit -m "Release" || true
-          npm version patch
+          git checkout $current_branch
+          git submodule foreach --recursive git checkout $current_branch
 
       - name: Build as PWA
         run: quasar build -m pwa
@@ -50,28 +59,15 @@ jobs:
       - name: Rename folder pwa as iadmin
         run: mv dist/pwa iadmin
 
-      - name: Publish iadmin
-        uses: dmnemec/copy_file_to_another_repo_action@main
+      - name: Remove old iadmin and publish iadmin folder in repository
+        run: |
+          git clone https://github.com/imagina/imaginacmsadmin-theme.git tmp_repo
+          cd tmp_repo
+          git checkout $branch_deploy
+          rm -rf iadmin
+          cp -r ../iadmin ./iadmin
+          git add .
+          git commit -m "+Release: Iadmin"
+          git push origin $branch_deploy
         env:
-          API_TOKEN_GITHUB: ${{ secrets.DEPLOY_ADMIN_THEME }}
-        with:
-          source_file: 'iadmin'
-          destination_repo: 'imagina/imaginacmsadmin-theme'
-          destination_branch: 'v8.x'
-          destination_folder: './'
-          user_email: 'carlosdevia@imaginacolombia.com'
-          user_name: 'imagina'
-          commit_message: '+Release: Iadmin'
-
-      - name: Push changes to Staging
-        run: |
-          git push origin staging
-
-      - name: Merge release to master
-        run: |
-          git checkout master
-          git merge origin/staging
-          git submodule foreach --recursive git checkout master   
-          git submodule foreach --recursive git merge origin/staging
-          git submodule foreach --recursive git push -u origin master
-          git push origin master
+          GITHUB_TOKEN: ${{ secrets.DEPLOY_ADMIN_THEME }}
