@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: IMNicolasM/basequasar-app
+          repository: imagina/basequasar-app
           token:  ${{ secrets.DEPLOY_ADMIN_THEME }}
 
       - name: Initialize submodules
