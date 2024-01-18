@@ -31,8 +31,6 @@ jobs:
           # Establecer la rama a fusionar basándose en la rama actual
           if [ "$current_branch" == "master" ]; then
             branch_to_merge="staging"
-          elif [ "$current_branch" == "staging" ]; then
-            branch_to_merge="dev"
           fi
           
           # Imprimir la información de la rama a fusionar y establecerla como variable de entorno
@@ -43,8 +41,8 @@ jobs:
         run: |
           git fetch --no-recurse-submodules
           git submodule foreach --recursive git fetch
-          if [ "$current_branch" == "staging" ]; then
-            git checkout -b $branch_to_merge
+          if [ "$current_branch" == "master" ]; then
+            git checkout $branch_to_merge
             git merge --allow-unrelated-histories origin/$branch_to_merge
             git submodule foreach --recursive git checkout $branch_to_merge
             git submodule foreach --recursive git merge --allow-unrelated-histories origin/$branch_to_merge
@@ -56,6 +54,7 @@ jobs:
 
       - name: Merge release to input branch
         run: |
+          git checkout $current_branch
           git merge --allow-unrelated-histories origin/$branch_to_merge
           git submodule foreach --recursive git checkout $current_branch   
           git submodule foreach --recursive git merge --allow-unrelated-histories origin/$branch_to_merge
