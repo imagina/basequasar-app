@@ -47,7 +47,7 @@ jobs:
             git submodule foreach --recursive git checkout $branch_to_merge
             git submodule foreach --recursive git merge --allow-unrelated-histories origin/$branch_to_merge
             git add .
-            git commit -m "Realease"
+            git commit -m "Realease" || true
             npm version patch
             git push origin $branch_to_merge
           fi
