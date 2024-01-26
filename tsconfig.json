@@ -1,6 +1,7 @@
 {
-  "extends": "@quasar/app/tsconfig-preset",
+  "extends": "@quasar/app-webpack/tsconfig-preset",
   "compilerOptions": {
+    "strict": false,
     "baseUrl": ".",
     "target": "es5",
     "sourceMap": true,
@@ -9,6 +10,8 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowJs": true,
+    "types": ["node"],
+    "lib": ["es2019", "dom", "esnext"],
   },
   "include": [
     "src/**/*.ts", 
