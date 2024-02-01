@@ -13,6 +13,7 @@
 #other fields
 !/.gitignore
 !/package.json
+!/yarn.lock
 !/tailwind.config.js
 !/tsconfig.json
 !/.eslintrc.js
