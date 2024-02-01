@@ -4,8 +4,9 @@ var path = require('path')
 const nodeExternals = require('webpack-node-externals')
 // Get our env variables
 const envparser = require('./env/envparser')
+const { configure } = require('quasar/wrappers');
 
-module.exports = function (ctx) {
+module.exports =  configure(function (ctx) {
   return {
     supportTS: true,
     preFetch: true,
@@ -156,4 +157,4 @@ module.exports = function (ctx) {
       }
     }
   }
-}
+})
