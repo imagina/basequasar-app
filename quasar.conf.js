@@ -26,7 +26,7 @@ module.exports =  configure(function (ctx) {
       { server: false, path: 'client-side' },
     ],
     css: [
-      'app.styl'
+      'app.sass'
     ],
     extras: [
       'fontawesome-v5',
