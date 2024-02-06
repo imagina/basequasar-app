@@ -1,3 +1,5 @@
+
+import { createRouter, createWebHistory } from 'vue-router'
 //[ptc]
 // import Vue from 'vue'
 // import VueRouter from 'vue-router'
@@ -9,6 +11,12 @@
  * If not building with SSR mode, you can
  * directly export the Router instantiation
  */
+
+const router = createRouter({
+  history: createWebHistory(),
+  scrollBehavior: () => ({x: 0, y: 0}),
+  routes: [],
+})
 
 export default function (/* { store, ssrContext } */) {
   //[ptc]
@@ -31,5 +39,5 @@ export default function (/* { store, ssrContext } */) {
     base: process.env.VUE_ROUTER_BASE
   }
 
-  return Router
+  return router
 }
