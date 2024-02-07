@@ -16,7 +16,8 @@
       <footer-componen v-if="appState.loadPage"/>
 
       <!--modal-login-->
-      <modal-auth/>
+      <!--[ptc]-->
+      <!-- <modal-auth/> -->
     </div>
   </q-layout>
 </template>
@@ -26,7 +27,8 @@
   import maintenancePage from '@imagina/qsite/_pages/master/maintenance'
   import headerComponent from 'src/modules/app/_components/header'
   import footerComponen from 'src/modules/app/_components/footer'
-  import modalAuth from '@imagina/quser/_components/auth/modal-form'
+  //[ptc]
+  // import modalAuth from '@imagina/quser/_components/auth/modal-form'
   import eventBus from '@imagina/qsite/_plugins/eventBus'
 
   export default {
@@ -45,7 +47,13 @@
         link: [{rel: 'icon', href: iconHref, id: 'icon'}],
       }
     },
-    components: {maintenancePage, headerComponent, footerComponen, modalAuth},
+    components: {
+      maintenancePage, 
+      headerComponent, 
+      footerComponen, 
+      //[ptc]
+      // modalAuth
+    },
     beforeDestroy() {
       eventBus.off('global-event-test')
     },
