@@ -27,6 +27,7 @@
   import headerComponent from 'src/modules/app/_components/header'
   import footerComponen from 'src/modules/app/_components/footer'
   import modalAuth from '@imagina/quser/_components/auth/modal-form'
+  import eventBus from '@imagina/qsite/_plugins/eventBus'
 
   export default {
     meta() {
@@ -46,7 +47,7 @@
     },
     components: {maintenancePage, headerComponent, footerComponen, modalAuth},
     beforeDestroy() {
-      this.$eventBus.$off('global-event-test')
+      eventBus.off('global-event-test')
     },
     created() {
       this.$nextTick(function () {
