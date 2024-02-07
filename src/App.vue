@@ -3,15 +3,17 @@
 </template>
 
 <script>
+import eventBus from '@imagina/qsite/_plugins/eventBus'
+
 export default {
   name: 'App',
   beforeDestroy() {
-    this.$eventBus.$off('service-worker.update.available')
+    eventBus.off('service-worker.update.available')
   },
   created() {
     this.$nextTick(async function () {
       //Manage badges to button actions
-      this.$eventBus.$on('service-worker.update.available', () => {
+      eventBus.on('service-worker.update.available', () => {
         this.$alert.info({
           message: this.$tr('isite.cms.message.swUpdateAvailable'),
           pos: 'top',
