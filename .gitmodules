@@ -94,3 +94,6 @@
 [submodule "node_modules/@imagina/qqreable"]
 	path = node_modules/@imagina/qqreable
 	url = https://github.com/imagina/qqreable.git
+[submodule "node_modules/@imagina/qwebhook"]
+	path = node_modules/@imagina/qwebhook
+	url = https://github.com/imagina/qwebhook.git
