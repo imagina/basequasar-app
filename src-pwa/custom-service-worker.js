@@ -77,6 +77,29 @@ if (workbox) {
     }
   });
 
+  self.addEventListener('notificationclick', function (event) {
+    // Optional: Close the notification
+    event.notification.close();
+
+    // Retrieve the URL from the notification data
+    let url = event.notification.data?.url || event.notification.data?.link || self.location.origin;
+
+    event.waitUntil(
+      clients.matchAll({type: 'window'}).then(clientList => {
+        for (let i = 0; i < clientList.length; i++) {
+          let client = clientList[i];
+          // If there's already a window open with the URL, focus it
+          if (client.url === url && 'focus' in client) {
+            return client.focus();
+          }
+        }
+        // If no window is open, open a new one with the specified URL
+        if (clients.openWindow) {
+          return clients.openWindow(url);
+        }
+      })
+    );
+  })
 
   //Network falling back to the cache
 

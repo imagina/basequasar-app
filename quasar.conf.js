@@ -2,6 +2,7 @@
 var webpack = require('webpack')
 var path = require('path')
 const nodeExternals = require('webpack-node-externals')
+const CopyWebpackPlugin = require("copy-webpack-plugin")
 // Get our env variables
 const envparser = require('./env/envparser')
 
@@ -13,15 +14,15 @@ module.exports = function (ctx) {
       //==== Core [Do not remove]
       '~@imagina/qsite/_boot/core-axios',
       '~@imagina/qsite/_boot/core-server-side',
-      { server: false, path: '~@imagina/qsite/_boot/core-middleware' },
+      {server: false, path: '~@imagina/qsite/_boot/core-middleware'},
       '~@imagina/qsite/_boot/core-helper',
       '~@imagina/qsite/_boot/core-i18n',
-      { server: false, path: '~@imagina/qsite/_boot/core-client-side' },
-      { server: false, path: '~@imagina/qsite/_boot/core-components-client-side' },
+      {server: false, path: '~@imagina/qsite/_boot/core-client-side'},
+      {server: false, path: '~@imagina/qsite/_boot/core-components-client-side'},
       '~@imagina/qsite/_boot/core-components',
       //==== boot from project
       'server-side',
-      { server: false, path: 'client-side' },
+      {server: false, path: 'client-side'},
     ],
     css: [
       'app.styl'
@@ -35,8 +36,8 @@ module.exports = function (ctx) {
       // lang: 'de', // Quasar language
       all: true, // --- includes everything; for dev only!
       config: {
-        loadingBar : {
-          skipHijack : true
+        loadingBar: {
+          skipHijack: true
         }
       }
     },
@@ -49,7 +50,7 @@ module.exports = function (ctx) {
       // gzip: true,
       // analyze: true,
       // extractCSS: false,
-      extendWebpack (cfg) {
+      extendWebpack(cfg) {
         // Make our helper function Global, for example to use it in js files you should call it env('MY_VALUE')
         cfg.plugins.push(
           new webpack.ProvidePlugin({
@@ -57,8 +58,16 @@ module.exports = function (ctx) {
             config: [path.resolve(__dirname, 'node_modules/@imagina/qsite/_config/master/index'), 'default']
           })
         )
+        // made statics as public
+        cfg.plugins.push(
+          new CopyWebpackPlugin({
+            patterns: [
+              { from: "src/statics", to: "" }
+            ]
+          }),
+        )
       },
-      chainWebpack (chain, { isServer, isClient }) {
+      chainWebpack(chain, {isServer, isClient}) {
         if (isServer) {
           chain.externals(nodeExternals({
             // do not externalize CSS files in case we need to import it from a dep
@@ -131,7 +140,7 @@ module.exports = function (ctx) {
     electron: {
       // bundler: 'builder', // or 'packager'
 
-      extendWebpack (cfg) {
+      extendWebpack(cfg) {
         // do something with Electron main process Webpack cfg
         // chainWebpack also available besides this extendWebpack
       },
