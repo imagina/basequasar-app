@@ -6,6 +6,8 @@
  */
 
 /* global workbox */
+importScripts('pusher-sw.js')
+
 if (workbox) {
   workbox.precaching.precache(self.__precacheManifest)
 
