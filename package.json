@@ -1,6 +1,6 @@
 {
   "name": "front-end-v1",
-  "version": "2.7.116",
+  "version": "2.7.117",
   "description": "A Quasar Framework app",
   "productName": "Quasar App",
   "cordovaId": "org.cordova.quasar.app",
