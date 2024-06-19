@@ -29,11 +29,13 @@ function bindEvent(eventName) {
   if (channel) {
     unbindEvent()
     channel.bind(eventName, function (params) {
-      self.registration.showNotification(params.title, {
-        body: params.message || params.body,
-        icon: params.icon,
-        data: params || {}
-      });
+      if (Notification.permission == 'granted') {
+        self.registration.showNotification(params.title, {
+          body: params.message || params.body,
+          icon: params.icon,
+          data: params || {}
+        });
+      }
     });
   }
 }
