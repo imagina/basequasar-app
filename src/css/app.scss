@@ -1,0 +1,569 @@
+//[ptc]
+@import '@tkmam1x/vue3-treeselect/dist/vue3-treeselect.css';
+//@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+// app global css
+* {
+  font-family: 'Manrope', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+//=================== Layout Padding
+
+.layout-padding {
+  @media (max-width: 767px) {
+    padding: 15px 15px 60px 15px;
+  }
+  @media (min-width: 768px) and (max-width: 991px) {
+    padding: 15px 15px 60px 15px;
+    margin: auto;
+  }
+  @media (min-width: 992px) and (max-width: 1199px) {
+    padding: 20px 20px 60px 20px;
+    margin: auto;
+  }
+  @media (min-width: 1200px) {
+    padding: 20px 20px 60px 20px;
+    margin: auto;
+  }
+}
+
+//=================== responsive visibilities
+
+.q-hide {
+  display: none !important;
+}
+
+.q-xs-hide {
+  @media screen and (min-width: $breakpoint-xs) {
+    display: none !important;
+  }
+}
+
+.q-sm-hide {
+  @media screen and (min-width: $breakpoint-sm) {
+    display: none !important;
+  }
+}
+
+.q-md-hide {
+  @media screen and (min-width: $breakpoint-md) {
+    display: none !important;
+  }
+}
+
+.q-lg-hide {
+  @media screen and (min-width: $breakpoint-lg) {
+    display: none !important;
+  }
+}
+
+.q-xl-hide {
+  @media screen and (min-width: $breakpoint-xl-min) {
+    display: none !important;
+  }
+}
+
+.q-show {
+  display: block !important;
+}
+
+.q-xs-show {
+  @media screen and (min-width: $breakpoint-xs) {
+    display: block !important;
+  }
+}
+
+.q-sm-show {
+  @media screen and (min-width: $breakpoint-sm) {
+    display: block !important;
+  }
+}
+
+.q-md-show {
+  @media screen and (min-width: $breakpoint-md) {
+    display: block !important;
+  }
+}
+
+.q-lg-show {
+  @media screen and (min-width: $breakpoint-lg) {
+    display: block !important;
+  }
+}
+
+.q-xl-show {
+  @media screen and (min-width: $breakpoint-xl-min) {
+    display: block !important;
+  }
+}
+
+//=================== Custom class colors
+
+.text-custom-accent-color {
+  color: $custom-accent-color;
+}
+
+.bg-custom-accent-color {
+  background-color: $custom-accent-color;
+}
+
+//=================== Round borders
+
+.round {
+  border-radius: $custom-radius !important;
+}
+
+.round-border {
+  border-radius: $custom-radius !important;
+  border: 1px solid $grey-5;
+}
+
+//================== Container like bootstrap
+
+.q-container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 15px;
+  @media screen and (min-width: $breakpoint-xs) {
+    max-width: 540px;
+  }
+  @media screen and (min-width: $breakpoint-sm) {
+    max-width: 720px;
+  }
+  @media screen and (min-width: $breakpoint-md) {
+    max-width: 960px;
+  }
+  @media screen and (min-width: $breakpoint-lg) {
+    max-width: 1140px;
+  }
+}
+
+//================= Box styles
+
+.box {
+  border-radius: $custom-radius !important;
+  box-shadow: $custom-box-shadow;
+  background-color: white;
+  padding: 15px;
+  min-height: 150px;
+  overflow: hidden;
+}
+
+.box.box-auto-height {
+  min-height: auto;
+}
+
+.box-title {
+  color: $blue-grey;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.box-title .q-icon {
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.box-collapse {
+  border-radius: $custom-radius;
+  box-shadow: $custom-box-shadow;
+  background-color: white;
+  overflow: hidden;
+}
+
+.box-collapse .q-expansion-item__border {
+  display: none;
+}
+
+.box-collapse .header-container {
+  border-bottom: 1px solid $grey-4;
+}
+
+.box-collapse .header-container .q-item__section {
+  padding: 0;
+  min-width: auto;
+  margin-right: 10px;
+  color: $blue-grey;
+  font-weight: bold;
+}
+
+.box-collapse .header-container .q-item__section .q-icon {
+  font-size: 16px;
+}
+
+.box-table {
+  border-radius: $custom-radius;
+  box-shadow: $custom-box-shadow;
+  background-color: white;
+}
+
+.border-top-color {
+  border-top: 3px solid $primary;
+  padding: 15px;
+}
+
+.border-top-color.q-table-container,
+.border-top-color.q-card {
+  padding: 0;
+}
+
+.btn-extra-small .q-btn__wrapper {
+  padding: 2px 10px !important;
+  min-height: 18px !important;
+  min-width: 18px !important;
+  font-size: 12px !important;
+}
+
+.btn-extra-small .q-icon {
+  font-size: 12px !important;
+  margin-right: 8px;
+}
+
+.btn-small .q-btn__wrapper {
+  min-height: 34px !important;
+  min-width: 34px !important;
+}
+
+.btn-small .q-icon {
+  font-size: 16px !important;
+}
+
+.btn-middle .q-btn__wrapper {
+  min-height: 40px !important;
+  min-width: 40px !important;
+}
+
+.btn-middle .q-icon {
+  font-size: 16px;
+}
+
+.btn-small.btn-middle.active-badge:after {
+  position: absolute;
+  content: '';
+  height: 12px;
+  width: 12px;
+  background: red;
+  border-radius: 50%;
+  right: -2px;
+  top: -2px;
+}
+
+.btn-outlined-custom {
+  border: 1px solid rgba(0, 13, 71, 0.15);
+}
+
+.btn-outlined-custom .q-btn__content {
+  color: $primary;
+}
+
+.btn-border-dropdown-custom {
+  border-radius: 10px;
+}
+
+.btn-border-dropdown-custom button:nth-child(2) {
+  border-left: 1px solid rgba(0, 13, 71, 0.15) !important;
+}
+
+//===================== VUE TREE SELECT
+
+.vue-treeselect__portal-target {
+  z-index: 99999999 !important;
+}
+
+.vue-treeselect__option {
+  padding: 8px 6px;
+}
+
+.cont-vue-tree {
+  border: 1px solid $grey-4;
+  border-left: 2px solid $primary;
+  border-radius: 4px;
+  display: inline-flex;
+  margin-right: 7px;
+}
+
+.cont-vue-tree .stack-label,
+.cont-vue-tree .input-title {
+  float: left;
+  padding: 6px 4px;
+  color: $primary;
+  font-size: 16px;
+  text-transform: capitalize;
+}
+
+.cont-vue-tree .vue-treeselect,
+.cont-vue-tree .q-if-inner,
+.cont-vue-tree .q-if-control {
+  float: right;
+  border: 0;
+}
+
+.cont-vue-tree .vue-treeselect__menu-container .vue-treeselect__control {
+  border: 0 !important;
+  width: auto;
+  padding-right: 5px !important;
+}
+
+.cont-vue-tree .vue-treeselect__menu-container .vue-treeselect__single-value {
+  font-size: 15px;
+  height: 36px;
+  padding: 5px 3px;
+  line-height: 1.8;
+}
+
+.cont-vue-tree .q-field__control {
+  min-height: max-content !important;
+}
+
+.cont-vue-tree .q-field__control-container {
+  min-height: max-content !important;
+}
+
+.q-form .q-field {
+  padding-bottom: 19px !important;
+}
+
+.q-form .q-field__bottom {
+  padding-top: 3px;
+}
+
+.input-title {
+  width: 100%;
+}
+
+.input-title #crudContentPage {
+  display: inline-block !important;
+  margin-bottom: 5px;
+  margin-left: 10px;
+}
+
+.img-as-bg {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.q-btn.q-btn--rounded {
+  border-radius: $custom-radius-items;
+}
+
+.q-field--outlined .q-field__control:before,
+.q-field--outlined .q-field__control:after {
+  border-radius: $custom-radius-items !important;
+}
+
+.logo-bg-primary-bk {
+  position: relative;
+}
+
+.logo-bg-primary-bk::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: $primary;
+  opacity: .1;
+}
+
+//scroll bar
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #D3DAEC;
+  border-radius: 8px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #888;
+  border-radius: 8px;
+}
+
+.text-tertiary {
+  color: $tertiary !important;
+}
+
+.bg-tertiary {
+  background: $tertiary !important;
+}
+
+.over-effect:hover {
+  background-color: $grey-2;
+}
+
+.shepherd-header {
+  background: $info !important;
+  padding: 0 1rem !important;
+}
+
+.shepherd-header .shepherd-cancel-icon {
+  color: white;
+}
+
+.shepherd-text {
+  padding: 10px 15px;
+  font-size: 14px !important;
+}
+
+.tour-item-content {
+  word-break: break-word;
+}
+
+.tour-item-content .tour-item-title {
+  line-height: 1;
+}
+
+.tour-item-content .tour-item-icon {
+  font-size: 30px;
+}
+
+.tour-primary {
+  background-color: $info !important;
+  color: #ffffff !important;
+  padding: 0.5rem 1rem !important;
+}
+
+.tour-secondary {
+  background-color: #f3f3f3 !important;
+  color: rgba(0, 0, 0, .75) !important;
+}
+
+//Builder
+.text-primary-builder {
+  color: $primaryBuilder;
+}
+
+.bg-primary-builder {
+  background-color: $primaryBuilder;
+}
+
+.text-secondary-builder {
+  color: $secondaryBuilder;
+}
+
+.bg-secondary-builder {
+  background-color: $secondaryBuilder;
+}
+
+.hover-effect-border {
+  position: relative;
+  cursor: pointer;
+}
+
+.hover-effect-border:hover::after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  border: 2px solid $primary;
+}
+
+.cursor-actionable {
+  color: #2067b0;
+  cursor: pointer;
+  max-width: max-content;
+}
+
+.cursor-actionable:hover {
+  border-bottom: 2px dotted #2067b0;
+}
+
+.selectable {
+  border: 2px solid transparent !important;
+  border-radius: 4px !important;
+  z-index: 0 !important;
+}
+
+.selectable--selected,
+.selectable:active,
+.selectable:hover {
+  background-color: $primary !important;
+  border: 2px solid $primary !important;
+  border-radius: 4px !important;
+  color: #fff;
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: all 0.2s ease-in-out;
+  z-index: 10 !important;
+}
+
+.alternating-colors > :nth-child(odd) {
+  background-color: $indigo-1;
+}
+
+.alternating-colors > :nth-child(even) {
+  background-color: white;
+}
+
+.fa.fa-caret-down {
+  font-size: 12px;
+}
+
+#q-notify .q-notifications {
+  .q-notification{
+    max-width: 600px;
+    position: relative;
+    border-radius: 5px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 8px;
+      width: calc(100% - 8px);
+      height: 100%;
+      background-color: white;
+      z-index: -1;
+      pointer-events: none;
+      border-radius: 0 5px 5px 0;
+    }
+
+    .q-notification__content {
+      align-items: flex-start;
+
+      .q-notification__icon {
+        margin-top: 10px;
+        font-size: 22px;
+      }
+
+      .notify__title {
+        color: #333333;
+        font-size: 16px;
+      }
+    }
+
+    .q-notification__progress {
+      z-index: 10;
+    }
+
+    .q-notification__message, .q-notification__actions button {
+      color: #666666;
+    }
+
+    .q-notification__actions:has(> :last-child:nth-child(1)) {
+      align-self: flex-start;
+    }
+  }
+}

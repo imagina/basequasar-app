@@ -1,28 +1,37 @@
-# Ignore everything
-/*
+.DS_Store
+.thumbs.db
+node_modules
 
-# But not these files
+# Quasar core related directories
+.quasar
+/dist
+/quasar.config.*.temporary.compiled*
 
-#src
-!/env
-!/src
-!/src-pwa
-!/src-ssr
-!.env-example
+# Cordova related directories and files
+/src-cordova/node_modules
+/src-cordova/platforms
+/src-cordova/plugins
+/src-cordova/www
 
-#other fields
-!/.gitignore
-!/package.json
-!/tailwind.config.js
-!/tsconfig.json
-!/.eslintrc.js
-!/quasar.conf.js
-!/README.md
-!/.babelrc
-!/.postcssrc.js
-!/babel.config.js
+# Capacitor related directories and files
+/src-capacitor/www
+/src-capacitor/node_modules
 
-#node_modules
-!/node_modules
-/node_modules/*
-!/node_modules/@imagina
+# BEX related directories and files
+/src-bex/www
+/src-bex/js/core
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# local .env files
+.env.local*
