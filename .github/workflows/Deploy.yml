@@ -43,11 +43,18 @@ jobs:
           # Set branch_deploy to the current branch name
           echo "branch_deploy=v8.x" >> "$GITHUB_ENV"
 
-      - name: Prepare Staging to Release
+      - name: Update Version
         run: |
-          git fetch --unshallow
+          git fetch --no-recurse-submodules
+          git submodule foreach --recursive git fetch
           git checkout $current_branch
+          git merge --allow-unrelated-histories origin/$current_branch
           git submodule foreach --recursive git checkout $current_branch
+          git submodule foreach --recursive git merge --allow-unrelated-histories origin/$current_branch
+          git add .
+          git commit -m "Realease" || true
+          npm version patch
+          git push origin $current_branch
 
       - name: Build as PWA
         run: quasar build -m pwa
