@@ -12,7 +12,7 @@ jobs:
           repository: imagina/basequasar-app
           token:  ${{ secrets.DEPLOY_ADMIN_THEME }}
 
-      - name: Set up Node.js 
+      - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '20'
