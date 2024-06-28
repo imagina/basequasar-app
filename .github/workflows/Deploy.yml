@@ -34,25 +34,25 @@ jobs:
           git config --global user.name "Imagina Actions Bot"
           git config --global user.email "carlosdevia@imaginacolombia.com"
           git config --global url."https://${{ secrets.DEPLOY_ADMIN_THEME }}@github.com/".insteadOf "https://github.com/"
-
       - name: Set Branch to push deploy
         id: set_branch
         run: |
           branch=$(git rev-parse --abbrev-ref HEAD)
-          echo "current_branch=$branch" >> "$GITHUB_ENV"
-          if [ "${{ github.ref }}" == "refs/heads/master" ]; then
-            echo "branch_deploy=v8.x" >> "$GITHUB_ENV"
-          else
-            # Set branch_deploy to the current branch name
-            echo "branch_deploy=$branch" >> "$GITHUB_ENV"
-          fi
-
-      - name: Prepare Staging to Release
+          echo "current_branch=v2.x" >> "$GITHUB_ENV"
+          # Set branch_deploy to the current branch name
+          echo "branch_deploy=v8.x" >> "$GITHUB_ENV"
+      - name: Update Version
         run: |
-          git fetch --unshallow
+          git fetch --no-recurse-submodules
+          git submodule foreach --recursive git fetch
           git checkout $current_branch
+          git merge --allow-unrelated-histories origin/$current_branch
           git submodule foreach --recursive git checkout $current_branch
-
+          #git submodule foreach --recursive git merge --allow-unrelated-histories origin/$current_branch
+          git add .
+          git commit -m "Realease" || true
+          npm version patch
+          git push origin $current_branch
       - name: Build as PWA
         run: quasar build -m pwa
 
