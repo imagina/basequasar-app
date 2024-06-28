@@ -40,7 +40,7 @@ jobs:
         run: |
           branch=$(git rev-parse --abbrev-ref HEAD)
           echo "current_branch=$branch" >> "$GITHUB_ENV"
-          f [ "${{ github.ref }}" == "refs/heads/master-action" ]; then
+          if [ "${{ github.ref }}" == "refs/heads/master-action" ]; then
             echo "branch_deploy=v10.x-action" >> "$GITHUB_ENV"
           else
             # Set branch_deploy to the current branch name
