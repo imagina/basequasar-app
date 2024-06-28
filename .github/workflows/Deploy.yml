@@ -39,7 +39,7 @@ jobs:
         id: set_branch
         run: |
           branch=$(git rev-parse --abbrev-ref HEAD)
-          echo "current_branch=v2.x-action" >> "$GITHUB_ENV"
+          echo "current_branch=v2.x" >> "$GITHUB_ENV"
           # Set branch_deploy to the current branch name
           echo "branch_deploy=v8.x-action" >> "$GITHUB_ENV"
 
@@ -48,8 +48,8 @@ jobs:
           git fetch --no-recurse-submodules
           git submodule foreach --recursive git fetch
           git checkout $current_branch
-          #git merge --allow-unrelated-histories origin/$current_branch
-          #git submodule foreach --recursive git checkout $current_branch
+          git merge --allow-unrelated-histories origin/$current_branch
+          git submodule foreach --recursive git checkout $current_branch
           #git submodule foreach --recursive git merge --allow-unrelated-histories origin/$current_branch
           git add .
           git commit -m "Realease" || true
