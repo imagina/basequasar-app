@@ -13,11 +13,11 @@ jobs:
           token:  ${{ secrets.DEPLOY_ADMIN_THEME }}
 
       - name: Set up Node.js 
-        uses: actions/setup-node@v2        
+        uses: actions/setup-node@v2
         with:
           node-version: '20'
 
-      - name: setup quasar & dependencies        
+      - name: setup quasar & dependencies
         run: |
          echo "Install Quasar CLI"
          npm install -g @quasar/cli
