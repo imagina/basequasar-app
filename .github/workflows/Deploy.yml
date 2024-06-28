@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: imagina/basequasar-app
+          repository: hrodriguezimagina/basequasar-app
           token:  ${{ secrets.DEPLOY_ADMIN_THEME }}
 
       - name: Set up Node.js
