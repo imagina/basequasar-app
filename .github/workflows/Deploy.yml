@@ -1,6 +1,9 @@
 name: Deploy CMS
 
-on: workflow_dispatch
+on:
+  push:
+    branches:
+      - workflow_v2x
 
 jobs:
   build-and-deploy:
