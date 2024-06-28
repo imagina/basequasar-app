@@ -23,7 +23,8 @@ jobs:
          npm install -g @quasar/cli
          echo "Install Yarn"  
          npm install --global yarn
-         echo "Install node Dependencies"         
+         echo "Install node Dependencies"
+         npm install
          yarn install      
 
       - name: Initialize submodules
