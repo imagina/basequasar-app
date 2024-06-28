@@ -20,43 +20,25 @@ jobs:
           git config --global user.name "Imagina Actions Bot"
           git config --global user.email "carlosdevia@imaginacolombia.com"
           git config --global url."https://${{ secrets.DEPLOY_ADMIN_THEME }}@github.com/".insteadOf "https://github.com/"
-
-      - name: Set Branch
-        id: set_branch
-        run: |
-          # Obtener la rama actual desde las variables de entorno de GitHub
-          current_branch="${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}"
-          echo "current_branch=$current_branch" >> "$GITHUB_ENV"
-          
-          # Establecer la rama a fusionar basándose en la rama actual
-          if [ "$current_branch" == "master" ]; then
-            branch_to_merge="staging"
-          fi
-          
-          # Imprimir la información de la rama a fusionar y establecerla como variable de entorno
-          echo "Rama a fusionar: $current_branch -> $branch_to_merge"
-          echo "branch_to_merge=$branch_to_merge" >> "$GITHUB_ENV"
-
+      
       - name: Update Version
         run: |
           git fetch --no-recurse-submodules
-          git submodule foreach --recursive git fetch
-          if [ "$current_branch" == "master" ]; then
-            git checkout $branch_to_merge
-            git merge --allow-unrelated-histories origin/$branch_to_merge
-            git submodule foreach --recursive git checkout $branch_to_merge
-            git submodule foreach --recursive git merge --allow-unrelated-histories origin/$branch_to_merge
-            git add .
-            git commit -m "Realease" || true
-            npm version patch
-            git push origin $branch_to_merge
-          fi
+          git submodule foreach --recursive git fetch          
+          git checkout v2.x
+          git merge --allow-unrelated-histories origin/v2.x
+          git submodule foreach --recursive git checkout v2.x
+          git submodule foreach --recursive git merge --allow-unrelated-histories origin/v2.x
+          git add .
+          git commit -m "Realease" || true
+          npm version patch
+          git push origin v2.x
 
       - name: Merge release to input branch
         run: |
-          git checkout $current_branch
-          git merge --allow-unrelated-histories origin/$branch_to_merge
-          git submodule foreach --recursive git checkout $current_branch   
-          git submodule foreach --recursive git merge --allow-unrelated-histories origin/$branch_to_merge
-          git submodule foreach --recursive git push -u origin $current_branch
-          git push origin $current_branch
+          git checkout v2.x
+          git merge --allow-unrelated-histories origin/v2.x
+          git submodule foreach --recursive git checkout v2.x
+          git submodule foreach --recursive git merge --allow-unrelated-histories origin/v2.x
+          git submodule foreach --recursive git push -u origin v2.x
+          git push origin v2.x

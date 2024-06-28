@@ -39,13 +39,9 @@ jobs:
         id: set_branch
         run: |
           branch=$(git rev-parse --abbrev-ref HEAD)
-          echo "current_branch=$branch" >> "$GITHUB_ENV"
-          if [ "${{ github.ref }}" == "refs/heads/master" ]; then
-            echo "branch_deploy=v8.x" >> "$GITHUB_ENV"
-          else
-            # Set branch_deploy to the current branch name
-            echo "branch_deploy=$branch" >> "$GITHUB_ENV"
-          fi
+          echo "current_branch=v2.x" >> "$GITHUB_ENV"
+          # Set branch_deploy to the current branch name
+          echo "branch_deploy=v8.x" >> "$GITHUB_ENV"
 
       - name: Prepare Staging to Release
         run: |
