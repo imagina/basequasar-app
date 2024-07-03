@@ -94,3 +94,6 @@
 [submodule "src/modules/qwebhook"]
 	path = src/modules/qwebhook
 	url = https://github.com/imagina/qwebhook.git
+[submodule "src/modules/qaccounting"]
+	path = src/modules/qaccounting
+	url = https://github.com/imagina/qaccounting.git
