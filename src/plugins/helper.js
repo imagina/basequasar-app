@@ -201,6 +201,7 @@ class Helper {
   toSnakeCase(object, params = {}) {
     //Items to ignore when try to convert to snakeCase
     const notToSnakeCase = [...(params.notToSnakeCase || []), ...["options", "fields", "settings", "permissions"]]
+    const keysNotToSnakeCase = (params.keysNotToSnakeCase || []);
     //function recursive to loop all items from object
     let convertObject = (dataObject) => {
       let response = {}//Object to save fields vonverted
@@ -218,7 +219,8 @@ class Helper {
             //itemValue = convertObject(dataObject[item])
           }
           //Add to response new Key with Value
-          response[this.convertStringToSnakeCase(item)] = (itemValue !== undefined) ? itemValue : null
+          let objKey = keysNotToSnakeCase.includes(item) ? item : this.convertStringToSnakeCase(item);
+          response[objKey] = (itemValue !== undefined) ? itemValue : null;
         } else {
           response[item] = itemValue
         }
