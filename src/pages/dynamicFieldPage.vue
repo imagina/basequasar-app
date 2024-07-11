@@ -127,7 +127,7 @@ export default {
             imageField: 'mediaFiles.mainimage.url',
           },
           loadOptions: {
-            apiRoute: 'apiRoutes.qcommerce.categories',
+            apiRoute: 'apiRoutes.qblog.categories',
             select: {label: 'title', id: 'id'},
           }
         },
