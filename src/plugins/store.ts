@@ -16,7 +16,7 @@ const methods = {
   getSetting (name: string)
   {
     let response = store.getters['qsiteApp/getSettingValueByName'](name);
-    if(response === '1' || response === '0' ) return Number(response);
+    if(['1', '0'].includes(response)) return Number(response);
 
     return response;
   },
