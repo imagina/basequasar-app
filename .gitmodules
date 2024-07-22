@@ -97,3 +97,6 @@
 [submodule "src/modules/qaccounting"]
 	path = src/modules/qaccounting
 	url = https://github.com/imagina/qaccounting.git
+[submodule "src/modules/qtask"]
+	path = src/modules/qtask
+	url = https://github.com/imagina/qtask.git
