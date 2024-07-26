@@ -13,6 +13,7 @@
 #other fields
 !/.gitignore
 !/package.json
+!/quasar.extensions.json
 !/tailwind.config.js
 !/tsconfig.json
 !/.eslintrc.js
