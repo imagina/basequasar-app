@@ -1,5 +1,5 @@
 <template>
-  <q-layout id="layoutMaster" :view="(appConfig.mode == 'iadmin') ? 'lHh LpR lFf' : 'lHr LpR lFf'">
+  <q-layout id="layoutMaster" class="tw-bg-gray-50" :view="(appConfig.mode == 'iadmin') ? 'lHh LpR lFf' : 'lHr LpR lFf'">
     <!-- HEADER -->
     <component :is="components.header" />
 
@@ -12,11 +12,19 @@
       <bannerAlert v-bind="configBanner()" v-if="isAppOffline || isWarning" />
       <div id="routeInformationContent" v-if="appConfig.mode == 'iadmin'"
            :class="`q-hide q-md-show ${iadminTheme == 1 ? 'bg-primary' : 'bg-white'}`">
-        <div id="subContent" class="row justify-between items-center">
+        <div id="subContent" class="row justify-between items-center tw-bg-gray-50">
           <div class="row items-center">
             <!-- Back Button -->
-            <q-btn icon="fas fa-arrow-left" unelevated round color="primary" dense class="btn-small q-mr-md"
-                   @click="$helper.backHistory()">
+            <q-btn 
+              icon="fa-regular fa-arrow-left" 
+              unelevated 
+              round 
+              text-color="primary"
+              dense 
+              size="12px"
+              class="btn-small q-mr-md tw-bg-gray-100"
+              @click="$helper.backHistory()"
+            >
               <q-tooltip>{{ $tr('isite.cms.label.back') }}</q-tooltip>
             </q-btn>
             <!--Breadcrumb-->
@@ -121,21 +129,6 @@ export default {
       modalForce: {
         shouldChangePassword: false
       },
-      bannerType: {
-        offline: {
-          icon: {
-            name: 'fa-regular fa-wifi-slash',
-          },
-          message: this.$tr('isite.cms.message.appOffline'),
-          classWrapper: 'tw-text-white tw-bg-gray-900',
-          action: () => eventBus.emit('toggleMasterDrawer', 'offline')
-        },
-        notification: {
-          marquee: true,
-          message: this.$store.getters['qsiteApp/getSettingValueByName']('isite::globalWarningMessage'),
-          classWrapper: 'tw-bg-yellow-400 tw-text-black tw-font-semibold',
-        }
-      }
     };
   },
   computed: {
@@ -230,7 +223,36 @@ export default {
     },
     isWarning() {
       return this.$store.getters['qsiteApp/getSettingValueByName']('isite::globalWarningMessage')
-    }
+    },
+    pendingRequests() {
+      return this.$store.state.qofflineMaster.pendingRequests
+    },
+    bannerType() {
+      return {
+        offline: {
+          icon: {
+            name: 'fa-regular fa-wifi-slash',
+          },
+          message: `
+            <span>${this.$tr('isite.cms.message.appOffline')}</span>
+            ${this.pendingRequests ? (`
+              <div class="tw-bg-yellow-300 tw-rounded-lg tw-h-full tw-ml-2 tw-p-1">
+                <span class="tw-font-semibold tw-text-black">
+                  ${this.pendingRequests} Requests in queue
+                </span>
+              </div>
+            `) : ''}
+          `,
+          classWrapper: 'tw-text-white tw-bg-gray-900',
+          action: () => eventBus.emit('toggleMasterDrawer', 'offline')
+        },
+        notification: {
+          marquee: true,
+          message: this.$store.getters['qsiteApp/getSettingValueByName']('isite::globalWarningMessage'),
+          classWrapper: 'tw-bg-yellow-400 tw-text-black tw-font-semibold',
+        }
+      }
+    },
   },
   methods: {
     init() {
@@ -297,7 +319,6 @@ export default {
     #subContent {
       padding: 8px 10px 8px 16px;
       border-radius: $custom-radius 0 0 0;
-      background: linear-gradient(180deg, #F1F4FA 0%, #FFFFFF 100%)
     }
   }
 

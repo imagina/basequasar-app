@@ -3,6 +3,11 @@ import { alert, cache } from 'src/plugins/utils';
 import { Loading } from 'quasar';
 import qs from 'qs';
 
+function versionToNumber(version) {
+  return version.split('.').reduce((acc, part, index) => {
+    return acc + parseInt(part, 10) * Math.pow(1000, 2 - index);
+  }, 0);
+}
 export default function({ app, router, store, ssrContext }) {
   //Open Loading
   Loading.show();
@@ -102,9 +107,16 @@ export default function({ app, router, store, ssrContext }) {
     const backendVersion = response.headers['x-app-version']
     const version = await cache.get.item(KEY)
 
-    if (version && backendVersion) {
+    if (
+      typeof backendVersion === 'string' &&
+      typeof version === 'string' &&
+      version.length > 0 &&
+      backendVersion.length > 0
+     ) {
       //Check if the version is updated
-      if (backendVersion > version && router.currentRoute.value.name != 'app.update.app') {
+      if (
+        versionToNumber(backendVersion) > versionToNumber(version) &&
+        router.currentRoute.value.name != 'app.update.app') {
         router.push({
           name: 'app.update.app',
           query: {
@@ -112,7 +124,7 @@ export default function({ app, router, store, ssrContext }) {
           }
         })
       }
-    } else if (backendVersion) {
+    } else if (typeof backendVersion === 'string' && backendVersion.length > 0) {
       await cache.set(KEY, backendVersion)
     }
 

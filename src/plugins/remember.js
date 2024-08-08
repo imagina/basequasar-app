@@ -18,10 +18,10 @@ class Remember {
   /*Return data in cache*/
   async(params = {}) {
     return new Promise(async (resolve, reject) => {
-      params = {key: false, seconds: (3600 * 3), callBack: false, refresh: false, inCache: false, ...params}//Validate params
+      params = {key: false, seconds: (3600 * 3), callBack: false, refresh: false, isOffline: false, ...params}//Validate params
       if (params.refresh) cache.remove(params.key)//Remove data from cache
       let currentDateInSeconds = (new Date().getTime() / 1000)//Current date in seconds
-      let responseData = await cache.get.item(params.key)//Get data from cache
+      let responseData = params.refresh && params.isOffline ? false : await cache.get.item(params.key)//Get data from cache
       let dataError = false //To errors
 
       //Validate if was expired
@@ -48,7 +48,9 @@ class Remember {
             }
 
           //Save in cache
-          await cache.set(params.key, responseData)
+          if (navigator.onLine) {
+            await cache.set(params.key, responseData);
+          }
         }).catch(error => {
           dataError = error
         })
