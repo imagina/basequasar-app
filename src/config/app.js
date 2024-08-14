@@ -5,7 +5,7 @@ export default {
   ...coreApp,
   version: psjson.version, //Version
   //git submodule foreach --recursive git merge dev
-  //baseUrl: 'https://dev-waruwa-clone.ozonohosting.com',//Define base url
+  baseUrl: 'https://ibuilder.ozonohosting.com',//Define base url
   //baseUrl: 'https://dev-colchones-amanecer.ozonohosting.com',//Define base url
   //mode: 'ipanel', //Define load mode
   //useLocalTranslations: true//Define from where use the translations
