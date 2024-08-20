@@ -11,7 +11,7 @@
       <!--Page route-->
       <bannerAlert v-bind="configBanner()" v-if="isAppOffline || isWarning" />
       <div id="routeInformationContent" v-if="appConfig.mode == 'iadmin'"
-           :class="`q-hide q-md-show ${iadminTheme == 1 ? 'bg-primary' : 'bg-white'}`">
+           :class="`q-hide q-md-show ${['1','3'].includes(iadminTheme) ? 'bg-primary' : 'bg-white'}`">
         <div id="subContent" class="row justify-between items-center">
           <div class="row items-center">
             <!-- Back Button -->
@@ -58,10 +58,13 @@ import metaDataMixin from './metaDataMixin'
 //Components Admin
 import headerAdminTheme1 from 'modules/qsite/_components/admin/theme1/header';
 import headerAdminTheme2 from 'modules/qsite/_components/admin/theme2/header';
+import headerAdminTheme3 from 'modules/qsite/_components/admin/theme3/header';
 import drawersAdminTheme1 from 'modules/qsite/_components/admin/theme1/drawers';
 import drawersAdminTheme2 from 'modules/qsite/_components/admin/theme2/drawers';
+import drawersAdminTheme3 from 'modules/qsite/_components/admin/theme3/drawers';
 import footerAdminTheme1 from 'modules/qsite/_components/admin/theme1/footer';
 import footerAdminTheme2 from 'modules/qsite/_components/admin/theme2/footer';
+import footerAdminTheme3 from 'modules/qsite/_components/admin/theme3/footer';
 //Components Panel
 import headerPanel from 'modules/qsite/_components/panel/header';
 import drawersPanel from 'modules/qsite/_components/panel/drawers';
@@ -85,10 +88,13 @@ export default {
     //Admin
     headerAdminTheme1,
     headerAdminTheme2,
+    headerAdminTheme3,
     drawersAdminTheme1,
     drawersAdminTheme2,
+    drawersAdminTheme3,
     footerAdminTheme1,
     footerAdminTheme2,
+    footerAdminTheme3,
     //Panel
     headerPanel,
     drawersPanel,
@@ -164,6 +170,11 @@ export default {
             header: headerAdminTheme2,
             drawer: drawersAdminTheme2,
             footer: footerAdminTheme2
+          },
+          theme3: {
+            header: headerAdminTheme3,
+            drawer: drawersAdminTheme3,
+            footer: footerAdminTheme3
           }
         };
         //Return theme components
