@@ -2,7 +2,12 @@
   <div id="indexMasterPage" class="relative-position">
     <!--Page Actions-->
     <div class="q-mb-md">
-      <page-actions :title="$tr($route.meta.title)" :excludeActions="['refresh']" :tour-name="tourName" />
+      <page-actions 
+        :title="$tr($route.meta.title)" 
+        :excludeActions="['refresh']" 
+        :tour-name="tourName" 
+        @activateTour="$tour.start(tourName)"
+      />
     </div>
 
     <!--Activities-->
@@ -44,7 +49,6 @@ export default {
       setTimeout(() => {
         this.loading = false;
         this.setQuickCards();
-        this.$tour.start(this.tourName);
       }, 1000);
     });
   },
