@@ -136,6 +136,16 @@ class DatePlugin {
       ...optionsCalendar
     });
   }
+
+  calculateNewDate(date, { isAdd = false, amount = 1, unit = 'day', format, isStart = true }) {
+    let newDate = moment(date);
+
+    newDate = isAdd ? newDate.add(amount, unit) : newDate.subtract(amount, unit);
+
+    newDate = isStart ? newDate.startOf(unit) : newDate.endOf(unit)
+
+    return newDate.format(format);
+  }
 }
 
 const date = new DatePlugin();
