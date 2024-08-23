@@ -51,7 +51,8 @@ export default {
     'qcredit',
     'qoffline',
     'qwebhook',
-    'qaccounting'
+    'qaccounting',
+    'qtask'
   ],
   //Cache
   saveCache: {
