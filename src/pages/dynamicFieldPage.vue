@@ -105,6 +105,19 @@ export default {
             endOfDay: '16:59:59',
           }
         },
+        timeSpent: {
+          ...globalData,
+          value: '1w 3d',
+          type: 'timeSpent',
+          help: {
+            description: 'Please use this format: 2w 4d 6h 45m'
+          },
+          props: {
+            label: 'type: timeSpent',
+            /* unit: weeks, days, hours, minutes */
+            unit: 'hours'
+          }
+        },
         select: {
           ...globalData,
           type: 'select',
