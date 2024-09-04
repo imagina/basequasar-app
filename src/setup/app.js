@@ -52,7 +52,8 @@ export default {
     'qoffline',
     'qwebhook',
     'qaccounting',
-    'qtask'
+    'qtask',
+    'qcomment'
   ],
   //Cache
   saveCache: {
