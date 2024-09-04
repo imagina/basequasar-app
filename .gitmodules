@@ -100,3 +100,6 @@
 [submodule "src/modules/qtask"]
 	path = src/modules/qtask
 	url = https://github.com/imagina/qtask.git
+[submodule "src/modules/qcomment"]
+	path = src/modules/qcomment
+	url = https://github.com/imagina/qcomment.git
