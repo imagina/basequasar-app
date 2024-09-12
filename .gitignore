@@ -33,5 +33,10 @@ yarn-error.log*
 *.njsproj
 *.sln
 
-# local .env files
-.env.local*
+# Ignore Playwright files
+
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/
+
