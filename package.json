@@ -44,6 +44,7 @@
     "terser-webpack-plugin": "^5.3.10",
     "vue": "3.4.15",
     "vue-advanced-chat": "^2.0.10",
+    "vue-cal": "^4.10.0",
     "vue-chartjs": "^5.3.0",
     "vue-chartjs-exporter": "^1.0.2",
     "vue-cropperjs": "^5.0.0",
