@@ -53,7 +53,8 @@ export default {
     'qwebhook',
     'qaccounting',
     'qtask',
-    'qcomment'
+    'qcomment',
+    'qtelemetry'
   ],
   //Cache
   saveCache: {

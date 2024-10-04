@@ -103,3 +103,6 @@
 [submodule "src/modules/qcomment"]
 	path = src/modules/qcomment
 	url = https://github.com/imagina/qcomment.git
+[submodule "src/modules/qtelemetry"]
+	path = src/modules/qtelemetry
+	url = https://github.com/imagina/qtelemetry.git
