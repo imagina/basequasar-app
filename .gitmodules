@@ -106,3 +106,6 @@
 [submodule "src/modules/qtelemetry"]
 	path = src/modules/qtelemetry
 	url = https://github.com/imagina/qtelemetry.git
+[submodule "src/modules/qwallet"]
+	path = src/modules/qwallet
+	url = https://github.com/imagina/qwallet.git

@@ -34,6 +34,7 @@ export default {
     'qlocations',
     'qappointment',
     'qbooking',
+    'qwallet',
     'qgamification',
     'qevent',
     'qpage',
