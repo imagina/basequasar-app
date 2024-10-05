@@ -141,7 +141,6 @@ export default {
       ...this.options,
       className: "plot"
     };
-    console.count('render')
     if (this.defer) {
       const mounted = (el) => {
         disconnect(); // remove old listeners
