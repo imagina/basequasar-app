@@ -17,7 +17,6 @@
     "@fortawesome/fontawesome-pro": "^6.5.1",
     "@googlemaps/js-api-loader": "^1.16.2",
     "@mayasabha/ckeditor4-vue3": "^1.0.8",
-    "@observablehq/plot": "^0.6.16",
     "@quasar/extras": "^1.16.4",
     "@quasar/quasar-ui-qcalendar": "^4.0.0-beta.16",
     "@tkmam1x/vue3-treeselect": "^0.1.15",
