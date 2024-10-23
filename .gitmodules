@@ -109,3 +109,6 @@
 [submodule "src/modules/qwallet"]
 	path = src/modules/qwallet
 	url = https://github.com/imagina/qwallet.git
+[submodule "src/modules/qretail"]
+	path = src/modules/qretail
+	url = https://github.com/imagina/qretail.git
