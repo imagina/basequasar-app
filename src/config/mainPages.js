@@ -1,5 +1,9 @@
 import appConfig from 'src/setup/app'
 
+let homePage = (appConfig.mode == 'iadmin') ? () => import('src/pages/adminHome.vue') :
+  () => import('src/pages/panelHome.vue');
+if(appConfig.productFrom) homePage = require(`modules/${appConfig.productFrom}/_product/home`).default
+
 export default {
   //Home Page
   home: {
@@ -8,8 +12,7 @@ export default {
     path: '/',
     name: 'app.home',
     layout: () => import('layouts/master.vue'),
-    page: (appConfig.mode == 'iadmin') ? () => import('src/pages/adminHome.vue') :
-      () => import('src/pages/panelHome.vue'),
+    page: homePage,
     title: 'isite.cms.sidebar.pageHome',
     icon: 'fal fa-home',
     authenticated: true,

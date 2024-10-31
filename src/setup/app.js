@@ -6,10 +6,19 @@ let host = window.location.href;
 tagsToParceHost.forEach(tagToReplace => host = host.replace(tagToReplace, ''));
 let loadFrom = host.split('/')[1];
 
+//Define the productFrom and mode
+let productFrom = null;
+let mode = 'iadmin';
+if (loadFrom) {
+  productFrom = ['booking'].includes(loadFrom) ? `q${loadFrom}` : null;
+  if (!productFrom && ['iadmin', 'ipanel'].includes(loadFrom)) mode = loadFrom;
+}
+
 export default {
   //baseUrl: 'https://ibuilder.ozonohosting.com',
   version: pjson.version,//Package version
-  mode: (loadFrom && (['iadmin', 'ipanel'].indexOf(loadFrom) != -1)) ? loadFrom : 'iadmin',//Define load mode
+  mode,//Define load mode
+  productFrom,//Define load as product
   validateModeAccess: true,//Define if validate app mode access
   forceRoleAndDepartment: false,//Force to select role and department
   //useLocalTranslations: true,//Define from where use the translations
