@@ -8,12 +8,13 @@
   </template>
   <script>
   //mixins
-  import sidebarMixins from './themes/sidebarMixins'
+  import sidebarMixins from 'layouts/themes/_mixins/sidebar'
   //Components
 
   import { eventBus } from 'src/plugins/utils'
 
   export default {
+    name: 'masterBlankDrawer',
     beforeUnmount() {
       eventBus.off('toggleMasterDrawer')
       eventBus.off('openMasterDrawer')

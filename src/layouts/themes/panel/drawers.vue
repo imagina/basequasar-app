@@ -100,7 +100,7 @@
 </template>
 <script>
 //mixins
-import sidebarMixins from 'layouts/themes/sidebarMixins'
+import sidebarMixins from 'layouts/themes/_mixins/sidebar'
 //Components
 import menuList from 'modules/qsite/_components/master/recursiveItem'
 import checkin from 'modules/qcheckin/_components/checkin'

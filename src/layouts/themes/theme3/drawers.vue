@@ -45,7 +45,7 @@
 </template>
 <script>
 //mixins
-import sidebarMixins from 'src/layouts/themes/sidebarMixins'
+import sidebarMixins from 'layouts/themes/_mixins/sidebar'
 //Components
 import configList from 'modules/qsite/_components/master/configList'
 import chatList from 'modules/qchat/_components/drawerChatList'

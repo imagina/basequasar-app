@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import drawersBlank from './drawersBlank.vue';
+import drawersBlank from 'layouts/themes/blank/drawers.vue';
 import cropperComponent from 'src/modules/qsite/_components/master/cropper.vue';
 import metaDataMixin from './metaDataMixin';
 
