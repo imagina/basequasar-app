@@ -136,15 +136,15 @@ export default {
           drawer: require(`modules/${this.appConfig.productFrom}/_product/drawers`).default,
           footer: require(`modules/${this.appConfig.productFrom}/_product/footer`).default
         } : {
-          header: require(`modules/qsite/_components/admin/theme${this.iadminTheme}/header`).default,
-          drawer: require(`modules/qsite/_components/admin/theme${this.iadminTheme}/drawers`).default,
-          footer: require(`modules/qsite/_components/admin/theme${this.iadminTheme}/footer`).default
+          header: require(`layouts/themes/theme${this.iadminTheme}/header`).default,
+          drawer: require(`layouts/themes/theme${this.iadminTheme}/drawers`).default,
+          footer: require(`layouts/themes/theme${this.iadminTheme}/footer`).default
         };
       } else { //Reutn components to ipanel
         return {
-          header: require('modules/qsite/_components/panel/header').default,
-          drawer: require('modules/qsite/_components/panel/drawers').default,
-          footer: require('modules/qsite/_components/panel/footer').default
+          header: require('layouts/themes/panel/header').default,
+          drawer: require('layouts/themes/panel/drawers').default,
+          footer: require('layouts/themes/panel/footer').default
         };
       }
     },
