@@ -12,10 +12,10 @@
         </div>
         <!-- Profile -->
         <div id="footerMobileProfile" class="item-footer col cursor-pointer">
-          <q-btn 
-            :to="{name: 'user.profile.me'}" 
-            flat 
-            no-caps 
+          <q-btn
+            :to="{name: 'user.profile.me'}"
+            flat
+            no-caps
             v-if="quserState.authenticated"
             class="item-icon" padding="none"
           >
@@ -64,14 +64,14 @@
         <q-card-section class="row items-center no-wrap q-pa-none">
           <q-list separator class="full-width" v-close-popup>
             <!--Settings-->
-            <q-item clickable v-ripple @click.native="eventBus.emit('toggleMasterDrawer','config')">
+            <q-item clickable v-ripple @click="eventBus.emit('toggleMasterDrawer','config')">
               <q-item-section avatar>
                 <q-icon color="primary" name="fa-light fa-folder-gear"/>
               </q-item-section>
               <q-item-section class="ellipsis">{{ $tr('isite.cms.label.setting') }}</q-item-section>
             </q-item>
             <!--Offline-->
-            <q-item clickable v-ripple @click.native="eventBus.emit('toggleMasterDrawer','offline')">
+            <q-item clickable v-ripple @click="eventBus.emit('toggleMasterDrawer','offline')">
               <q-item-section avatar>
                 <q-icon color="primary" name="fa-light fa-wifi-slash"/>
               </q-item-section>
@@ -79,14 +79,14 @@
             </q-item>
             <!--Chat action-->
             <q-item clickable v-ripple v-if="$hasAccess('ichat.conversations.index')"
-                    @click.native="eventBus.emit('toggleMasterDrawer','chat')">
+                    @click="eventBus.emit('toggleMasterDrawer','chat')">
               <q-item-section avatar>
                 <q-icon color="primary" name="fa-light fa-message"/>
               </q-item-section>
               <q-item-section class="ellipsis">Chat</q-item-section>
             </q-item>
             <!--Checking action-->
-            <q-item clickable v-ripple @click.native="eventBus.emit('toggleMasterDrawer','checkin')"
+            <q-item clickable v-ripple @click="eventBus.emit('toggleMasterDrawer','checkin')"
                     v-if="$hasAccess('icheckin.shifts.create')">
               <q-item-section avatar>
                 <q-icon color="primary" name="fas fa-stopwatch"/>
@@ -94,7 +94,7 @@
               <q-item-section class="ellipsis">{{ $tr('icheckin.cms.sidebar.checkin') }}</q-item-section>
             </q-item>
             <!--Recommendation action-->
-            <q-item clickable v-ripple @click.native="eventBus.emit('toggleMasterDrawer','recommendation')"
+            <q-item clickable v-ripple @click="eventBus.emit('toggleMasterDrawer','recommendation')"
                     v-if="params.recommendations ? true : false">
               <q-item-section avatar>
                 <q-icon color="primary" name="fas fa-hat-wizard"/>
@@ -102,14 +102,14 @@
               <q-item-section class="ellipsis">{{ $trp('isite.cms.label.recommendation') }}</q-item-section>
             </q-item>
             <!--Notification action-->
-            <q-item clickable v-ripple @click.native="eventBus.emit('toggleMasterDrawer','notification')">
+            <q-item clickable v-ripple @click="eventBus.emit('toggleMasterDrawer','notification')">
               <q-item-section avatar>
                 <q-icon color="primary" name="fa-light fa-bell"/>
               </q-item-section>
               <q-item-section class="ellipsis">{{ $trp('isite.cms.label.notification') }}</q-item-section>
             </q-item>
             <!-- Logout -->
-            <q-item clickable v-ripple @click.native="$router.push({name: 'auth.logout'})">
+            <q-item clickable v-ripple @click="$router.push({name: 'auth.logout'})">
               <q-item-section avatar>
                 <q-icon color="primary" name="fa-light fa-right-from-bracket"/>
               </q-item-section>
@@ -126,6 +126,7 @@
 import { eventBus } from 'src/plugins/utils'
 
 export default {
+  name: 'masterAdminFooterTheme2',
   beforeUnmount() {
     eventBus.off('setMobileMainAction')
   },
@@ -134,7 +135,7 @@ export default {
   watch: {
     $route: {
       deep: true,
-      handler: function (newValue) {
+      handler: function () {
         this.mainAction = config('app.mobilMainAction')
       }
     },

@@ -8,7 +8,7 @@
   </template>
   <script>
   //mixins
-  import sidebarMixins from 'modules/qsite/_mixins/sidebarMixins'
+  import sidebarMixins from './themes/sidebarMixins'
   //Components
 
   import { eventBus } from 'src/plugins/utils'
@@ -24,6 +24,7 @@
     mounted() {
       this.$nextTick(function () {
         this.init()
+        this.miniState = this.windowSize == 'mobile' ? false : true
       })
     },
     data() {
@@ -32,12 +33,17 @@
         windowWith: window.innerWidth,
         projectName: this.$getSetting('core::site-name'),
         logo: this.$store.state.qsiteApp.logo,
-        miniState: this.windowSize == 'mobile' ? false : true,
+        miniState: false,
         drawer: {
           filter: false,
         },
         appConfig: config('app'),
         filter: this.$filter
+      }
+    },
+    watch: {
+      routeSubHeader() {
+        this.drawer.recommendation = false
       }
     },
     computed: {
@@ -54,7 +60,6 @@
         return this.$getMediaSetting('isite::logoIadminSM')['path']
       },
       routeSubHeader() {
-        this.drawer.recommendation = false
         return this.$route.meta.subHeader || {}
       },
       //Version app text

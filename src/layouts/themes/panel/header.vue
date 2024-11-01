@@ -28,6 +28,7 @@ import siteActions from 'modules/qsite/_components/master/siteActions'
 import { eventBus } from 'src/plugins/utils'
 
 export default {
+  name: 'masterPanelHeader',
   beforeUnmount() {
     eventBus.off('header.badge.manage')
   },
@@ -68,7 +69,7 @@ export default {
 
       //Set Home page and current page
       let pages = (this.currentRoute.name.indexOf('app.home') == -1) ?
-          [config(`pages.mainqsite.home`), this.currentRoute.meta] : [config(`pages.mainqsite.home`)]
+          [config('pages.mainqsite.home'), this.currentRoute.meta] : [config('pages.mainqsite.home')]
 
       //Get page from breadcrum
       breadcrumbs.forEach(pageName => pages.splice(1, 0, config(`pages.${pageName}`)))

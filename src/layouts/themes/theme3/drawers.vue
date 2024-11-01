@@ -45,18 +45,18 @@
 </template>
 <script>
 //mixins
-import sidebarMixins from 'modules/qsite/_mixins/sidebarMixins'
+import sidebarMixins from 'src/layouts/themes/sidebarMixins'
 //Components
 import configList from 'modules/qsite/_components/master/configList'
 import chatList from 'modules/qchat/_components/drawerChatList'
 import menuList from 'modules/qsite/_components/master/recursiveItem'
-import checkin from 'modules/qcheckin/_components/checkin'
 import masterRecommendation from 'modules/qsite/_components/master/masterRecommendations'
 import masterNotifications from 'modules/qnotification/_components/drawerNotifications'
 import { eventBus } from 'src/plugins/utils'
 import offline from 'modules/qoffline/_components/drawerOffline'
 
 export default {
+  name: 'masterAdminDrawerTheme3',
   beforeUnmount() {
     eventBus.off('toggleMasterDrawer')
     eventBus.off('openMasterDrawer')
@@ -67,7 +67,6 @@ export default {
     menuList,
     configList,
     chatList,
-    checkin,
     masterRecommendation,
     masterNotifications,
     offline
@@ -75,6 +74,7 @@ export default {
   mounted() {
     this.$nextTick(function () {
       this.init()
+      this.miniState = this.windowSize == 'mobile' ? false : true;
     })
   },
   data() {
@@ -82,7 +82,7 @@ export default {
       windowHeight: window.innerHeight,
       windowWith: window.innerWidth,
       projectName: this.$getSetting('core::site-name'),
-      miniState: this.windowSize == 'mobile' ? false : true,
+      miniState: false,
       drawer: {
         menu: this.$q.platform.is.mobile ? false : true,
         config: false,
@@ -96,12 +96,16 @@ export default {
       eventBus
     }
   },
+  watch: {
+    routeSubHeader() {
+      this.drawer.recommendation = false
+    }
+  },
   computed: {
     windowSize() {
       return this.windowWith >= '992' ? 'desktop' : 'mobile'
     },
     routeSubHeader() {
-      this.drawer.recommendation = false
       return this.$route.meta.subHeader || {}
     },
     logo() {

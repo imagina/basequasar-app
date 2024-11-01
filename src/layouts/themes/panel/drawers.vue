@@ -100,7 +100,7 @@
 </template>
 <script>
 //mixins
-import sidebarMixins from 'src/layouts/themes/sidebarMixins'
+import sidebarMixins from 'layouts/themes/sidebarMixins'
 //Components
 import menuList from 'modules/qsite/_components/master/recursiveItem'
 import checkin from 'modules/qcheckin/_components/checkin'
@@ -121,8 +121,7 @@ export default {
     this.$nextTick(function () {
       this.init()
       this.miniState = this.windowSize == 'mobile' ? false : true
-
-      console.warn(this.drawer)
+      this.drawer.menu = this.windowSize == 'mobile' ? false : true
     })
   },
   data() {

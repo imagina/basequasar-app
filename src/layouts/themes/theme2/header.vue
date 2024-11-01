@@ -21,6 +21,7 @@ import siteActions from 'modules/qsite/_components/master/siteActions'
 import { eventBus } from 'src/plugins/utils'
 
 export default {
+  name: 'masterAdminHeaderTheme2',
   components: {siteActions},
   mounted() {
     this.$nextTick(function () {

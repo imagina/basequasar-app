@@ -68,7 +68,7 @@ import offline from 'modules/qoffline/_components/drawerOffline'
 import { eventBus } from 'src/plugins/utils'
 
 export default {
-  name: 'masterDrawers2',
+  name: 'masterAdminDrawerTheme2',
   beforeUnmount() {
     eventBus.off('toggleMasterDrawer')
     eventBus.off('openMasterDrawer')

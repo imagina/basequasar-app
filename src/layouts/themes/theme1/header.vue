@@ -18,6 +18,7 @@
 import siteActions from 'modules/qsite/_components/master/siteActions'
 
 export default {
+  name: 'masterAdminHeaderTheme1',
   props: {},
   components: {siteActions},
   mounted() {
