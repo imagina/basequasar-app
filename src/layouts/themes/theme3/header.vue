@@ -15,7 +15,7 @@
 </template>
 <script>
 //Components
-import siteActions from 'modules/qsite/_components/master/siteActions'
+import siteActions from 'src/components/siteActions/index.vue'
 
 export default {
   name: 'masterAdminHeaderTheme3',
