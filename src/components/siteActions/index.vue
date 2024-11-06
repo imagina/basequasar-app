@@ -9,25 +9,26 @@
           v-bind="{...defaultButtonProps, ...btn.props}"
           @click="btn.action != undefined ? btn.action() : null"
         >
+          <q-icon v-if="btn.props.rightIcon" :name="btn.props.rightIcon" class="q-ml-xs" size="12px" color="blue-grey"/>
           <q-menu v-if="btn.menu" fit>
             <div class="q-py-sm q-px-md">
               <div class="text-subtitle1 text-primary">{{ btn.label }}</div>
               <!--Separator-->
               <q-separator class="q-my-sm" />
               <!-- Description -->
-              <div class="text-caption text-blue-grey">{{ $tr('isite.cms.message.descriptionHelpCenter') }}.</div>
+              <div class="text-caption text-blue-grey" v-if="btn.desc">{{ btn.desc }}.</div>
               <!--Actions-->
               <q-list separator class="no-shadow" style="min-width: 260px">
                 <q-item v-for="(act, keyAction) in btn.menu.actions" :key="keyAction" clickable v-ripple
                         v-close-popup @click="act.action != undefined ? act.action() : null">
                   <q-item-section class="text-blue-grey">
                     <div>
-                      <q-icon :name="act.icon" class="q-mr-sm" color="primary" size="xs" />
+                      <q-icon :name="act?.icon" class="q-mr-sm" color="primary" size="xs" />
                       {{ act.label }}
                     </div>
                   </q-item-section>
                   <q-item-section side>
-                    <q-icon name="fa-light fa-chevron-right" size="12px" />
+                    <q-icon :name="act?.rightIcon" size="12px"/>
                   </q-item-section>
                 </q-item>
               </q-list>

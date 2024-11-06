@@ -18,7 +18,8 @@ export default function controller(props: ControllerProps) {
       class: 'btn-small',
       textColor: 'blue-grey',
       noCaps: true
-    }
+    },
+    customActions: {customBtns: [], customMenus: []}
   })
 
   // Computed
@@ -52,6 +53,8 @@ export default function controller(props: ControllerProps) {
         const organizationSelected = quserState.organizations.find((organization: Organization) => organization.id == quserState.organizationId);
         if (organizationSelected) goToSiteUrl = organizationSelected.url;
       }
+
+      const { customBtns, customMenus } = state.customActions;
 
       return {
         buttons: [
@@ -121,6 +124,7 @@ export default function controller(props: ControllerProps) {
           //Help Center
           {
             name: 'helpCenter',
+            desc: i18n.tr('isite.cms.message.descriptionHelpCenter'),
             label: i18n.trp('isite.cms.label.helpCenter'),
             vIf: parseInt(store.getSetting('isite::hcStatus') || '0'),
             props: {
@@ -131,6 +135,7 @@ export default function controller(props: ControllerProps) {
               actions: [
                 {
                   icon: 'fa-light fa-question-circle',
+                  rightIcon: 'fa-light fa-chevron-right',
                   label: 'FAQ',
                   action: () => eventBus.emit('toggleHelpSection', {sectionName: 'faq'})
                 }
@@ -149,7 +154,8 @@ export default function controller(props: ControllerProps) {
               name: 'app.update.app',
               query: {fromCache: 1}
             })
-          }
+          },
+          ...customBtns
         ],
         menu: [
           //Profile
@@ -191,7 +197,8 @@ export default function controller(props: ControllerProps) {
               align: 'left'
             },
             action: () => methods.logout()
-          }
+          },
+          ...customMenus
         ],
         ...(props.replaceActions || {})
       };
@@ -211,15 +218,48 @@ export default function controller(props: ControllerProps) {
     },
     logout() {
       router.push({name: 'auth.logout'});
-    }
+    },
+    async getCustomHeaderActions() {
+      const customBtns = [];
+      const customMenus = [];
+      const values = Object.values(config('main'))
+      const headerActionsList = await Promise.allSettled(
+        values.flatMap(async (item) => {
+          const headerActions = item.headerActions;
+          if (!headerActions) return [];
+          if (typeof headerActions === 'function') {
+            const result = await headerActions();
+            return result || [];
+          }
+          return headerActions;
+        }) // Add await for async request
+      )
+      const successfulActions = headerActionsList
+        .filter(result => result.status === 'fulfilled')
+        .flatMap(result => result.value);
+      successfulActions.forEach((config) => {
+        const customConfig = {
+          ...config,
+          props: {
+            ...state.defaultButtonProps,
+            ...(config.props || {})
+          }
+        };
+        // Separate btn and menu
+        if (config.type === 'btn') customBtns.push(customConfig);
+        else if (config.type === 'menu') customMenus.push(customConfig);
+      });
+      state.customActions = {customBtns, customMenus}
+    },
   }
 
   onBeforeUnmount(() => {
     eventBus.off('header.badge.manage');
   })
   onMounted(() => {
-    nextTick(async () => {
+    nextTick(() => {
       methods.init()
+      methods.getCustomHeaderActions()
     })
   })
 
