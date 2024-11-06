@@ -275,6 +275,10 @@ module.exports = configure(function(ctx) {
             type: 'image/png'
           }
         ]
+      },
+      metaVariables: {
+        appleMobileWebAppCapable: false, // set this to false to avoid deprecated tag
+        mobileWebAppCapable: true // use the updated meta tag
       }
     },
 
