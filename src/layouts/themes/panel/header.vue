@@ -24,7 +24,7 @@
 </template>
 <script>
 //Components
-import siteActions from 'modules/qsite/_components/master/siteActions'
+import siteActions from 'src/components/siteActions/index.vue'
 import { eventBus } from 'src/plugins/utils'
 
 export default {
