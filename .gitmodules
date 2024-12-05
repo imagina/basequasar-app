@@ -112,3 +112,6 @@
 [submodule "src/modules/qretail"]
 	path = src/modules/qretail
 	url = https://github.com/imagina/qretail.git
+[submodule "src/modules/qproduct"]
+	path = src/modules/qproduct
+	url = https://github.com/imagina/qproduct.git
