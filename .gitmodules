@@ -115,3 +115,9 @@
 [submodule "src/modules/qproduct"]
 	path = src/modules/qproduct
 	url = https://github.com/imagina/qproduct.git
+[submodule "src/modules/qorder"]
+	path = src/modules/qorder
+	url = https://github.com/imagina/qorder.git
+[submodule "src/modules/qprice"]
+	path = src/modules/qprice
+	url = https://github.com/imagina/qprice.git
