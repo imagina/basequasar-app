@@ -14,7 +14,7 @@ export const test = base.extend({
     page: async ({ page, baseURL }, use) => {
         if (baseURL) await page.goto(baseURL);
         await use(page);
-        await page.close();
+        // await page.close();
     },
 })
 

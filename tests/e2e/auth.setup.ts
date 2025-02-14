@@ -1,10 +1,9 @@
 import { test as setup, expect } from '@playwright/test'
 import { createSession  } from '../auth'
-
-const URL = 'http://localhost:8080/#/'
+import { config } from '../config'
 
 setup('authenticate', async ({ page }) => {
-    await page.goto(URL);
+    await page.goto(config.url);
     await createSession(page)
     await page.reload()
 

@@ -1,8 +1,9 @@
-const fs = require('fs').promises;
-const path = require('path');
+import { promises as fs } from 'fs'
+import path from 'path'
+import { config } from './config'
 
 const authFile = 'playwright/.auth/user.json';
-const API = 'https://ibuilder.ozonohosting.com/api/profile/v1/auth/login';
+const API = `${config.api}/api/profile/v1/auth/login`;
 
 const parentDirectory = path.resolve(__dirname, '..');
         
@@ -40,8 +41,8 @@ const fetchLogin = async () => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            "username": "msolano@mail.com",
-            "password": "123456789",
+            "username": "soporte@imaginacolombia.com",
+            "password": "v&th7WjDlk5FJ2AX",
             "device": "Windows 10.0"
         })
     })
@@ -50,10 +51,35 @@ const fetchLogin = async () => {
     return data.data
 }
 
-const insertUser = async ({ sessionData }) => {
-    const DB_NAME = 'localhost:8080DB';
+const nameDB = () => {
+    // const hostname = location.hostname.split('.')
+    // let response: string[] = hostname
+  
+    // //Set capitalize to all words
+    // hostname.forEach((word, index) => {
+    //   if (index >= 1) {
+    //     hostname[index] = word.charAt(0).toUpperCase() + word.slice(1)
+    //   }
+    // })
+  
+    // //Remove .com .org....
+    // if (hostname.length >= 2) response.pop()
+    // response.includes('localhost') && response.push(':8080')
+  
+    // return `${response.join('')}DB`
 
-    const openRequest = window.indexedDB.open(DB_NAME);
+    return 'localhost:8081DB'
+}
+
+const insertUser = async ({ sessionData }) => {
+    
+    // const DBName = nameDB();
+
+    const DBName = 'localhost:8081DB';
+
+    // console.log('DBName', DBName)
+
+    const openRequest = window.indexedDB.open(DBName);
 
     openRequest.onupgradeneeded = function() {
         const db = openRequest.result;
