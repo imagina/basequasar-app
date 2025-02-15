@@ -41,10 +41,18 @@ const fillFields = async (page) => {
         }
     }
 
+    console.log({ fields })
+
     for (const field of fields) {
         const fieldFirst = field.first()
-        const type = await fieldFirst.getAttribute('type').catch(error => console.log({ error }))
-        const classes = await fieldFirst.getAttribute('class').catch(error => console.log({ error }))
+        const type = fieldFirst.isVisible() 
+            ? await fieldFirst.getAttribute('type', { timeout: 5000 }).catch(error => console.log({ error })) 
+            : ''
+        const classes = fieldFirst.isVisible() 
+            ? await fieldFirst.getAttribute('class', { timeout: 5000 }).catch(error => console.log({ error })) 
+            : ''
+
+        console.log({ type })
 
         if (type === 'text') {
             await fieldFirst.fill('testing')
@@ -62,29 +70,24 @@ const fillFields = async (page) => {
             console.log('search')
             // Try to select an option from the "select." If it fails, 
             // attempt to enable the "select" search to find an option to select.
-
-            // const inputValue = await fieldFirst.locator('.q-chip.row.inline.no-wrap').isVisible()
-            const inputValue = await fieldFirst.evaluate(node => node.value);
-
-            // Seleccionar el elemento justo arriba de fieldFirst en el DOM
-            const elementAbove = await fieldFirst.locator('xpath=preceding-sibling::*[1]').isVisible();
             
             try {
-                await fieldFirst.click()
+                // await fieldFirst.click()
                 const options = await page.getByRole('option').all()
+                console.log({ options })
                 if (options.length > 0) {
-                    await page.waitForLoadState('load')
-                    await page.waitForLoadState('networkidle')
-                    await page.waitForLoadState('domcontentloaded')
-                    await page.getByRole('option').first().click({ timeout: 5000 });
+                    console.log('options.length > 0')
+                    await waitForLoading(page)
+                    // await page.getByRole('option').first().click({ timeout: 5000 });
                 } else {
                     throw new Error("No results found");
                 }
             } catch (error) {
+                // await page.waitForTimeout(5000)
                 await fieldFirst.click()
 
-                const chip = await fieldFirst.locator('span').locator('.ellipsis').isVisible()
-                console.log({ chip })
+                // const chip = await fieldFirst.locator('span').locator('.ellipsis').isVisible()
+                // console.log({ chip })
 
                 await fieldFirst.fill('ab')
                 await page.waitForLoadState('networkidle')
@@ -110,13 +113,21 @@ const fillFields = async (page) => {
     }
 
     // Click on the save button
-    await form.locator('button').nth(2).click()
+    await form.locator('button').filter({ hasText: 'Guardar y regresar' }).click()
 
     await waitForLoading(page)
 
     const visibleForm = await page.locator('form').isVisible()
 
+    // Registro NO creado
+    const alert = await page.getByRole('alert').getByText('Registro NO creado').isVisible()
+    
+    if (alert) {
+        throw new Error('Failed to save record')
+    }
+
     if (visibleForm) {
+        console.log('visibleForm')
         await fillFields(page)
     } else {
         // The successful creation alert is expected to be displayed
@@ -126,16 +137,16 @@ const fillFields = async (page) => {
 
 test.describe.serial('test product advance form', () => {
     test('Create', async ({ page }) => {
-        await page.waitForLoadState('load')
-        await page.waitForLoadState('networkidle')
-        await page.waitForLoadState('domcontentloaded')
+        await waitForLoading(page)
 
         const grip = page.locator('div').locator('.q-tab-panel')
 
-        const forms = grip.locator('div').locator('.relative-position.card').first()
+        const forms = grip.locator('div').locator('.relative-position.card').nth(4)
         await forms.click()
         
         await fillFields(page)
+        
+        // await forms.locator('button').nth(0).click()
     })
 
     test('Update', async ({ page }) => {
