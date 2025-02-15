@@ -16,6 +16,7 @@ const waitForLoading = async (page) => {
 }
 
 export const fillFields = async (page, expect, update=false) => {
+    console.log({ update })
     const fillerText = update ? 'updated' : 'testing'
 
     console.log({ fillerText })

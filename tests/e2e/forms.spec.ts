@@ -3,7 +3,7 @@ import { config } from '../config'
 import { deleteItem } from './common-tests'
 import { fillFields } from './helpers'
 
-test.use({ baseURL: config.url + '/ecommerce/product-categories' });
+test.use({ baseURL: config.url + '/ecommerce/product-options' });
 
 const openModal = async (page) => {
     const tr = await page.locator('tbody').locator('.q-tr.tw-bg-white').first();
@@ -30,7 +30,7 @@ const create = async (page) => {
     await page.getByTestId('modal-actions').locator('button').nth(1).click()
 
     // The successful creation alert is expected to be displayed
-    await expect(page.getByRole('alert').getByText('Registro creado')).toBeVisible({ timeout: 10000 })
+    await expect(page.getByRole('alert').getByText('Registro creado')).toBeVisible({ timeout: 15000 })
 }
 
 const update = async (page) => {

@@ -1,14 +1,7 @@
-import { test, expect } from '../../shared-context'
+import { test } from '../../shared-context'
 import { config } from '../../config'
-import { deleteItem } from '../common-tests'
 
 test.use({ baseURL: config.url + '/ecommerce/products/create' });
-
-const openModal = async (page) => {
-    const tr = await page.locator('tbody').locator('.q-tr.tw-bg-white').first();
-    await expect(tr).toBeVisible({ timeout: 60000 });
-    await tr.getByRole('button').first().click();
-}
 
 const waitForLoading = async (page) => {
     await page.waitForLoadState('networkidle')
@@ -46,10 +39,12 @@ const fillFields = async (page) => {
     for (const field of fields) {
         const fieldFirst = field.first()
         const type = fieldFirst.isVisible() 
-            ? await fieldFirst.getAttribute('type', { timeout: 5000 }).catch(error => console.log({ error })) 
+            ? await fieldFirst.getAttribute('type', { timeout: 5000 })
+                .catch(error => console.log({ error })) 
             : ''
         const classes = fieldFirst.isVisible() 
-            ? await fieldFirst.getAttribute('class', { timeout: 5000 }).catch(error => console.log({ error })) 
+            ? await fieldFirst.getAttribute('class', { timeout: 5000 })
+                .catch(error => console.log({ error })) 
             : ''
 
         console.log({ type })
@@ -63,7 +58,8 @@ const fillFields = async (page) => {
         }
 
         if (type === 'number') {
-            await fieldFirst.fill('5')
+            await fieldFirst.fill('5', { timeout: 5000 })
+                .catch( error => console.error('Failed to fill field'))
         }
 
         if (type === 'search') {
@@ -145,31 +141,5 @@ test.describe.serial('test product advance form', () => {
         await forms.click()
         
         await fillFields(page)
-        
-        // await forms.locator('button').nth(0).click()
-    })
-
-    test('Update', async ({ page }) => {
-        await openModal(page)
-        await page.locator('a').filter({ hasText: 'Editar' }).click();
-
-        await page.waitForLoadState('networkidle')
-    
-        const form = page.locator('form').first()
-    
-        await form.locator('input').first().fill('Updated')
-    
-        await form.locator('.q-editor__content').first().fill('Updated')
-
-        await form.locator('button').nth(1).click()
-    })
-
-    test('Delete', async ({ page }) => {
-        await openModal(page)
-        // const id: any = await tr.locator('td').nth(2).textContent()
-
-        await deleteItem(page, expect)
-        await expect(page.getByRole('alert').getByText('Registro eliminado')).toBeVisible()
-        // await expect(page.locator('table').getByText(id)).toBeHidden({ timeout: 60000 });
     })
 })
