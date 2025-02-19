@@ -27,6 +27,7 @@ export default {
     default: 'es',
     availables: ['en-us', 'es']
   },
+  //disableColumnsButton: true, //Define if disables columns button in pageActions
   //Modules
   modules: [
     'qcrud',
