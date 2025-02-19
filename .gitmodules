@@ -103,3 +103,21 @@
 [submodule "src/modules/qcomment"]
 	path = src/modules/qcomment
 	url = https://github.com/imagina/qcomment.git
+[submodule "src/modules/qtelemetry"]
+	path = src/modules/qtelemetry
+	url = https://github.com/imagina/qtelemetry.git
+[submodule "src/modules/qwallet"]
+	path = src/modules/qwallet
+	url = https://github.com/imagina/qwallet.git
+[submodule "src/modules/qretail"]
+	path = src/modules/qretail
+	url = https://github.com/imagina/qretail.git
+[submodule "src/modules/qproduct"]
+	path = src/modules/qproduct
+	url = https://github.com/imagina/qproduct.git
+[submodule "src/modules/qorder"]
+	path = src/modules/qorder
+	url = https://github.com/imagina/qorder.git
+[submodule "src/modules/qprice"]
+	path = src/modules/qprice
+	url = https://github.com/imagina/qprice.git
