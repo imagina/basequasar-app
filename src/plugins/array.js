@@ -88,6 +88,7 @@ class Array {
         (typeof fields.sublabel != 'function' ? item[fields.sublabel] : fields.sublabel(item))
 
       response.push({
+        ...item,
         label,
         sublabel,
         id: optId,

@@ -33,7 +33,7 @@
       <!--Router view-->
       <div id="routerPageContent" class="layout-padding">
         <router-view v-if="appState.loadPage" />
-        <Alert/>
+        <Alert />
       </div>
     </q-page-container>
 
@@ -54,30 +54,16 @@
 </template>
 
 <script>
-import metaDataMixin from './metaDataMixin'
-//Components Admin
-import headerAdminTheme1 from 'modules/qsite/_components/admin/theme1/header';
-import headerAdminTheme2 from 'modules/qsite/_components/admin/theme2/header';
-import headerAdminTheme3 from 'modules/qsite/_components/admin/theme3/header';
-import drawersAdminTheme1 from 'modules/qsite/_components/admin/theme1/drawers';
-import drawersAdminTheme2 from 'modules/qsite/_components/admin/theme2/drawers';
-import drawersAdminTheme3 from 'modules/qsite/_components/admin/theme3/drawers';
-import footerAdminTheme1 from 'modules/qsite/_components/admin/theme1/footer';
-import footerAdminTheme2 from 'modules/qsite/_components/admin/theme2/footer';
-import footerAdminTheme3 from 'modules/qsite/_components/admin/theme3/footer';
-//Components Panel
-import headerPanel from 'modules/qsite/_components/panel/header';
-import drawersPanel from 'modules/qsite/_components/panel/drawers';
-import footerPanel from 'modules/qsite/_components/panel/footer';
+import metaDataMixin from './metaDataMixin';
 //Components
 import cropperComponent from 'modules/qsite/_components/master/cropper';
 import activitiesActions from 'modules/qgamification/_components/activitiesActions/index.vue';
-import Alert from 'modules/qoffline/_components/alert.vue'
-import bannerAlert from 'modules/qsite/_components/master/bannerAlert.vue'
+import Alert from 'modules/qoffline/_components/alert.vue';
+import bannerAlert from 'modules/qsite/_components/master/bannerAlert.vue';
 import _pages from 'src/setup/pages';
 import _ from 'lodash';
 import { eventBus } from 'src/plugins/utils.ts';
-import notificationDialog from 'src/modules/qnotification/_components/notificationDialog/index.vue'
+import notificationDialog from 'src/modules/qnotification/_components/notificationDialog/index.vue';
 
 export default {
   name: 'MasterLayout',
@@ -85,20 +71,6 @@ export default {
   components: {
     cropperComponent,
     activitiesActions,
-    //Admin
-    headerAdminTheme1,
-    headerAdminTheme2,
-    headerAdminTheme3,
-    drawersAdminTheme1,
-    drawersAdminTheme2,
-    drawersAdminTheme3,
-    footerAdminTheme1,
-    footerAdminTheme2,
-    footerAdminTheme3,
-    //Panel
-    headerPanel,
-    drawersPanel,
-    footerPanel,
     //Offline
     Alert,
     bannerAlert,
@@ -130,7 +102,7 @@ export default {
       bannerType: {
         offline: {
           icon: {
-            name: 'fa-regular fa-wifi-slash',
+            name: 'fa-regular fa-wifi-slash'
           },
           message: this.$tr('isite.cms.message.appOffline'),
           classWrapper: 'tw-text-white tw-bg-gray-900',
@@ -139,7 +111,7 @@ export default {
         notification: {
           marquee: true,
           message: this.$store.getters['qsiteApp/getSettingValueByName']('isite::globalWarningMessage'),
-          classWrapper: 'tw-bg-yellow-400 tw-text-black tw-font-semibold',
+          classWrapper: 'tw-bg-yellow-400 tw-text-black tw-font-semibold'
         }
       }
     };
@@ -159,31 +131,20 @@ export default {
     //instance components by mode and thems
     components() {
       if (this.appConfig.mode == 'iadmin') {//Return components to iadmin
-        //Instance thems componenst to iadmin
-        const themes = {
-          theme1: {
-            header: headerAdminTheme1,
-            drawer: drawersAdminTheme1,
-            footer: footerAdminTheme1
-          },
-          theme2: {
-            header: headerAdminTheme2,
-            drawer: drawersAdminTheme2,
-            footer: footerAdminTheme2
-          },
-          theme3: {
-            header: headerAdminTheme3,
-            drawer: drawersAdminTheme3,
-            footer: footerAdminTheme3
-          }
+        return this.appConfig.productFrom ? {
+          header: require(`modules/${this.appConfig.productFrom}/_product/header`).default,
+          drawer: require(`modules/${this.appConfig.productFrom}/_product/drawers`).default,
+          footer: require(`modules/${this.appConfig.productFrom}/_product/footer`).default
+        } : {
+          header: require(`layouts/themes/theme${this.iadminTheme}/header`).default,
+          drawer: require(`layouts/themes/theme${this.iadminTheme}/drawers`).default,
+          footer: require(`layouts/themes/theme${this.iadminTheme}/footer`).default
         };
-        //Return theme components
-        return themes[`theme${this.iadminTheme}`];
       } else { //Reutn components to ipanel
         return {
-          header: headerPanel,
-          drawer: drawersPanel,
-          footer: footerPanel
+          header: require('layouts/themes/panel/header').default,
+          drawer: require('layouts/themes/panel/drawers').default,
+          footer: require('layouts/themes/panel/footer').default
         };
       }
     },
@@ -196,8 +157,8 @@ export default {
       //Get breadcrumbs from params
       let breadcrumbs = (this.$route.meta?.subHeader?.breadcrumb || []).reverse();
       //Set Home page and current page
-      const home  = _pages.mainapp.home
-      const pages = this.$route.name.indexOf('app.home') == -1 ? [home, this.$route.meta] : [home]
+      const home = _pages.mainapp.home;
+      const pages = this.$route.name.indexOf('app.home') == -1 ? [home, this.$route.meta] : [home];
       //Get page from breadcrum
       breadcrumbs.forEach((pageName) => {
         pages.splice(1, 0, _.get(_pages, pageName));
@@ -240,7 +201,7 @@ export default {
       };
     },
     isWarning() {
-      return this.$store.getters['qsiteApp/getSettingValueByName']('isite::globalWarningMessage')
+      return this.$store.getters['qsiteApp/getSettingValueByName']('isite::globalWarningMessage');
     }
   },
   methods: {
@@ -286,8 +247,8 @@ export default {
       }
     },
     configBanner() {
-      if (this.isAppOffline) return this.bannerType.offline
-      if (this.isWarning) return this.bannerType.notification
+      if (this.isAppOffline) return this.bannerType.offline;
+      if (this.isWarning) return this.bannerType.notification;
     }
   }
 };

@@ -716,6 +716,11 @@ class Helper {
 
     return `${device} ${version}`;
   }
+
+  deleteHtml(data) {
+    if (!data) return '';
+    return typeof data === 'string' ? data.replace(/<[^>]+>/g, '') : data;
+  }
 }
 
 const helper = new Helper();
