@@ -3,7 +3,7 @@ import { config } from '../config'
 import { deleteItem } from './common-tests'
 import { fillFields } from './helpers'
 
-test.use({ baseURL: config.url + '/ecommerce/product-options' });
+test.use({ baseURL: config.url + '/ecommerce/warehouses' });
 
 const openModal = async (page) => {
     const tr = await page.locator('tbody').locator('.q-tr.tw-bg-white').first();
@@ -58,20 +58,6 @@ const deleteTest = async (page) => {
 
 test.describe.serial('Test the integrity of the forms', () => {
     test('Create', async ({ page }) => {
-        // await page.locator('id=new-button-crud').click()
-    
-        // await page.waitForLoadState('load')
-        // await page.waitForLoadState('networkidle')
-        // await page.waitForLoadState('domcontentloaded')
-    
-        // await fillFields(page, expect)
-    
-        // // Click on the save button
-        // await page.getByTestId('modal-actions').locator('button').nth(1).click()
-    
-        // // The successful creation alert is expected to be displayed
-        // await expect(page.getByRole('alert').getByText('Registro creado')).toBeVisible({ timeout: 10000 })
-
         await create(page)
     })
 

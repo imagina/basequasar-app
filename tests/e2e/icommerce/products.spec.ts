@@ -47,8 +47,6 @@ const fillFields = async (page) => {
                 .catch(error => console.log({ error })) 
             : ''
 
-        console.log({ type })
-
         if (type === 'text') {
             await fieldFirst.fill('testing')
             const placeholder = await fieldFirst.getAttribute('placeholder')
@@ -79,11 +77,7 @@ const fillFields = async (page) => {
                     throw new Error("No results found");
                 }
             } catch (error) {
-                // await page.waitForTimeout(5000)
                 await fieldFirst.click()
-
-                // const chip = await fieldFirst.locator('span').locator('.ellipsis').isVisible()
-                // console.log({ chip })
 
                 await fieldFirst.fill('ab')
                 await page.waitForLoadState('networkidle')
@@ -95,10 +89,6 @@ const fillFields = async (page) => {
         if (classes === 'vue-treeselect__input') {
             await fieldFirst.click()
             await page.locator('.vue-treeselect__option').first().click();
-        }
-
-        if (type === 'checkbox') {
-            // await fieldFirst.check({ timeout: 5000 })
         }
     }
 
@@ -132,13 +122,93 @@ const fillFields = async (page) => {
 }
 
 test.describe.serial('test product advance form', () => {
-    test('Create', async ({ page }) => {
+    test('content', async ({ page }) => {
         await waitForLoading(page)
 
         const grip = page.locator('div').locator('.q-tab-panel')
 
-        const forms = grip.locator('div').locator('.relative-position.card').nth(4)
-        await forms.click()
+        const form = grip.locator('div').locator('.relative-position.card').first()
+        await form.click()
+
+        await fillFields(page)
+    })
+    test('state', async ({ page }) => {
+        await waitForLoading(page)
+
+        const grip = page.locator('div').locator('.q-tab-panel')
+
+        const form = grip.locator('div').locator('.relative-position.card').nth(1)
+        await form.click()
+
+        await fillFields(page)
+    })
+    test('categories', async ({ page }) => {
+        await waitForLoading(page)
+
+        const grip = page.locator('div').locator('.q-tab-panel')
+
+        const form = grip.locator('div').locator('.relative-position.card').nth(2)
+        await form.click()
+        
+        await fillFields(page)
+    })
+    test('meta info', async ({ page }) => {
+        await waitForLoading(page)
+
+        const grip = page.locator('div').locator('.q-tab-panel')
+
+        const form = grip.locator('div').locator('.relative-position.card').nth(3)
+        await form.click()
+        
+        await fillFields(page)
+    })
+    test('data', async ({ page }) => {
+        await waitForLoading(page)
+
+        const grip = page.locator('div').locator('.q-tab-panel')
+
+        const form = grip.locator('div').locator('.relative-position.card').nth(4)
+        await form.click()
+        
+        await fillFields(page)
+    })
+    test('relations', async ({ page }) => {
+        await waitForLoading(page)
+
+        const grip = page.locator('div').locator('.q-tab-panel')
+
+        const form = grip.locator('div').locator('.relative-position.card').nth(5)
+        await form.click()
+        
+        await fillFields(page)
+    })
+    test('images', async ({ page }) => {
+        await waitForLoading(page)
+
+        const grip = page.locator('div').locator('.q-tab-panel')
+
+        const form = grip.locator('div').locator('.relative-position.card').nth(6)
+        await form.click()
+        
+        await fillFields(page)
+    })
+    test('discount', async ({ page }) => {
+        await waitForLoading(page)
+
+        const grip = page.locator('div').locator('.q-tab-panel')
+
+        const form = grip.locator('div').locator('.relative-position.card').nth(7)
+        await form.click()
+        
+        await fillFields(page)
+    })
+    test('wineries', async ({ page }) => {
+        await waitForLoading(page)
+
+        const grip = page.locator('div').locator('.q-tab-panel')
+
+        const form = grip.locator('div').locator('.relative-position.card').nth(8)
+        await form.click()
         
         await fillFields(page)
     })
