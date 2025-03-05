@@ -34,6 +34,7 @@ export default {
     'quser',
     'qnotification',
     'qcommerce',
+    'qproduct',
     'qblog',
     'qform',
     'qplan',
@@ -69,7 +70,8 @@ export default {
     'qaccounting',
     'qtask',
     'qcomment',
-    'qtelemetry'
+    'qtelemetry',
+    'qtenant'
   ],
   //Cache
   saveCache: {
