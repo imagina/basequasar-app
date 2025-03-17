@@ -1,5 +1,12 @@
 {
   "extends": "@quasar/app-webpack/tsconfig-preset",
+  "exclude": [
+    "src/modules",
+    "src/boot",
+    "src/config",
+    "node_modules",
+    "dist"
+  ],
   "compilerOptions": {
     "strict": false,
     "baseUrl": ".",
@@ -10,22 +17,26 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowJs": true,
-    "types": ["node"],
-    "lib": ["es2019", "dom", "esnext"],
+    "types": [
+      "node"
+    ],
+    "lib": [
+      "es2019",
+      "dom",
+      "esnext"
+    ],
     "paths": {
-      "modules/*": ["src/modules/*"],
-      "@imagina/*": ["src/modules/*"]
+      "modules/*": [
+        "src/modules/*"
+      ],
+      "@imagina/*": [
+        "src/modules/*"
+      ]
     }
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "src/modules/**/*.js",
-    "src/modules/**/*.vue"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
+    "src//*.ts",
+    "src//.tsx",
+    "src/**/.vue"
   ]
 }
