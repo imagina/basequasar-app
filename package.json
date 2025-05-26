@@ -1,6 +1,6 @@
 {
   "name": "imagina-cms",
-  "version": "3.0.62",
+  "version": "3.0.88",
   "description": "A Imagina Project",
   "productName": "Imagina CMS",
   "author": "msolanogithub <msolano@imaginacolombia.com>",
@@ -21,6 +21,7 @@
     "@quasar/quasar-ui-qcalendar": "^4.0.0-beta.16",
     "@tkmam1x/vue3-treeselect": "^0.1.15",
     "@vue-leaflet/vue-leaflet": "^0.10.1",
+    "@vueuse/core": "^13.0.0",
     "autoprefixer": "^10.4.17",
     "axios": "^1.2.1",
     "chart.js": "^4.4.1",

@@ -27,12 +27,14 @@ export default {
     default: 'es',
     availables: ['en-us', 'es']
   },
+  //disableColumnsButton: true, //Define if disables columns button in pageActions
   //Modules
   modules: [
     'qcrud',
     'quser',
     'qnotification',
     'qcommerce',
+    'qproduct',
     'qblog',
     'qform',
     'qplan',
@@ -68,7 +70,8 @@ export default {
     'qaccounting',
     'qtask',
     'qcomment',
-    'qtelemetry'
+    'qtelemetry',
+    'qtenant'
   ],
   //Cache
   saveCache: {

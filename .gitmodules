@@ -121,3 +121,6 @@
 [submodule "src/modules/qprice"]
 	path = src/modules/qprice
 	url = https://github.com/imagina/qprice.git
+[submodule "src/modules/qtenant"]
+	path = src/modules/qtenant
+	url = https://github.com/imagina/qtenant.git
