@@ -210,7 +210,7 @@ export default {
     },
     /** idl Time */
     idlTime() {
-      const idlTime = parseInt(this.$getSetting('iprofile::logoutIdlTime') || 0);
+      const idlTime = parseInt(this.$getSetting('iuser::logoutIdlTime') || 0);
       if (idlTime) {
         var time;
 
