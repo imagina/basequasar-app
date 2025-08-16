@@ -41,8 +41,6 @@ class Middleware {
       let isAuthenticated = process.env.CLIENT ? this.store.state.quserAuth.authenticated : true;
       //try login
       if (!isAuthenticated) isAuthenticated = await this.store.dispatch('quserAuth/AUTH_TRYAUTOLOGIN');
-      //Update user data
-      else this.store.dispatch('quserAuth/AUTH_UPDATE');
       //Check if should change password
       this.store.dispatch('quserAuth/AUTH_FORCE_PASSWORD');
       //Response
@@ -110,10 +108,10 @@ class Middleware {
             if (!this.store.getters['quserAuth/hasAccess'](to.meta.permission)) this.redirectTo = { name: 'app.home' };
 
           //Validate mode access permission
-          if (appConfig.validateModeAccess && !this.store.getters['quserAuth/hasAccess'](`profile.access.${appConfig.mode}`)) {
+          if (appConfig.validateModeAccess && !this.store.getters['quserAuth/hasAccess'](`iuser.access.${appConfig.mode}`)) {
             const otherWorkSpace = appConfig.mode == 'iadmin' ? 'ipanel' : 'iadmin';
             //Validate if redirect to other workSpace
-            if (this.store.getters['quserAuth/hasAccess'](`profile.access.${otherWorkSpace}`)) {
+            if (this.store.getters['quserAuth/hasAccess'](`iuser.access.${otherWorkSpace}`)) {
               const redirectToWorkSpace = window.location.href.replace(appConfig.mode, otherWorkSpace);
               helper.openExternalURL(redirectToWorkSpace, false);
             } else {

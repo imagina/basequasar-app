@@ -25,8 +25,4 @@ export default async ({app, router, store, Vue}) => {
   store.dispatch('qsiteApp/SET_EXTRA')
   //====== Load Clarity
   store.dispatch('qsiteApp/LOAD_CLARITY')
-
-  //====== laod cdn google maps
-  let apiKey = store.getters['qsiteApp/getSettingValueByName']('isite::api-maps')
-  if (apiKey) helper.loadCDN(`https://maps.googleapis.com/maps/api/js?offset=5&key=${apiKey}&libraries=places`)
 }

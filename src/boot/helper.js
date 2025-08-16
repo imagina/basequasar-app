@@ -14,7 +14,7 @@ export default function ({app, router, store, Vue, ssrContext}) {
   app.config.globalProperties.$remember = utils.remember
   app.config.globalProperties.$tour = tour
   app.config.globalProperties.$hook = new utils.hook(store)
-  app.config.globalProperties.$notification = new notificationPlugin(store)
+  //v12 app.config.globalProperties.$notification = new notificationPlugin(store) 
   app.config.globalProperties.$clone = utils.clone
   app.config.globalProperties.$crud = crud
   app.config.globalProperties.$openUrl = utils.openURL
