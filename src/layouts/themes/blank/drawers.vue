@@ -32,7 +32,7 @@
       return {
         windowHeight: window.innerHeight,
         windowWith: window.innerWidth,
-        projectName: this.$getSetting('core::site-name'),
+        projectName: this.$getSetting('isite::site-name'),
         logo: this.$store.state.qsiteApp.logo,
         miniState: false,
         drawer: {

@@ -10,13 +10,13 @@ import { store } from 'src/plugins/utils';
 export default boot(async (/* { app, router, ... } */) => {
   //Get the manifest link
   const manifestLink = document.querySelector('link[rel="manifest"]');
-  const siteName = store.getSetting('core::site-name')
+  const siteName = store.getSetting('isite::site-name')
 
   if (manifestLink) {
     const startUrl = `${window.location.origin}${window.location.pathname}`;
-    const name = store.getSetting('isite::manifestName') ?? store.getSetting('core::site-name');
+    const name = store.getSetting('isite::manifestName') ?? store.getSetting('isite::site-name');
     const shortName = store.getSetting('isite::manifestShortName') ?? name;
-    const description = store.getSetting('isite::manifestDescription') ?? store.getSetting('core::site-description') ?? siteName;
+    const description = store.getSetting('isite::manifestDescription') ?? store.getSetting('isite::site-description') ?? siteName;
     const background = store.getSetting('isite::manifestBackgroundColor') ?? '#ffffff';
     const themeColor = store.getSetting('isite::manifestThemeColor') ?? store.getSetting('isite::brandPrimary');
     const iconsBaseUrl = store.getSetting('isite::manifestIconsBaseUrl') ?? `${startUrl}icons`;

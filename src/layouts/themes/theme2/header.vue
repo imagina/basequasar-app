@@ -30,7 +30,7 @@ export default {
   },
   data() {
     return {
-      projectName: this.$getSetting('core::site-name'),
+      projectName: this.$getSetting('isite::site-name'),
       logo: this.$store.state.qsiteApp.logo,
       appConfig: config('app'),
       loadHeaderIpanel: false,
