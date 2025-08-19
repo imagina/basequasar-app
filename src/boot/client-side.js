@@ -23,6 +23,4 @@ export default async ({app, router, store, Vue}) => {
   store.dispatch('qsiteApp/SET_SITE_COLORS')
   //====== Load extra state in store
   store.dispatch('qsiteApp/SET_EXTRA')
-  //====== Load Clarity
-  store.dispatch('qsiteApp/LOAD_CLARITY')
 }
