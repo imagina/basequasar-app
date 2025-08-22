@@ -57,7 +57,7 @@ class PluginGrid {
             },
             // Create grid
             createGrid: function (colCount, row, rowNumber) {
-              var content = '<div class="grid grid-cols-'+colCount+'">';
+              var content = '<div class="grid grid-cols-1 md:grid-cols-'+colCount+'">';
               for (var i = 1; i <= colCount; i++) {
                 content = content + '  <div class="content">' +
                 '<p>Col ' + i + ' content area</p>' +
@@ -71,7 +71,7 @@ class PluginGrid {
             createEditable: function (colCount, rowNumber) {
               for (var i = 1; i <= colCount; i++) {
                 this.initEditable('content' + rowNumber + i, {
-                  selector: '.grid-cols-'+colCount+ ' > div:nth-child('+i+')'
+                  selector: '.md\\:grid-cols-'+colCount+ ' > div:nth-child('+i+')'
                 });
               }
             }
@@ -82,7 +82,8 @@ class PluginGrid {
         /* tailwind */
         let gridCols = '.grid{display:grid;gap:2rem}'
         for (var i = 1; i <= 13; i++) {
-          gridCols = gridCols + `.grid-cols-${i}{grid-template-columns: repeat(${i}, 1fr)}`
+          gridCols = gridCols + `.md\\:grid-cols-${i}{grid-template-columns: repeat(${i}, 1fr)}` + 
+          `.grid-cols-${i}{grid-template-columns: repeat(${i}, 1fr)}`
         }
         //Add styles
         CKEDITOR.addCss(
