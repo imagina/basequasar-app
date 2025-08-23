@@ -14,7 +14,7 @@ class PluginCollapsibleItem {
           template: getCollapsibleItem(),
           editables: {
             title: {
-              selector: '.collapsible-item-title-link',
+              selector: '.collapsible-item-title',
               allowedContent: 'span strong em u;*{color}'
             },
             content: {
@@ -29,6 +29,7 @@ class PluginCollapsibleItem {
           },
           init: function () {
             //called when widget instance is created
+            return
             var accordionid = "";
             if (editor.elementPath() != null) {
               var parents = editor.elementPath().elements;
@@ -53,6 +54,7 @@ class PluginCollapsibleItem {
           },
           data: function () {
             //called whenever the data is updated
+            /*
             this.element.setAttribute('id', this.data.itemId);
 
             var heading = this.element.find('.collapsible-item-heading').$[0];
@@ -78,12 +80,16 @@ class PluginCollapsibleItem {
 
             this.element.find('.collapsible-item-collapse').$[0].setAttribute('id', 'collapse' + this.data.itemId);
             this.element.find('.collapsible-item-collapse').$[0].setAttribute('aria-labelledby', 'heading' + this.data.itemId);
+            */
           },
         });
       },
       onLoad: function (event) {
         //Add Styles
         CKEDITOR.addCss(
+          '.flex{display: flex}' +
+          '.list-none {list-style-type: none}' +
+
           'a.collapsible-item-title-link { display: block; }' +
           '.collapsible-item::before {font-size:10px;color:#000;content: "Bootstrap collapsible element"}' +
           '.collapsible-item-heading {background-color:#f4f8ef;color:#72b73a;text-decoration:none;font-size:20px;} ' +
@@ -93,7 +99,7 @@ class PluginCollapsibleItem {
           '.collapsible-item-title {margin: 0 0 8px;padding: 5px 8px;}' +
           '.collapsible-item-body {padding: 0 8px;}' +
           '.collapsible-item-title-link-text {min-width:50px;display:inline-block;min-height:20px;height:100%;}' +
-          '.collapsible-item-title-link-icon {display:inline-block;float:right;}'
+          '.collapsible-item-title-link-icon {display:inline-block;float:right;}'          
         );
         //Add font aweson icon
         CKEDITOR.on("instanceReady", function (event) {
@@ -109,18 +115,22 @@ class PluginCollapsibleItem {
 
   //Template
   getCollapsibleItem() {
-    var collapsibleItem =
-      '<div class="panel panel-default collapsible-item" id="collapbsible-1">' +
-      '   <div class="panel-heading collapsible-item-heading" role="tab" id="headingCollapbsible">' +
-      '       <h4 class="panel-title collapsible-item-title">' +
-      '           <div class="collapsed collapsible-item-title-link-icon pull-right" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseCollapbsible" aria-expanded="false" aria-controls="collapseCollapbsible"><span class="glyphicon glyphicon-chevron-down">&nbsp;</span></div>' +
-      '           <div class="collapsed h2 text-primary collapsible-item-title-link" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseCollapbsible" aria-expanded="false" aria-controls="collapseCollapbsible"><span class="collapsible-item-title-link-text">Title Text</span></div>' +
-      '       </h4>' +
-      '   </div>' +
-      '   <div id="collapseCollapbsible" class="panel-collapse collapse collapsible-item-collapse" role="tabpanel" aria-labelledby="headingCollapbsible">' +
-      '       <div class="panel-body collapsible-item-body">Body Text</div>' +
-      '   </div>' +
-      '</div>';
+    var collapsibleItem = '<div>'+
+          '<details class="group collapsible-item">'+
+            '<summary class="cursor-pointer list-none flex items-center justify-between">'+
+              '<div class="collapsible-item-heading">' +
+                '<div class="collapsible-item-title 2xl">'+
+                  '<span>Title text</span>'+
+                '</div>'+
+              '</div>'+         
+            '</summary>'+    
+            '<div class="overflow-hidden transition-all duration-500 max-h-0 group-open:max-h-40">'+
+              '<div class="mt-3 collapsible-item-body">'+
+                'Body Text'+
+              '</div>'+
+            '</div>'+
+          '</details>'+
+        '</div>'
     return collapsibleItem;
   }
 }
