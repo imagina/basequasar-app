@@ -28,7 +28,7 @@ export default {
   },
   data() {
     return {
-      projectName: this.$getSetting('isite::site-name'),
+      projectName: this.$getSetting('isite::siteName'),
       logo: this.$store.state.qsiteApp.logo,
       appConfig: config('app'),
       loadHeaderIpanel: false

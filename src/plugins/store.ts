@@ -17,7 +17,6 @@ const methods = {
   {
     let response = store.getters['qsiteApp/getSettingValueByName'](name);
     if(response === '1' || response === '0' ) return Number(response);
-
     return response;
   },
   getMediaSetting (name: string)
