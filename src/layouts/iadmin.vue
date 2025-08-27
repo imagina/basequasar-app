@@ -110,7 +110,7 @@ export default {
         },
         notification: {
           marquee: true,
-          message: this.$store.getters['qsiteApp/getSettingValueByName']('isite::globalWarningMessage'),
+          message: '',//this.$store.getters['qsiteApp/getSettingValueByName']('isite::globalWarningMessage'),
           classWrapper: 'tw-bg-yellow-400 tw-text-black tw-font-semibold'
         }
       }
@@ -201,7 +201,7 @@ export default {
       };
     },
     isWarning() {
-      return this.$store.getters['qsiteApp/getSettingValueByName']('isite::globalWarningMessage');
+      return false;//this.$store.getters['qsiteApp/getSettingValueByName']('isite::globalWarningMessage');
     }
   },
   methods: {

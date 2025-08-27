@@ -82,7 +82,7 @@ export default function controller(props: ControllerProps) {
           name: 'helpCenter',
           desc: i18n.tr('isite.cms.message.descriptionHelpCenter'),
           label: i18n.trp('isite.cms.label.helpCenter'),
-          vIf: parseInt(store.getSetting('isite::hcStatus') || '0'),
+          vIf: false, //parseInt(store.getSetting('isite::hcStatus') || '0'),
           props: {
             id: 'siteActionHelpCenter',
             icon: 'fal fa-question-circle'
@@ -171,9 +171,9 @@ export default function controller(props: ControllerProps) {
         ...(props.replaceActions || {})
       };
     }),
-    profileImage() {
+    profileImage: computed(() => {
       return store.getters['quserAuth/profileImage'];
-    }
+    })
   }
 
   // Methods
