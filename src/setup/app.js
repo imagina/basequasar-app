@@ -21,7 +21,7 @@ export default {
   productFrom,//Define load as product
   validateModeAccess: true,//Define if validate app mode access
   forceRoleAndDepartment: false,//Force to select role and department
-  //useLocalTranslations: true,//Define from where use the translations
+  useLocalTranslations: true,//Define from where use the translations
   //UI Languages
   languages: {
     default: 'es',
