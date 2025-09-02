@@ -51,7 +51,10 @@ jobs:
         run: |
           git fetch --unshallow
           git checkout $current_branch
-          git submodule foreach --recursive git checkout $current_branch
+          git submodule foreach --recursive '
+            git fetch --all
+            git checkout $current_branch || git checkout -b $current_branch origin/$current_branch
+          '
 
       - name: Build as PWA
         run: quasar build -m pwa
