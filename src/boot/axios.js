@@ -12,8 +12,6 @@ export default function({ app, router, store, ssrContext }) {
   const tagsToParceHost = [
     'http://',
     'https://',
-    ':8080',
-    ':3000',
     'www.'
   ];
   //Get base url
