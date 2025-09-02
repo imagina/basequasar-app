@@ -19,7 +19,7 @@ export default function({ app, router, store, ssrContext }) {
   //Get base url
   const rootHost = baseUrl || (ssrContext ? ssrContext.req.get('host') : window.location.host);
   let host = rootHost;
-  let protocol = rootHost.startsWith('http://') ? 'http' : 'https';
+  let protocol = (rootHost.startsWith('http://') || rootHost.includes('localhost:')) ? 'http' : 'https';
   //Parse host if not exist in .env
   if (!baseUrl) {
     tagsToParceHost.forEach(
@@ -28,6 +28,7 @@ export default function({ app, router, store, ssrContext }) {
     if (rootHost.indexOf('www') != -1) host = `www.${host}`;//Set again WWW
     host = `${protocol}://${host}`; //Add protocol
   }
+
   store.commit('qsiteApp/SET_BASE_URL', host); //Set base Url in store
   store.commit(
     'qsiteApp/SET_ORIGIN_URL',
