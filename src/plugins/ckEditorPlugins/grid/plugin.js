@@ -33,7 +33,7 @@ class PluginGrid {
             },
             // Before init.
             upcast: function (element) {
-              return element.name == 'div' && element.hasClass('btgrid');
+              //return element.name == 'div' && element.hasClass('btgrid');
             },
             // initialize
             // Init function is useful after copy paste rebuild.
