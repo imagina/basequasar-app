@@ -69,7 +69,7 @@ class PluginCollapsibleItem {
         //Add Styles
         CKEDITOR.addCss(
           'a.collapsible-item-title-link { display: block; }' +
-          '.collapsible-item::before {font-size:10px;color:#000;content: "Tailwind collapsible element"}' +
+          '.collapsible-item::before {font-size:10px;color:#000;content: "Click to on title to expand"}' +
           '.collapsible-item-heading {background-color:#f4f8ef;color:#72b73a;text-decoration:none;font-size:20px;} ' +
           '.collapsible-item-collapse {display:block;background-color:#ddd;min-height:10px;} ' +
           '.collapsible-item {padding: 8px;margin: 10px;background: #eee;border-radius: 8px;border: 1px solid #ddd;box-shadow: 0 1px 1px #fff inset, 0 -1px 0px #ccc inset;}' +
