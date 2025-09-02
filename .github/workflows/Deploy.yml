@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           repository: imagina/basequasar-app
-          token:  ${{ secrets.DEPLOY_ADMIN_THEME }}
+          token: ${{ secrets.DEPLOY_ADMIN_THEME }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
@@ -19,12 +19,12 @@ jobs:
 
       - name: setup quasar & dependencies
         run: |
-         echo "Install Quasar CLI"
-         npm install -g @quasar/cli
-         echo "Install Yarn"  
-         npm install --global yarn
-         echo "Install node Dependencies"         
-         yarn install      
+          echo "Install Quasar CLI"
+          npm install -g @quasar/cli
+          echo "Install Yarn"
+          npm install --global yarn
+          echo "Install node Dependencies"
+          yarn install
 
       - name: Initialize submodules
         run: git submodule update --init --remote
@@ -56,18 +56,28 @@ jobs:
       - name: Build as PWA
         run: quasar build -m pwa
 
-      - name: Rename folder pwa as iadmin
-        run: mv dist/pwa iadmin
-
-      - name: Remove old iadmin and publish iadmin folder in repository
+      - name: Deploy CMS
         run: |
-          git clone https://github.com/imagina/imaginacmsadmin-theme.git tmp_repo
-          cd tmp_repo
-          git checkout $branch_deploy
-          rm -rf iadmin
-          cp -r ../iadmin ./iadmin
-          git add .
-          git commit -m "+Release: Iadmin"
-          git push origin $branch_deploy
+          if [ "$branch_deploy" = "v12.x" ]; then
+            echo "🚀 Deploying to imagina/imaginacms-icms (dist folder)"
+            git clone https://github.com/imagina/imaginacms-icms.git tmp_repo
+            cd tmp_repo
+            git checkout $branch_deploy
+            rm -rf dist
+            cp -r ../dist/pwa ./dist
+            git add .
+            git commit -m "+Release: ICMS dist update"
+            git push origin $branch_deploy
+          else
+            echo "🚀 Deploying to imagina/imaginacmsadmin-theme (iadmin folder)"
+            git clone https://github.com/imagina/imaginacmsadmin-theme.git tmp_repo
+            cd tmp_repo
+            git checkout $branch_deploy
+            rm -rf iadmin
+            cp -r ../dist/pwa ./iadmin
+            git add .
+            git commit -m "+Release: Iadmin"
+            git push origin $branch_deploy
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.DEPLOY_ADMIN_THEME }}
