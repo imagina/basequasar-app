@@ -15,7 +15,7 @@ if (loadFrom) {
 }
 
 export default {
-  //baseUrl: 'https://ibuilder.ozonohosting.com',
+  //baseUrl: 'https://laravel-api.ozonohosting.com',
   version: pjson.version, //Package version
   mode, //Define load mode
   productFrom, //Define load as product
