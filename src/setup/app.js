@@ -16,12 +16,12 @@ if (loadFrom) {
 
 export default {
   //baseUrl: 'https://ibuilder.ozonohosting.com',
-  version: pjson.version,//Package version
-  mode,//Define load mode
-  productFrom,//Define load as product
-  validateModeAccess: true,//Define if validate app mode access
-  forceRoleAndDepartment: false,//Force to select role and department
-  useLocalTranslations: true,//Define from where use the translations
+  version: pjson.version, //Package version
+  mode, //Define load mode
+  productFrom, //Define load as product
+  validateModeAccess: true, //Define if validate app mode access
+  forceRoleAndDepartment: false, //Force to select role and department
+  useLocalTranslations: true, //Define from where use the translations
   //UI Languages
   languages: {
     default: 'es',
@@ -71,7 +71,8 @@ export default {
     'qtask',
     'qcomment',
     'qtelemetry',
-    'qtenant'
+    'qtenant',
+    'qrentcar'
   ],
   //Cache
   saveCache: {
@@ -105,9 +106,7 @@ export default {
   //Cache Time in Seconds
   cacheTime: (3600 * 3),
   //Reset Store
-  resetStores: [
-    'quserAuth/RESET'
-  ],
+  resetStores: ['quserAuth/RESET'],
   //Footer movile main action
   mobilMainAction: {
     icon: 'fas fa-home',
