@@ -32,6 +32,7 @@ export default {
   modules: [
     'qcrud',
     'quser',
+    'qcontact',
     'qnotification',
     'qcommerce',
     'qproduct',
