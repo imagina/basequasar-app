@@ -127,3 +127,6 @@
 [submodule "src/modules/qrentcar"]
 	path = src/modules/qrentcar
 	url = https://github.com/imagina/qrentcar.git
+[submodule "src/modules/qcontact"]
+	path = src/modules/qcontact
+	url = https://github.com/imagina/qcontact.git
