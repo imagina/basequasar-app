@@ -80,7 +80,13 @@ export default function({ app, router, store, ssrContext }) {
 
   //========== Request interceptor
   axios.interceptors.request.use(async function(config) {
-    store.dispatch('quserAuth/REFRESH_TOKEN');
+    await store.dispatch('quserAuth/REFRESH_TOKEN');
+    const sessionData = await cache.get.item('sessionData')
+
+    if (sessionData?.userToken) {
+      config.headers.Authorization = `Bearer ${sessionData.userToken}`;
+    }
+
     //Set abortController for the GET methods
     if (config.method == 'get') {
       config.signal = abortController ? abortController.signal : null;
