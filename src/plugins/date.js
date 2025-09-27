@@ -106,6 +106,27 @@ class DatePlugin {
     return date;
   }
 
+  getDaysDiff(futureDate, currentDate = new Date()) {
+    const d1 = new Date(futureDate);
+    const d2 = new Date(currentDate);
+
+    // Normalizar ambas fechas a medianoche
+    d1.setHours(0, 0, 0, 0);
+    d2.setHours(0, 0, 0, 0);
+
+    // Diferencia en milisegundos
+    const diffMs = d1.getTime() - d2.getTime();
+
+    // Convertir a días (redondeando hacia abajo)
+    let diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+    // Si ya pasó, devolver 0 como mínimo
+    return Math.max(diffDays, 0);
+  }
+
+
+
+
   /**
    * Add hours to date
    *
