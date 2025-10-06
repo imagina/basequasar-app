@@ -3,6 +3,7 @@ import notificationPlugin from 'modules/qnotification/_plugins/notification'
 import {tour} from 'modules/qgamification/_plugins/tour'
 import apiResponse from 'modules/qcrud/_plugins/apiResponse'
 import utils from 'src/plugins/utils.ts'
+import { PDFPlugin } from 'vue3-pdfmake'
 
 export default function ({app, router, store, Vue, ssrContext}) {
   app.config.globalProperties.$alert = utils.alert
@@ -14,7 +15,7 @@ export default function ({app, router, store, Vue, ssrContext}) {
   app.config.globalProperties.$remember = utils.remember
   app.config.globalProperties.$tour = tour
   app.config.globalProperties.$hook = new utils.hook(store)
-  //v12 app.config.globalProperties.$notification = new notificationPlugin(store) 
+  //v12 app.config.globalProperties.$notification = new notificationPlugin(store)
   app.config.globalProperties.$clone = utils.clone
   app.config.globalProperties.$crud = crud
   app.config.globalProperties.$openUrl = utils.openURL
@@ -28,4 +29,6 @@ export default function ({app, router, store, Vue, ssrContext}) {
   Object.keys(utils.store).forEach(methodName => {
     app.config.globalProperties[`$${methodName}`] = utils.store[methodName];
   });
+
+  app.use(PDFPlugin)
 }

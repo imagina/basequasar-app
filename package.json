@@ -39,6 +39,7 @@
     "lodash.clonedeep": "^4.5.0",
     "moment": "^2.30.1",
     "moment-timezone": "^0.5.45",
+    "pdfmake": "^0.2.20",
     "postcss": "^8.4.35",
     "pusher-js": "^8.4.0-rc2",
     "quasar": "^2.8.0",
@@ -55,6 +56,7 @@
     "vue-moment": "^4.1.0",
     "vue-router": "^4.0.12",
     "vue-signature-pad": "^3.0.2",
+    "vue3-pdfmake": "^2.3.0",
     "vuedraggable": "^4.1.0",
     "vuex": "^4.0.1",
     "xlsx": "^0.18.5"
